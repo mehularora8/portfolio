@@ -21,7 +21,8 @@ window.onload = function() {
 		VANTA.NET({
 		  el: "#container",
 		  color: 0xff3f81,
-		  backgroundColor: 0x0
+		  backgroundColor: 0x0,
+		  maxDistance: 18.00
 		});
 		typewriter();
 		setInterval(typewriter, 5000);

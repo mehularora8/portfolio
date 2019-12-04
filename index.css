@@ -133,13 +133,22 @@ a{
 	}
 
 	#nameWrapper{
-		top:55vh;height: 25vh;
+		top:55vh;
+		height: 25vh;
+	}
+
+	#icons{
+		top: 75vh;
 	}
 
 	#name{
 		height: 25vh;
 		width: 100%;
 		text-align: center;
+	}
+
+	#footer{
+		bottom: 0;
 	}
 }
 

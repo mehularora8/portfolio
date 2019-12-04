@@ -1,0 +1,129 @@
+@font-face{
+	font-family: "myriad";
+	src: url("fonts/myriad.OTF");
+}
+
+body{
+	padding: 0;
+	margin: 0;
+	font-family: "myriad", sans-serif;
+	overflow: hidden;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+@keyframes enlarge{
+	from{
+		transform: scale(1.0);
+	}
+	to{
+		transform: scale(1.2);
+	}
+}
+
+#container{
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+}
+
+#imageWrapper{
+	width: 100vw;
+	height: 20vh;
+	position: absolute;
+	top: 20vh;
+	left: 0;
+	text-align: center;
+}
+
+#image{
+	display: inline-block;
+	width: 40vh;
+	height: 40vh; 
+	border-radius: 50%;
+	background: url("images/me.jpg");
+	background-size: cover;
+	background-position: center;
+}
+
+#nameWrapper{
+	width: 100vw;
+	height: 20vh;
+	position: absolute;
+	top: 65vh;
+	left: 0;
+	text-align: center;
+}
+
+#name{
+	display: inline-block;
+	width: auto;
+	height: 20vh; 
+	font-size: 8vh;
+	color: white;
+	line-height: 6vh;
+	font-weight: bold;
+}
+
+#name span{
+	font-size: 30px;
+}
+
+#icons{
+	width: 100vw;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 80vh;
+}
+
+.icon{
+	z-index: 1;
+	height: 6vh;
+	width: 6vh;
+	color: white;
+	background-size: cover;
+	margin: 0.7vw;
+}
+
+.icon:hover{
+	animation: enlarge 0.5s forwards;
+}
+
+.icon.instagram{
+	background-image: url(images/instagram.png);
+}
+
+.icon.github{
+	background-image: url(images/github.png);
+}
+
+.icon.resume{
+	background-image: url(images/pdf2.png);
+}
+
+.icon.linkedin{
+	background-image: url(images/linkedin.png);
+}
+
+.icon.mail{
+	background-image: url(images/mail.png);
+}
+
+#footer{
+	position: absolute;
+	bottom: 1vh;
+	height: 3vh;
+	width: 100vw;
+	font-size: 3vh;
+	color: white;
+	text-align: center;
+	font-style: italic;
+}
+
+

@@ -141,12 +141,16 @@ a{
 		height: 25vh;
 	}
 
+	#uni{
+		width: 100%;
+	}
+
 	#icons{
 		top: 75vh;
 	}
 
 	#name{
-		height: 25vh;
+		height: 10vh;
 		width: 100%;
 		text-align: center;
 	}

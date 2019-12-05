@@ -32,9 +32,9 @@ a{
 
 #imageWrapper{
 	width: 100vw;
-	height: 50vh;
+	height: 40vh;
 	position: absolute;
-	top: 20vh;
+	top: 15vh;
 	left: 0;
 	text-align: center;
 }
@@ -53,7 +53,7 @@ a{
 	width: 100vw;
 	height: 20vh;
 	position: absolute;
-	top: 65vh;
+	top: 60vh;
 	left: 0;
 	text-align: center;
 }
@@ -61,15 +61,18 @@ a{
 #name{
 	display: inline-block;
 	width: auto;
-	height: 20vh; 
+	height: 10vh; 
 	font-size: 8vh;
 	color: white;
-	line-height: 6vh;
 	font-weight: bold;
 }
 
-#name span{
+#uni{
+	display: inline-block;
+	width: auto;
+	height: 10vh; 
 	font-size: 4vh;
+	color: white;
 }
 
 #icons{
@@ -79,7 +82,8 @@ a{
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	top: 80vh;
+	top: 75vh;
+	color: white;
 }
 
 .icon{
@@ -88,7 +92,7 @@ a{
 	width: 6vh;
 	color: white;
 	background-size: cover;
-	margin: 0.7vw;
+	margin: 0 1vw;
 }
 
 .icon:hover{

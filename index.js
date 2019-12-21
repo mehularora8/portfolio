@@ -17,31 +17,39 @@ function typewriter(){
 	appendChar(text);
 }*/
 
-window.onload = function() {
+window.onload = () => {
+	document.getElementById('loadingmask').style.display = 'none';
 		VANTA.NET({
 		  el: "#container",
 		  color: 0x8dc9eb,
 		  backgroundColor: 0xffffff,
-		  maxDistance: 14.00
+		  points: 9,
+		  maxDistance: 15.00,
+		  spacing: 16.00
 		});
 	}
 
 var media = window.matchMedia("(max-width: 768px)");
 
+//Make background a little less dense when on mobile
 function backgroundChange(media){
 	if(media.matches){
 		VANTA.NET({
 		  el: "#container",
 		  color: 0x8dc9eb,
 		  backgroundColor: 0xffffff,
-		  maxDistance: 8.00
+		  points: 9,
+		  maxDistance: 8.00,
+		  spacing: 16.00
 		});
 	} else{
 		VANTA.NET({
 		  el: "#container",
 		  color: 0x8dc9eb,
 		  backgroundColor: 0xffffff,
-		  maxDistance: 14.00
+		  points: 9,
+		  maxDistance: 15.00,
+		  spacing: 16.00
 		});
 	}
 }

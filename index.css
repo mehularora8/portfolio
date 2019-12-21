@@ -35,6 +35,36 @@ a{
 	}
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loadingmask{
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: white;
+	z-index: 99;
+}
+
+#loading{
+	/*To center div*/
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	
+	border: 1vh solid #f3f3f3; /* Light grey */
+	border-top: 1vh solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 5vh;
+	height: 5vh;
+	animation: spin 2s linear infinite;
+}
+
 #container{
 	width: 100vw;
 	height: 100vh;
@@ -99,8 +129,8 @@ a{
 
 .icon{
 	z-index: 1;
-	height: 6vh;
-	width: 6vh;
+	height: 5vh;
+	width: 5vh;
 	color: black;
 	background-size: cover;
 	margin: 0 1vw;
@@ -119,7 +149,7 @@ a{
 }
 
 .icon.resume{
-	background-image: url(images/pdf2.png);
+	background-image: url(images/pdf.png);
 }
 
 .icon.linkedin{

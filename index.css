@@ -13,6 +13,7 @@ body{
 a{
 	text-decoration: none;
 	cursor: pointer;
+	color: #c41e3a;
 }
 
 @keyframes enlarge{
@@ -62,9 +63,8 @@ a{
 	display: inline-block;
 	width: auto;
 	height: 10vh; 
-	font-size: 8vh;
-	color: white;
-	font-weight: bold;
+	font-size: 7vh;
+	color: black;
 }
 
 #uni{
@@ -72,25 +72,26 @@ a{
 	width: auto;
 	height: 10vh; 
 	font-size: 4vh;
-	color: white;
+	color: black;
 }
 
 #icons{
 	width: 100vw;
 	height: 10vh;
+	font-size: 12px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
 	top: 75vh;
-	color: white;
+	color: black;
 }
 
 .icon{
 	z-index: 1;
 	height: 6vh;
 	width: 6vh;
-	color: white;
+	color: black;
 	background-size: cover;
 	margin: 0 1vw;
 }
@@ -119,16 +120,16 @@ a{
 	background-image: url(images/mail.png);
 }
 
-#footer{
+/*#footer{
 	position: absolute;
 	bottom: 1vh;
 	height: 3vh;
 	width: 100vw;
 	font-size: 3vh;
-	color: white;
+	color: black;
 	text-align: center;
 	font-style: italic;
-}
+}*/
 
 @media only screen and (max-width: 768px) {
 	#imageWrapper{

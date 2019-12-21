@@ -20,8 +20,8 @@ function typewriter(){
 window.onload = function() {
 		VANTA.NET({
 		  el: "#container",
-		  color: 0xff3f81,
-		  backgroundColor: 0x0,
+		  color: 0x8dc9eb,
+		  backgroundColor: 0xffffff,
 		  maxDistance: 18.00
 		});
 		typewriter();

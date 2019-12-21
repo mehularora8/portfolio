@@ -8,6 +8,7 @@ body{
 	margin: 0;
 	font-family: "myriad", sans-serif;
 	overflow: hidden;
+	animation: fadein 2s;
 }
 
 a{
@@ -22,6 +23,15 @@ a{
 	}
 	to{
 		transform: scale(1.2);
+	}
+}
+
+@keyframes fadein{
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
 	}
 }
 

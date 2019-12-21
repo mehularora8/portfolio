@@ -1,4 +1,4 @@
-var footerQuotes = ["Tabs over spaces.", "Not crazy, opposite.", "Parantheses start in the same line as the function declaration.", "Unix-like operating systems. Period.", "Honestly, either vim or emacs works."];
+/*var footerQuotes = ["Tabs over spaces.", "Not crazy, opposite.", "Parantheses start in the same line as the function declaration.", "Unix-like operating systems. Period.", "Honestly, either vim or emacs works."];
 
 function appendChar(txt){
 	if (txt.length > 0) {
@@ -15,16 +15,36 @@ function typewriter(){
 	document.getElementById("footer").innerHTML = "";
 	let text = footerQuotes[Math.floor(Math.random() * footerQuotes.length)];
 	appendChar(text);
-}
+}*/
 
 window.onload = function() {
 		VANTA.NET({
 		  el: "#container",
 		  color: 0x8dc9eb,
 		  backgroundColor: 0xffffff,
-		  maxDistance: 18.00
+		  maxDistance: 14.00
 		});
-		typewriter();
-		setInterval(typewriter, 5000);
 	}
 
+var media = window.matchMedia("(max-width: 768px)");
+
+function backgroundChange(media){
+	if(media.matches){
+		VANTA.NET({
+		  el: "#container",
+		  color: 0x8dc9eb,
+		  backgroundColor: 0xffffff,
+		  maxDistance: 8.00
+		});
+	} else{
+		VANTA.NET({
+		  el: "#container",
+		  color: 0x8dc9eb,
+		  backgroundColor: 0xffffff,
+		  maxDistance: 14.00
+		});
+	}
+}
+
+backgroundChange(media)
+media.addListener(backgroundChange)

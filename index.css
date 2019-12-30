@@ -140,20 +140,20 @@ a{
 	animation: enlarge 0.5s forwards;
 }
 
-.icon.instagram{
-	background-image: url(images/instagram.png);
+.icon.ist{
+	background-image: url(images/ist.png);
 }
 
-.icon.github{
-	background-image: url(images/github.png);
+.icon.ghub{
+	background-image: url(images/ghub.png);
 }
 
 .icon.resume{
 	background-image: url(images/pdf.png);
 }
 
-.icon.linkedin{
-	background-image: url(images/linkedin.png);
+.icon.lkn{
+	background-image: url(images/lkn.png);
 }
 
 .icon.mail{

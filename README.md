@@ -1,3 +1,4 @@
 # stanford-web
 
-Code for web[dot]stanford[dot]edu/~aroram8
+Code for http://web[dot]stanford[dot]edu/~aroram8 and http://mehularora[dot]me
+ 

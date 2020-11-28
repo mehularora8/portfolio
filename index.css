@@ -601,8 +601,8 @@ td+td{
 .contact-item{
 	width: 30%;
 	height: 10vh;
-	border-radius: 15px;
 	margin: 2vh;
+	font-size: 1vw;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -622,7 +622,7 @@ td+td{
 
 #icons{
 	width: 100%;
-	height: 10em;
+	height: 10vh;
 	font-size: 8px;
 	display: flex;
 	align-items: center;
@@ -723,6 +723,7 @@ td+td{
 
 #footer{
 	text-align: center;
+	font-size: 1.5vh;
 	width: 100%;
 	height: 7vh;
 	font-weight: lighter;
@@ -732,7 +733,6 @@ td+td{
 	display: inline-block;
 	color: grey;
 }
-
 
 .skills-row{
 	height: auto;
@@ -768,3 +768,36 @@ td+td{
 	-webkit-transform: translateY(-0.5em);
 	transform: translateY(-0.5em);
 }
+
+#warning-container{ 
+	background-color: #171717;
+	height: 100vh;
+	width: 100vw;
+	/*text-align: center;*/
+	color: white;
+	display: none; 
+	text-align: center;
+}
+
+#warning{
+	/*display: inline-block;*/
+	margin: auto;
+}
+
+@media only screen and (orientation:portrait){
+	#wrapper { 
+		display:none; 
+	}
+
+	#warning-container { 
+		display:grid; 
+	}
+}
+
+@media only screen and (orientation:landscape){
+	#warning-container { 
+		display:none; 
+	}
+}
+
+

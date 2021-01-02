@@ -555,6 +555,11 @@ td+td{
 	background-image: url(images/goldenhour.png);
 }
 
+#wtw{
+	background-image: url(images/wtw.png);
+	background-size: 45%, 45%;
+}
+
 #abridge{
 	background-image: url(images/abridge.png);
 	background-size: 45%, 45%;

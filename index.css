@@ -9,6 +9,17 @@
 }
 
 @font-face{
+	font-family: "raleway-t";
+	src: url("fonts/Raleway/Raleway-T.ttf");
+}
+
+@font-face{
+	font-family: "raleway-r";
+	src: url("fonts/Raleway/Raleway-R.ttf");
+}
+
+
+@font-face{
 	font-family: "merriweather";
 	src: url("fonts/MerriweatherSans-Regular.ttf");
 }
@@ -199,15 +210,25 @@ a{
 #picture{
 	width: 40vw;
 	height: 100vh;
-	background-image: url(images/me.png);
+
+	/* Need this for image */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	/* Need this for background */
+	/*background-image: url(images/me.png);
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 75%, 75%;
+	background-size: 75%, 75%;*/
 }
 
+/* Need this for image */
 #picture > img{
-	height: 30vh;
-	width: 30vh;
+	height: 50vh;
+	width: 50vh;
+	border-radius: 50%;
 }
 
 #items{
@@ -490,12 +511,14 @@ td+td{
 }
 
 .desc-title{
-	font-family: "subheading";
+	font-family: "raleway-r";
+	font-weight: bold;
 	color: #C41E3A;
-	font-size: 1.3vw;
+	font-size: 1.4vw;
 }
 
 .desc-subtitle{
+	font-size: 1vw;
 	color: #002366;
 }
 
@@ -506,7 +529,7 @@ td+td{
 }
 
 .desc-location{
-	font-size: 0.9vw;
+	font-size: 1vw;
 }
 
 .projects-row{
@@ -711,7 +734,7 @@ td+td{
 }
 
 #flask{
-	background-image: url(images/flask.png);
+	background-image: url(images/node.png);
 }
 
 #ghub{

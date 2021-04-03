@@ -1,3 +1,37 @@
+@keyframes move-twink-back {
+    from {
+    	background-position: 0 0;
+    }
+
+    to {
+    	background-position: -10000px 5000px;
+    }
+}
+
+.stars, .twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stars {
+  background: #000 url(images/stars.png) repeat top center;
+  z-index:-4;
+}
+
+.twinkling{
+  background: transparent url(images/twinkling.png) repeat top center;
+  z-index: -3;
+  animation: move-twink-back 600s linear infinite;
+}
+
+
+/* Everything before this is experimental */
 @font-face{
 	font-family: "merriweather-bold";
 	src: url("fonts/MerriweatherSans-Bold.ttf");
@@ -60,12 +94,19 @@ html::-webkit-scrollbar {
 
 html{
 	scroll-behavior: smooth;
-	--bg: #171717;
+	/*--bg: #171717;*/
+	--bg: black;
 	/*--bg : #242424;*/
-	--contrast: #C41E3A;
+	/*--contrast: #C41E3A;
+	--contrast: white;*/
+	/*--contrast: #f2c600;*/
+	--contrast: #deac21;
 }
 
 body{
+	/*background: linear-gradient(90deg, rgba(62,128,222,1) 19%, rgba(0,202,255,1) 100%);*/
+	background: var(--bg);
+	color: white;
 	padding: 0;
 	margin: 0;
 	font-family: "ibm";
@@ -118,7 +159,8 @@ a{
 }
 
 #topbar{
-	background: var(--bg);
+	/*background: var(--bg);*/
+	background-color: black;
 	color: white;
 	height: 7vh;
 	width: 100vw;
@@ -181,7 +223,7 @@ a{
 	width: 100vw;
 	height: 100vh;
 	z-index: -1;
-	background: var(--bg);
+	/*background: var(--bg);*/
 	/*background: url("images/bg");*/
 	background-position: center;
 	background-size: cover;
@@ -191,7 +233,7 @@ a{
 }
 
 #content{
-	font-family: "ibm-light", sans-serif;
+	font-family: "ibm", sans-serif;
 	display: inline-block;
 	color: #f2f2f2;
 	font-size: 1.5vw;
@@ -293,12 +335,13 @@ ul li::before{
 	width: 25vh;
 	height: 20vh;
 	display: inline-block;
-	font-size: 20vh;
+	font-size: 13vh;
 	position: relative;
-	z-index: 1;
-	font-weight: 900;
-	opacity: 0.1;
+	z-index: -1;
+	font-weight: 120;
+	/*opacity: 0.5;*/
 	color: var(--contrast);
+	/*color: white;*/
 }
 
 #about-title, #exp-title, #contact-title{
@@ -319,11 +362,11 @@ ul li::before{
 	width: 70vw;
 	font-size: 1.2vw;
 	color: grey;
+	/*color: grey;*/
 	/*font-weight: lighter;*/
 }
 
 #skills-subtitle, #projects-subtitle{
-	/*font-family: "merriweather-light", sans-serif;*/
 	text-align: right;
 	display: inline-block;
 	width: 70vw;
@@ -333,7 +376,6 @@ ul li::before{
 }
 
 #about-content, #skills-content{
-	/*font-family: "merriweather-light", sans-serif;*/
 	text-align: left;
 	display: inline-block;
 	width: 70vw;
@@ -350,6 +392,7 @@ ul li::before{
 }
 
 .ff-item{
+	/*background-color: white;*/
 	width: 35vw;
 	box-shadow: 0 0 0.25vh rgba(0, 0, 0, 0.2);
 	border-radius: 1vh;
@@ -365,6 +408,7 @@ ul li::before{
 
 .ff-heading{
 	width: 100%;
+	/*color: black;*/
 	/*font-family: "heading";*/
 	font-weight: bold;
 	display: flex;
@@ -385,10 +429,8 @@ ul li::before{
 	height: 5vh;
 	font-size: 2vh;
 	text-align: center;
-	/*display: flex;*/
+	/*color: black;*/
 	align-items: center;
-	/*margin-top: 1vh;
-	margin-bottom: 1.5vh;*/
 }
 
 .ff-icon{
@@ -412,7 +454,7 @@ ul li::before{
 	padding: 0.1vh;
 }
 
-#skills, #contact, #projects{
+#skills, #contact, #projects {
 	text-align: center;
 	font-weight: lighter;
 }
@@ -481,9 +523,10 @@ td+td{
 	width: 20px;
   	height: 20px;
 }
-.emph{
+
+/*.emph{
 	color: var(--contrast);
-}
+}*/
 
 .spacer{
 	width: 100vw;
@@ -510,16 +553,14 @@ td+td{
 }
 
 .exp-desc{
-	/*font-family: "merriweather-light", sans-serif;*/
 	width: 30%;
 	text-align: left;
 	margin: 2vh;
 	font-size: 1.6vh;
-	color: #424242;
-	/*outline: 1px solid red;*/
 }
 
 .desc-title{
+	color: #FFD900;
 	font-family: "raleway-r";
 	font-weight: bold;
 	color: var(--contrast);
@@ -528,7 +569,7 @@ td+td{
 
 .desc-subtitle{
 	font-size: 1vw;
-	color: #002366;
+	color: white;
 }
 
 .desc-image{
@@ -538,11 +579,11 @@ td+td{
 }
 
 .desc-location{
+	color: grey;
 	font-size: 1vw;
 }
 
 .projects-row{
-	/*font-family: "merriweather-light", sans-serif;*/
 	display: inline-flex;
 	/*justify-content: center;
 	align-items: center;*/
@@ -571,16 +612,15 @@ td+td{
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: 33%, 33%;
 }
 
 #ytc{
 	background-image: url(images/ytclogo.png);
-	background-size: 75%, 75%;
 }
 
 #req{
 	background-image: url(images/req.png);
-	background-size: 45%, 45%;
 }
 
 #goldenhour{
@@ -589,12 +629,10 @@ td+td{
 
 #wtw{
 	background-image: url(images/wtw.png);
-	background-size: 45%, 45%;
 }
 
 #abridge{
 	background-image: url(images/abridge.png);
-	background-size: 45%, 45%;
 }
 
 #uno{
@@ -604,7 +642,7 @@ td+td{
 
 #heap{
 	background-image: url(images/107e.png);
-	background-size: 75%, 75%;
+	background-size: 60%, 60%;
 }
 
 .projects-desc{
@@ -612,18 +650,18 @@ td+td{
 	text-align: left;
 	width: 80%;
 	height: auto;
-	color: #424242;
+	color: white;
 	font-size: 1.75vh;
 }
 
 .project-heading{
 	font-size: 2.5vh;
-	color: black;
+	color: var(--contrast);
 }
 
 .project-subheading{
 	font-size: 1.75vh;
-	color: #696969;
+	color: grey;
 }
 
 .contact-row{
@@ -643,18 +681,18 @@ td+td{
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	color: black;
+	color: white;
 	font-weight: normal;
 }
 
 .social{
 	text-align: left;
-	color: black;
+	color: white;
 	font-weight: lighter;
 }
 
 .handle{
-	color: #424242;
+	color: grey;
 }
 
 #icons{
@@ -667,8 +705,8 @@ td+td{
 
 .icon{
 	z-index: 1;
-	height: 5vh;
-	width: 5vh;
+	height: 6vh;
+	width: 6vh;
 	color: black;
 	background-size: cover;
 	margin: 0 1vw;
@@ -784,31 +822,6 @@ td+td{
 	padding: 2vh;
 }
 
-.donut{
-	margin: 1vh;
-}
-
-/*Donut Chart*/
-
-.chart-text {
-	/*font-family: cocogoose;*/
-	border: 1px solid red;
-	fill: #000;
-	-moz-transform: translateY(0.25em);
-	-ms-transform: translateY(0.25em);
-	-webkit-transform: translateY(0.25em);
-	transform: translateY(0.25em);
-}
-
-.chart-number {
-	font-size: 0.3em;
-	line-height: 1;
-	text-anchor: middle;
-	-moz-transform: translateY(-0.5em);
-	-ms-transform: translateY(-0.5em);
-	-webkit-transform: translateY(-0.5em);
-	transform: translateY(-0.5em);
-}
 
 #warning-container{ 
 	background-color: var(--bg);
@@ -825,7 +838,7 @@ td+td{
 	margin: auto;
 }
 
-@media only screen and (orientation:portrait){
+@media only screen and (orientation:portrait) {
 	#wrapper { 
 		display:none; 
 	}
@@ -835,7 +848,7 @@ td+td{
 	}
 }
 
-@media only screen and (orientation:landscape){
+@media only screen and (orientation:landscape) {
 	#warning-container { 
 		display:none; 
 	}

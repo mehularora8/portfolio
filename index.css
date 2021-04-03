@@ -784,31 +784,6 @@ td+td{
 	padding: 2vh;
 }
 
-.donut{
-	margin: 1vh;
-}
-
-/*Donut Chart*/
-
-.chart-text {
-	/*font-family: cocogoose;*/
-	border: 1px solid red;
-	fill: #000;
-	-moz-transform: translateY(0.25em);
-	-ms-transform: translateY(0.25em);
-	-webkit-transform: translateY(0.25em);
-	transform: translateY(0.25em);
-}
-
-.chart-number {
-	font-size: 0.3em;
-	line-height: 1;
-	text-anchor: middle;
-	-moz-transform: translateY(-0.5em);
-	-ms-transform: translateY(-0.5em);
-	-webkit-transform: translateY(-0.5em);
-	transform: translateY(-0.5em);
-}
 
 #warning-container{ 
 	background-color: var(--bg);

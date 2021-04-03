@@ -54,8 +54,15 @@
 	src: url("fonts/mg.ttf");
 }
 
+html::-webkit-scrollbar {
+	display: none;
+}
+
 html{
 	scroll-behavior: smooth;
+	--bg: #171717;
+	/*--bg : #242424;*/
+	--contrast: #C41E3A;
 }
 
 body{
@@ -87,11 +94,11 @@ body{
 @keyframes hl{
 	from{
 		margin-bottom: 0vh;
-		border-bottom: 2px solid #171717;
+		border-bottom: 2px solid var(--bg);
 	}
 	to{
 		margin-bottom: 2vh;
-		border-bottom: 2px solid #C41E3A;
+		border-bottom: 2px solid var(--contrast);
 	}
 }
 
@@ -107,11 +114,11 @@ body{
 a{
 	text-decoration: none;
 	cursor: pointer;
-	color: #C41E3A; 
+	color: var(--contrast); 
 }
 
 #topbar{
-	background: #171717;
+	background: var(--bg);
 	color: white;
 	height: 7vh;
 	width: 100vw;
@@ -129,7 +136,7 @@ a{
 
 #name-header{
 	font-family: "naming";
-	background: #171717;
+	background: var(--bg);
 	color: white;
 	height: 4vh;
 	width: auto;
@@ -174,7 +181,7 @@ a{
 	width: 100vw;
 	height: 100vh;
 	z-index: -1;
-	background: #171717;
+	background: var(--bg);
 	/*background: url("images/bg");*/
 	background-position: center;
 	background-size: cover;
@@ -216,7 +223,7 @@ a{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	
+
 	/* Need this for background */
 	/*background-image: url(images/me.png);
 	background-position: center;
@@ -247,6 +254,8 @@ a{
 	padding: 0.5vw;
 	width: 6vw;
 	height: auto;
+	/*background: linear-gradient(90deg, rgba(62,128,222,1) 19%, rgba(0,202,255,1) 100%);
+	color: white;*/
 	background-color: #e2e2e2;
 	color: black;
 	text-align: center;
@@ -289,7 +298,7 @@ ul li::before{
 	z-index: 1;
 	font-weight: 900;
 	opacity: 0.1;
-	color: #C41E3A;
+	color: var(--contrast);
 }
 
 #about-title, #exp-title, #contact-title{
@@ -461,7 +470,7 @@ td+td{
   width: 25px;
   height: 25px;
   border-radius: 50%; 
-  background: #C41E3A;
+  background: var(--contrast);
 }
 
 /*.lang{
@@ -473,7 +482,7 @@ td+td{
   	height: 20px;
 }
 .emph{
-	color: #C41E3A;
+	color: var(--contrast);
 }
 
 .spacer{
@@ -513,7 +522,7 @@ td+td{
 .desc-title{
 	font-family: "raleway-r";
 	font-weight: bold;
-	color: #C41E3A;
+	color: var(--contrast);
 	font-size: 1.4vw;
 }
 
@@ -802,7 +811,7 @@ td+td{
 }
 
 #warning-container{ 
-	background-color: #171717;
+	background-color: var(--bg);
 	height: 100vh;
 	width: 100vw;
 	/*text-align: center;*/

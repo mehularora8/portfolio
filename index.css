@@ -760,6 +760,14 @@ td+td{
 	background-image: url(images/linux.png);
 }
 
+#aws{
+	background-image: url(images/aws.png);
+}
+
+#java{
+	background-image: url(images/java.png);
+}
+
 #git{
 	background-image: url(images/git.png);
 }

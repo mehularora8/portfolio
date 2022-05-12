@@ -109,7 +109,8 @@ html{
 	--contrast: white;*/
 	/*--contrast: #f2c600;*/
 	/*--contrast: #deac21;*/
-	--contrast: #8c1c36;
+	/*--contrast: #8c1c36;*/
+	--contrast: #2aa88a;
 }
 
 body {
@@ -127,6 +128,10 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 	color: var(--contrast); 
+}
+
+#footer a {
+	color: #2aa88a;
 }
 
 #topbar{
@@ -439,14 +444,16 @@ ul li::before{
 .ff-item {
 	display: flex;
 	width: 30%;
-	border-radius: 1%;
+	border-radius: 0.5vw;
   box-shadow: 0 0.35vh 0.35vh rgba(0, 0, 0, 0.3);
   background: white;
   text-align: center;
 }
 
 .grad {
-	background: linear-gradient(45deg, #7f7fd5, #86a8e7, #91eae4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	border-radius: 0.5vw;
+	background: #2aa88a;
+	/*linear-gradient(45deg, #7f7fd5, #86a8e7, #91eae4);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .grad > img {

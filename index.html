@@ -1,380 +1,42 @@
-<!-- 
-	IDEAS: 
-	- TODO: Add links make sure they work. 
-	- Add scrolling animations
-	- ADD JS.
-	- Add projects. 
-	- ADD GOOGLE ANALYTICS
--->
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+	<head>
+		<title>Mehul Arora</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="main.css" />
+	</head>
+	<!DOCTYPE html>
+    <div class="container">
+        <div class="left">
+			<h1>Hi there! I'm Mehul.</h1>
 
-<head>
-	<title>Mehul Arora</title>
-
-	<meta name="viewport" content="width = device-width, initial-scale = 1">
-	<meta name="author" content="Mehul Arora">
-	<meta name="keywords" content="software, engineer, stanford, computer science, business, product, pm">
-	<meta name="description" content="Hi! I am Mehul Arora, a senior currently pursuing Computer Science at Stanford University.">
-
-
-	<link rel="icon" type="text/css" href="images/logo.png">
-	<link rel="stylesheet" type="text/css" href="index.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"> -->
-	
-	
-	<script src="index.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
-	<script src="https://www.vantajs.com/dist/vanta.net.min.js"></script>
-</head>
-
-<body>
-	<div id="warning-container">
-		<div id="warning"><img src="images/orientation.png" id="orientation"><br><br>This website is best experienced in landscape mode.</div>
-	</div>
-
-	<div id="wrapper">
-		<!-- <div id = "name-header">Programmer. Creator. Geek.</div> -->
-		<!-- <img src="images/logo.png" id = "logo"> -->
-		<div id="topbar">
-			<a href="#about">
-				<div class="link">About</div>
-			</a>
-			<a href="#experience">
-				<div class="link">Experience</div>
-			</a>
-			<a href="#projects">
-				<div class="link">Projects</div>
-			</a>
-			<a href="Resume.pdf">
-				<div class="link">Resume</div>
-			</a>
-			<div id="navbar-spacer"></div>
-		</div>
-		<div id="container">
-			<!-- <div class = "stars"></div> -->
-			<!-- <div class = "twinkling"></div> -->
-
-			<div id="name">
-				<div id="content">
-					<span id="emphasis">CREATOR. <br> ENGINEER. <br> GEEK.</span>
-					<br>
-					<br> <i class="fa-solid fa-location-pin" style="color:#8c1c36;"></i> &nbsp; San Francisco, CA
-				</div>
-				<br><br><br>
-				<div id="name-description">
-					Hi! I'm Mehul. I'm currently a senior @Stanford. Ex Microsoft, Amazon.
-				</div>
-				<br>
-				<br>
-				<div class="contact-row">
-					<a href="https://github.com/mehularora8"><div class="icon" id="ghub"></div></a>
-
-					<a href="https://www.linkedin.com/in/mehul-arora/"><div class="icon" id="linkedin"></div></a>
-
-					<a href="mailto:aroram8@stanford.edu"><div class="icon" id="email"></div></a>
-				</div>
-			</div>
-			<div id="picture"> <img src="images/me-real.jpg"> </div>
-		</div>
-
-
-
-		<a name="about"></a>
-		<div id="about">
-			<div id="about-title">
-				<!-- <div class="number">01</div> -->
-				<div class="heading">ABOUT&nbsp;<span class="emph">ME</span></div>
-			</div>
-			<br>
-			<div id="about-subtitle">Creator. Programmer. Geek.</div>
-			<br>
-			<br>
-			<br>
-			<div id="about-content"> 
-				I am a senior at <a href="https://stanford.edu" target="_blank">Stanford University </a> pursuing a B.S. in Computer Science with a concentration in Human Computer Interaction, and a M.S. in Management Science and Engineering. I'm passionate about creating new technology and systems that help redefine the lives of people on a large scale. Even though computers have grown increasingly familiar to me over the years, they still continue to carry the same level of fascination for me as when I first began my explorations at the age of 10.  
-				<br>
-				<br> I love working in collaborative environments. One of my favorite activities is attending hackathons, since that gives me a platform to work at the intersection of two of my passions - innovation and collaboration.
-				<br>
-				<br> I really enjoy teaching! Over the years, I have been a Section leader for <a href="https://cs106b.stanford.edu">CS106B: Programming Abstractions</a>, and I'm currently a TA for MS&E 278: Patent Law and <a href="https://cs131.stanford.edu">CS131: Computer Vision.</a>
-				<br>
-				<br>
-				<br>
-
-				<div id = "ff">
-					<div class = "ff-item">
-						<div class = "grad">
-							<img src="images/trophy.png">
-						</div>
-						<div class = "ff-text">
-							I represented India at the World Youth Scrabble Championship.
-						</div>
-						
-					</div>
-					<div class = "ff-item">
-						<div class = "grad">
-							<img src="images/headset.png">
-						</div>
-						<div class = "ff-text">
-							I love talking about esports. I also host an esports podcast!
-						</div>
-					</div>
-					<div class = "ff-item">
-						<div class = "grad">
-							<img src="images/improv.png">
-						</div>
-						<div class = "ff-text">
-							I love to improvise!
-						</div>
-					</div>
-				</div>
-			</div>
-			<br>
-			<br> 
-		</div>
-		<br>
-		<br>
-		<br>
-		<a name="experience"></a>
-		<div id="exp">
-			<div id="exp-title">
-				<div class="rheading">WHAT HAVE I <span class="emph"> &nbsp;DONE SO FAR?</span></div>
-			</div>
-			<div id="exp-subtitle">An archive of my experience</div>
-			<br>
-			<br>
-			<br>
-			<div class="exp-item">
-				<div class="exp-pic"> 
-					<img src="images/microsoft.jpeg" class="desc-image" style="border-radius: 25px"> 
-				</div>
-				<div class="exp-desc"> 
-					<span class="desc-title">Microsoft Corporation </span>
-					<br> <span class="desc-subtitle">Product Management Intern <br>June 2022 - September 2022</span>
-					<br> <span class="desc-location"><i class="fa-solid fa-location-pin" style="color:#C41E3A;"></i> &nbsp;Seattle, WA</span>
-					<br><br>
-				</div>
-			</div>
-			<br>
-			<br>
-			<br>
-			<div class="exp-item">
-				<div class="exp-pic"> 
-					<img src="images/amazon.jpeg" class="desc-image" style="border-radius: 25px"> 
-				</div>
-				<div class="exp-desc"> 
-					<span class="desc-title">Amazon, Inc. </span>
-					<br> <span class="desc-subtitle">Software Development Engineering Intern <br>June 2021 - September 2021</span>
-					<br> <span class="desc-location"><i class="fa-solid fa-location-pin" style="color:#C41E3A;"></i> &nbsp;Seattle, WA</span>
-					<br><br>
-					<br> I worked as a backend engineer on the IMDb platform, on the Consumer Reference team. I created production-ready video ingestion service from scratch, which brought down the time to upload a video to the IMDb platform from several minutes to a few seconds. 
-					<br> <br>
-					My first industry internship came with a lot of new experiences. From learning how to design software infrastructure to deploying code to beta for the first time, I thoroughly enjoyed my time at Amazon. 
-				</div>
-			</div>
 			
-			<br>
-			<br>
-			<br>
-			<div class="exp-item">
-				<div class="exp-pic"> 
-					<img src="images/curis2.png" class="desc-image" style="border-radius: 25px"> 
-				</div>
+			<p>Welcome to my corner of the internet. I'm a creator, engineer and overall geek that loves building cool stuff.</p>
 
-				<div class="exp-desc"> 
-					<span class="desc-title">
-						Stanford Wehab Lab 
-						<a href="https://wehab.stanford.edu/research/far" target="_blank">
-							<span class="fas fa-external-link-alt" style="color:black;"></span>
-						</a>
-					</span>
-					<br> <span class="desc-subtitle">Research Assistant <br> June 2020 - January 2021</span>
-					<br> <span class="desc-location"><i class="fa-solid fa-location-pin" style="color:#C41E3A;"></i> &nbsp;Remote - Stanford, CA</span>
-					<br><br>
-					<br> I worked on a project known as Facilitating Affect Regulation in children diagnosed with ASD, or FAR.
-					<br>
-					<br> I developed an end-to-end haptic breathing pacer for children diagnosed with Autism Spectrum Disorder (ASD) using Swift and Arduino. I built an iOS app from scratch to manage the device and implemented bluetooth communication protocols between the app and the microprocessor on the device.
-					<br>
-				</div>
-			</div>
-			<br>
-			<br>
-			<br>
-			<div class="exp-item">
-				<div class="exp-pic"> 
-					<img src="images/stan2.png" class="desc-image" style="border-radius: 25px"> 
-				</div>
-				<div class="exp-desc"> 
-					<span class="desc-title">
-						Department of CS 
-						<a href="https://cs106b.stanford.edu" target="_blank">
-							<span class="fas fa-external-link-alt" style="color:black;"></span>
-						</a>
-					</span>
-					<br> <span class="desc-subtitle">CS106 Section Leader <br>January 2021 - Current</span>
-					<br> <span class="desc-location"><i class="fa-solid fa-location-pin" style="color:#C41E3A;"></i> &nbsp;Stanford, CA</span>
-					<br><br>
-					<br> I am a section leader for CS106A and CS106B, Stanford's introductory CS sequence and largest undergraduate classes with typical enrollments of around 500 students per quarter.
-					<br>
-					<br> I teach a weekly discussion section to solidify concepts taught in lecture and work through programming problems. I hold office hours, where I am responsible for answering questions and helping students debug their code. I also held workshops and assisted new Section Leaders through practice teaches.
-					<br>
-				</div>
-			</div>
-			<br>
-			<br>
-			<br>
-			<div class="exp-item">
-				<div class="exp-pic"> 
-					<img src="images/stanford.jpg" class="desc-image" style="border-radius: 25px"> 
-				</div>
-				<div class="exp-desc"> <span class="desc-title">Stanford University</span>
-					<br> <span class="desc-subtitle">B.S. Computer Science<br>September 2019 - June 2023</span>
-					<br> <span class="desc-location"><i class="fa-solid fa-location-pin" style="color:#C41E3A;"></i> &nbsp;Stanford, CA</span>
-					<br><br>
-					<br> Stanford was my dream school ever since I was 13. When I got here, it was everything I had imagined.
-					<br>
-					<br> The scale and diversity of opportunities at Stanford were unprecedented, and they pushed to expand my perspective and challenge myself to the fullest. From being a member of Applied cybersecurity to playing tournaments on the men's ultimate team, I was able to truly develop my interests and find neww ones outside class.
-					<br>
-					<br> Being in the presence of such remarkable peers and inspiring people, everyday at Stanford feels like a dream.
-				</div>
-			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<div class="exp-item">
-				<div class="exp-pic"> 
-					<img src="images/dpsr.jpg" class="desc-image" style="border-radius: 25px"> 
-				</div>
-				<div class="exp-desc"> <span class="desc-title">Delhi Public School, Rohini </span>
-					<br> <span class="desc-subtitle">Class of 2019</span>
-					<br> <span class="desc-location"><i class="fa-solid fa-location-pin" style="color:#C41E3A;"></i> &nbsp;New Delhi, India</span>
-					<br>
-					<br> DPS Rohini provided me with a platform to pursue everything I wanted to. I was an active quizzer and represented my school at national and state-wide Computer Science symposia. 
-					<br> </div>
+			<p>My work has led me around the tech industry block. Previously, I took a <a href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619">lab study</a> to production, built infrastructure to ingest trailers into IMDb, and redesigned surveys for Microsoft Office. In 2023, I was a <a href="https://www.floodgate.com/">Floodgate</a> Reactor fellow. I'm now working on automating patenting at <a href="https://www.crunchbase.com/organization/lightbulbml">LightbulbML</a>.</p>
+
+			<p>My life philosophy is centered around maximizing new experiences. My recent obsessions include <a target="_blank" href="https://instagram.com/cameraseesfirst">photography</a>, trying <a href="https://mehularora.notion.site/Caffeine-Chronicles-8ce68e0bbaea47a082db69b1e01cb1f3?pvs=74">local cafes</a>, and <a target="_blank" href="https://twitch.tv/scorchcs2">nerding out</a> about Counter-Strike.</p>
+
+			You can reach me via: 
+				<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank">linkedin</a>
+				<a href="https://twitter.com/luhemarora" target="_blank">twitter</a> or
+				<a href="mailto:aroramehul8@gmail.com">email</a>.
+
+		</div>
+        <div class="right">
+			<div class="grid">
+				<img src="photos/1.png" alt="Image 1">
+				<img src="photos/2.png" alt="Image 2">
+				<img src="photos/3.png" alt="Image 3">
+				<img src="photos/4.png" alt="Image 4">
+				<img src="photos/5.png" alt="Image 5">
+				<img src="photos/6.png" alt="Image 6">
+				<img src="photos/7.png" alt="Image 7">
+				<img src="photos/8.png" alt="Image 8">
+				<img src="photos/9.png" alt="Image 9">
 			</div>
 		</div>
-		<br>
-		<br>
-		<br>
-		<div id="projects">
-			<div id="projects-title">
-				<div class="heading">PROJECTS<!-- <span class="emph">PROJECTS</span> --></div>
-				<!-- <div class="number">04</div> -->
-			</div>
-			<div id="projects-subtitle">Projects, projects everywhere</div>
-			<br><br><br>
-			<div class="projects-row">
-				<div class="projects-item">
-					<div class="projects-image">
-						<img src="images/parea.png">
-					</div>
-					<div class="projects-desc"> <span class="project-heading">Parea</span>
-						<br> <span class="project-subheading">CS Senior Project</span>
-						<br>
-						<br> My team of 4 developed a scalable mobile application to provide caregivers of people with ASD with trusted resources and community support using React Native and Google Firebase.
-						<br>
-						<br> The code for this project is private in accordance with the Stanford honour code.
-						<br>
-						<br> </div>
-				</div>
-
-				<div class="projects-item">
-					<div class="projects-image">
-						<img src="images/wtw.png">
-					</div>
-					<div class="projects-desc"> <span class="project-heading">WhatTimeWorks</span> 
-						<br> <span class="project-subheading">Personal Project</span>
-						<br>
-						<br> At some point during the pandemic, scheduling utilities lost their appeal. Most were hard to use on phones, and thus I created WhatTimeWorks, a real-time organization application that helps you get availabilities and schedule events when a large number of people are involved.
-						<br>
-						<br>
-						<a href="https://github.com/mehularora8/WhatTimeWorks" target="_blank">View ></a>
-						<br>
-						<br>
-					</div>
-				</div>
-
-				<div class="projects-item">
-					<div class="projects-image">
-						<img src="images/wanadu.png">
-					</div>
-					<div class="projects-desc"> <span class="project-heading">Wanadu</span> 
-						<br> <span class="project-subheading">CS278: Social Computing</span>
-						<br>
-						<br> I, for one, enjoy doing niche things when I travel, such as experiencing the best café in town. Wanadu is a social application born out of the need to curate the best local experience for those that wish to get away from the popular tourist destinations. 
-						<br>
-						<br>
-						<a href="https://github.com/mehularora8/requirement-tracker-final" target="_blank">View ></a>
-						<br>
-						<br>
-					</div>
-				</div>
-			</div>
-
-			<div class="projects-row">
-				<div class="projects-item">
-					<div class="projects-image">
-						<img src="images/ytclogo.png">
-					</div>
-					<div class="projects-desc"> 
-						<span class="project-heading">YesTrashCan</span> 
-						<br> 
-						<span class="project-subheading">TreeHacks 2020</span>
-						<br>
-						<br> YesTrashCan is a modular CV project that classifies user waste and helps monitor waste levels on a centralized dashboard and make sustainability effortless. We used the nVidia Jetson Nano to run a CV model to classify waste. 
-						<br>
-						<br>
-						<a href="https://github.com/mehularora8/treehacks2020" target="_blank">View ></a>
-						<br><br>
-					</div>
-				</div>
-				<div class="projects-item">
-					<div class="projects-image">
-						<img src="images/req.png">
-					</div>
-					<div class="projects-desc"> <span class="project-heading">Requirement Tracker</span> 
-						<br> <span class="project-subheading">Personal Project</span>
-						<br>
-						<br> As a freshman in college, I was overwhelmed with all the classes I wanted to take and the requirements I needed to fulfill. I decided to create an iOS application using Swift to make tracking degree progress more efficient for students.  
-						<br>
-						<br>
-						<a href="https://github.com/mehularora8/requirement-tracker-final" target="_blank">View ></a>
-						<br>
-						<br>
-					</div>
-				</div>
-				<div class="projects-item">
-					<div class="projects-image">
-						<img src="images/abridge.png">
-					</div>
-					<div class="projects-desc"> 
-						<span class="project-heading">Abridge</span> 
-						<br>
-						<span class="project-subheading">AngelHack 2018</span>
-						<br>
-						<br> Abridge is a web platform built using Python, Javascript and Google’s cloud suite that allows users to take notes seamlessly from speech. We used an attention based model to capture important parts of the text and summarize it.
-						<br>
-						<br> 
-						<a href="https://github.com/mehularora8/abridge" target="_blank">View ></a>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		<br>
-		<br>
-		<br>
-		<div id="footer">
-			<div id="footer-content"> You made it to the end! Have a cookie: 🍪 
-				<br>
-				<br> Made with love by Mehul Arora.
-				<br>
-				<br> Icons from <a href="https://icons8.com"> Icons8</a> and <a href="https://flaticon.com" target="_blank">Flaticon</a>. </div>
-			<div class="spacer"></div>
-		</div>
-	</div>
-</body>
-
+    </div>
+	</body>
 </html>

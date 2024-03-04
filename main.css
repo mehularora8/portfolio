@@ -29,6 +29,12 @@ p {
     padding: 3%; /* Add some padding inside the divisions */
 }
 
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 a {
     text-decoration: none;
     color: #18272F;
@@ -54,6 +60,19 @@ a:hover::before {
 }
 
 
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create three columns of equal size */
+    gap: 0px;
+}
+
+.grid img {
+    width: 100%; /* Make images fill their container */
+    height: auto; /* Keep image aspect ratio */
+    display: block; /* Remove any space below the image */
+}
+
+
 /* Media query for screens smaller than 768px */
 @media (max-width: 768px) {
     .container {
@@ -63,16 +82,4 @@ a:hover::before {
     p {
         margin: 10% 0;
     }
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Create three columns of equal size */
-    gap: 0px; /* No space between grid items */
-}
-
-.grid img {
-    width: 100%; /* Make images fill their container */
-    height: auto; /* Keep image aspect ratio */
-    display: block; /* Remove any space below the image */
 }

@@ -4,41 +4,73 @@
 		<title>Mehul Arora</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="globals.css" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				theme: {
+					extend: {
+						fontFamily: {
+							'playfair': ['Playfair Display', 'serif'],
+							'source-sans-pro': ['"Source Sans Pro"', 'sans-serif'],
+							'cousine': ['Cousine', 'monospace']
+						},
+						colors: {
+							'custom-dark': '#18272F',
+							'custom-light': '#F5F5F5',
+							'custom-teal': '#2e898e8a'
+						}
+					}
+				}
+			}
+		</script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
 		<link rel="icon" href="photos/6.png" type="image/png">
 	</head>
-	<!DOCTYPE html>
-    <div class="container">
-        <div class="left">
-			<h1>Hi there! I'm Mehul.</h1>
-			
-			<p>Welcome to my corner of the internet. I'm a creator, engineer and geek that loves building stuff.</p>
+	<body class="font-source-sans-pro text-base leading-relaxed text-custom-dark bg-custom-light p-0 m-0">
+		<div class="flex flex-col md:flex-row min-h-screen">
+			<div class="flex-1 p-6 md:p-12">
+				<h1 class="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-12">Hi there! I'm Mehul.</h1>
+				
+				<p class="my-8 md:my-6">Welcome to my corner of the internet. I'm an engineer and geek that loves building stuff.</p>
 
-			<p>My work has led me around the tech industry block. In college, I took a <a href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619">lab study</a> to production, built infrastructure to ingest trailers into <a href="https://www.imdb.com/trailers/" target="_blank">IMDb</a>, and redesigned surveys for <a href="https://www.office.com/" target="_blank">Microsoft Office</a>. In 2023, I was a <a href="https://www.floodgate.com/">Floodgate</a> Reactor fellow, during which I built <a href="https://www.crunchbase.com/organization/lightbulbml">LightbulbML</a>. I'm now working on automating patenting at <a href="https://schox.com" target="_blank">Schox</a>.</p>
+				<p class="my-8 md:my-6">My work has led me around the tech industry block. In college, I took a <a href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="custom-link no-underline text-custom-dark font-bold">lab study</a> to production, built infrastructure to ingest trailers into <a href="https://www.imdb.com/trailers/" target="_blank" class="custom-link no-underline text-custom-dark font-bold">IMDb</a>, and redesigned surveys for <a href="https://www.office.com/" target="_blank" class="custom-link no-underline text-custom-dark font-bold">Microsoft Office</a>. In 2023, I was a <a href="https://www.floodgate.com/" class="custom-link no-underline text-custom-dark font-bold">Floodgate</a> Reactor fellow, during which I built <a href="https://www.crunchbase.com/organization/lightbulbml" class="custom-link no-underline text-custom-dark font-bold">LightbulbML</a>. I'm now building agents for patent prosecution at <a href="https://schox.com" target="_blank" class="custom-link no-underline text-custom-dark font-bold">Schox</a>.</p>
 
-			<p>My life philosophy is centered around maximizing new experiences. My recent obsessions include <a target="_blank" href="https://instagram.com/cameraseesfirst">photography</a>, trying <a href="https://mehularora.notion.site/Caffeine-Chronicles-8ce68e0bbaea47a082db69b1e01cb1f3?pvs=74">local cafes</a>, and <a target="_blank" href="https://twitch.tv/scorchcs2">nerding out</a> about FPS games.</p>
+				<p class="my-8 md:my-6">My life philosophy is centered around maximizing new experiences. I've previously tried to:</p>
+				<ul>
+					<li>get featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="custom-link no-underline text-custom-dark font-bold">shot by iPhone ad</a></li>
+					<li>cosplay as <a target="_blank" href="https://twitch.tv/scorchcs2" class="custom-link no-underline text-custom-dark font-bold">broadcast talent</a> for a Counter Strike tournament</li>
+				</ul>
 
-			<p>When I'm not pushing my stream of thoughts to twitter, I write it down <a href="https://substack.com/@mehularora" target="_blank">here</a>. Most recently: <a href="https://substack.com/@mehularora/note/p-153181635?utm_source=notes-share-action&r=1yp30k" target="_blank">a deep dive into barcodes.</a></p>
-			
-			You can reach me via
-				<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank">linkedin</a>
-				<a href="https://twitter.com/luhemarora" target="_blank">twitter</a> or
-				<a href="mailto:aroramehul8@gmail.com">email</a>.
-			
-		</div>
-        <div class="right">
-			<div class="grid">
-				<img src="photos/1.png" alt="Image 1">
-				<img src="photos/2.png" alt="Image 2">
-				<img src="photos/3.png" alt="Image 3">
-				<img src="photos/4.png" alt="Image 4">
-				<img src="photos/5.png" alt="Image 5">
-				<img src="photos/6.png" alt="Image 6">
-				<img src="photos/7.png" alt="Image 7">
-				<img src="photos/8.png" alt="Image 8">
-				<img src="photos/9.png" alt="Image 9">
+				<p>Some other stuff I've made:</p>
+				<ul>
+					<li>A directory of 100+ <a href="https://caffeinechronicles.vercel.app/" class="custom-link no-underline text-custom-dark font-bold">local cafes</a></li>
+					<li>A <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="custom-link no-underline text-custom-dark font-bold">gyro locator</a></li>
+					<li>A <a href="https://piwatch.vercel.app/" class="custom-link no-underline text-custom-dark font-bold">meme stat tracker for Valorant</a></li>
+					</ul>
+				
+				<p class="my-8 md:my-6">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="custom-link no-underline text-custom-dark font-bold">on Substack</a>. 
+				
+					<p class="my-8 md:my-6">You can reach me via
+					<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="custom-link no-underline text-custom-dark font-bold">linkedin</a> or
+					<a href="https://twitter.com/luhemarora" target="_blank" class="custom-link no-underline text-custom-dark font-bold">twitter</a>.
+				</p>
+			</div>
+			<div class="flex-1 p-6 md:p-12 flex items-center justify-center">
+				<div class="grid grid-cols-3 gap-0">
+					<img src="photos/1.png" alt="Image 1" class="w-full h-auto block">
+					<img src="photos/2.png" alt="Image 2" class="w-full h-auto block">
+					<img src="photos/3.png" alt="Image 3" class="w-full h-auto block">
+					<img src="photos/4.png" alt="Image 4" class="w-full h-auto block">
+					<img src="photos/5.png" alt="Image 5" class="w-full h-auto block">
+					<img src="photos/6.png" alt="Image 6" class="w-full h-auto block">
+					<img src="photos/7.png" alt="Image 7" class="w-full h-auto block">
+					<img src="photos/8.png" alt="Image 8" class="w-full h-auto block">
+					<img src="photos/9.png" alt="Image 9" class="w-full h-auto block">
+				</div>
 			</div>
 		</div>
-    </div>
 	</body>
 </html>

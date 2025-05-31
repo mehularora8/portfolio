@@ -33,63 +33,57 @@
 		<div class="flex flex-col md:flex-row min-h-screen">
 			<div class="flex-1 p-6 md:p-12 max-w-2xl">
 				<div class="relative">
-					<!-- Floating decorative elements -->
-					<div class="absolute -top-4 -left-4 w-20 h-20 bg-gradient-to-br from-fuchsia-500 to-pink-500 rounded-full opacity-25 blur-xl"></div>
-					<div class="absolute top-32 -right-8 w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full opacity-25 blur-lg"></div>
-					<div class="absolute top-80 -left-12 w-24 h-24 bg-gradient-to-br from-lime-400 to-emerald-500 rounded-full opacity-20 blur-xl"></div>
-					<div class="absolute top-96 right-4 w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-30 blur-lg"></div>
-					<div class="absolute bottom-32 -left-6 w-18 h-18 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full opacity-25 blur-lg"></div>
-
-					<!-- Additional floating elements across the screen -->
-					<div class="fixed top-20 right-32 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full opacity-20 blur-lg"></div>
-					<div class="fixed top-64 right-20 w-10 h-10 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-full opacity-25 blur-md"></div>
-					<div class="fixed bottom-48 right-40 w-16 h-16 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-full opacity-23 blur-lg"></div>
-					<div class="fixed bottom-20 right-64 w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full opacity-27 blur-md"></div>
-					<div class="fixed top-40 right-56 w-8 h-8 bg-gradient-to-br from-lime-400 to-green-500 rounded-full opacity-30 blur-sm"></div>
-					<div class="fixed top-80 right-12 w-18 h-18 bg-gradient-to-br from-violet-400 to-fuchsia-500 rounded-full opacity-20 blur-lg"></div>
-					<div class="fixed bottom-32 right-28 w-14 h-14 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-full opacity-25 blur-lg"></div>
-					<div class="fixed top-12 right-44 w-6 h-6 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full opacity-35 blur-sm"></div>
+					<!-- Strategic floating elements behind section headings -->
+					
+					<!-- Behind "Some other stuff I've built" section -->
+					<div class="absolute top-80 -left-6 w-24 h-24 bg-gradient-to-br from-amber-400 to-blue-500 rounded-full opacity-20 blur-xl"></div>
+					
+					<!-- Behind "For the plot" section -->
+					<div class="absolute top-[32rem] -left-4 w-28 h-28 bg-gradient-to-br from-amber-400 to-emerald-500 rounded-full opacity-20 blur-xl"></div>
 
 					<h1 class="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight relative z-10">Hi there! I'm Mehul.</h1>
 					
-					<div class="space-y-8 relative z-10">
-						<p class="text-lg md:text-xl text-gray-700 leading-relaxed">Welcome to my corner of the internet. I'm an engineer and geek that loves building stuff.</p>
+					<div class="space-y-12 relative z-10">
+						<div class="space-y-6">
+							<p class="leading-relaxed">Welcome to my corner of the internet. I'm an engineer and geek that loves building stuff.</p>
 
-						<p class="leading-relaxed">My work has led me around the tech industry block. In college, I brought a <a href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="custom-link no-underline text-custom-dark font-semibold">lab study</a> to production, built infrastructure to ingest trailers into <a href="https://www.imdb.com/trailers/" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">IMDb</a>, and redesigned surveys for <a href="https://www.office.com/" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">Microsoft Office</a>.</p>
+							<p class="leading-relaxed">My work has led me around the tech industry block. In college, I brought a <a href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="custom-link no-underline text-custom-dark font-semibold">lab study</a> to production, wrote code that runs every time you watch a trailer on <a href="https://www.imdb.com/trailers/" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">IMDb</a>, and redesigned surveys for <a href="https://www.office.com/" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">Microsoft Office</a>.</p>
 
-						<p class="leading-relaxed">In 2023, I built <a href="https://www.crunchbase.com/organization/lightbulbml" class="custom-link no-underline text-custom-dark font-semibold">LightbulbML</a>. I'm now building agents for patent prosecution at <a href="https://schox.com" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">Schox</a>.</p>
+							<p class="leading-relaxed">In 2023, I built <a href="https://www.crunchbase.com/organization/lightbulbml" class="custom-link no-underline text-custom-dark font-semibold">LightbulbML</a>. I'm now building agents for patent prosecution at <a href="https://schox.com" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">Schox</a>.</p>
+						</div>
 
-						
-
-							<p>Some other stuff I've built:</p>
-							<ul class="list-disc list-inside">
+						<div class="space-y-4">
+							<h2 class="font-playfair text-lg md:text-xl font-semibold text-custom-dark">Some other stuff I've built:</h2>
+							<ul class="list-disc list-inside space-y-2 ml-4">
 								<li>a <a href="https://caffeinechronicles.vercel.app/" class="custom-link no-underline text-custom-dark font-semibold">directory</a> of 100+ local cafes I've visited around the country</li>
 								<li>a <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="custom-link no-underline text-custom-dark font-semibold">gyro-scope</a>. You'll see.</li>
 							</ul>
-
-						<p class="leading-relaxed">I often do things for the plot. Some favorites:</p>
-						<ul class="list-disc list-inside">	
-							<li>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="custom-link no-underline text-custom-dark font-semibold">shot by iPhone ad</a></li>
-							<li>cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="custom-link no-underline text-custom-dark font-semibold">broadcast talent</a> for a counter strike tournament</li>
-							<li>I perform <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="custom-link no-underline text-custom-dark font-semibold">bhangra</a></li>
-							<li>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="custom-link no-underline text-custom-dark font-semibold">improv</a> show for 50 people.</li>
-						</ul>
-						
-
-						<p class="leading-relaxed">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">on substack</a>. </p>
-
-						<div class="relative">
-							<p class="leading-relaxed text-gray-600">
-								You can reach me via 
-								<a href="https://twitter.com/luhemarora" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">bird app</a> or
-								<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">corporate app</a>.
-							</p>
 						</div>
+
+						<div class="space-y-4">
+							<h2 class="font-playfair text-lg md:text-xl font-semibold text-custom-dark">I often do things for the plot. Some favorites:</h2>
+							<ul class="list-disc list-inside space-y-2 ml-4">	
+								<li>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="custom-link no-underline text-custom-dark font-semibold">shot by iPhone ad</a></li>
+								<li>cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="custom-link no-underline text-custom-dark font-semibold">broadcast talent</a> for a counter strike tournament</li>
+								<li>I perform <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="custom-link no-underline text-custom-dark font-semibold">bhangra</a></li>
+								<li>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="custom-link no-underline text-custom-dark font-semibold">improv</a> show for 50 people.</li>
+							</ul>
+						</div>
+
+						<p class="leading-relaxed">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">on substack</a>.
+								You can also reach me via 
+								<a href="https://twitter.com/luhemarora" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">bird app</a> or
+								<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="custom-link no-underline text-custom-dark font-semibold">job app</a>.
+							</p>
 					</div>
 				</div>
 			</div>
 			<div class="flex-1 p-6 md:p-12 flex items-start justify-center">
 				<div class="grid grid-cols-3 gap-0 relative">
+					<!-- Moved blobs to memoji grid area -->
+					<div class="absolute -top-8 -left-8 w-32 h-32 bg-gradient-to-br from-amber-500 to-pink-500 rounded-full opacity-20 blur-2xl"></div>
+					<div class="absolute bottom-20 -right-8 w-24 h-24 bg-gradient-to-br from-amber-500 to-purple-600 rounded-full opacity-20 blur-xl"></div>
+					
 					<img src="photos/1.png" alt="Image 1" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
 					<img src="photos/2.png" alt="Image 2" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
 					<img src="photos/3.png" alt="Image 3" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">

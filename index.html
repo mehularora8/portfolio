@@ -78,23 +78,67 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex-1 p-6 md:p-12 flex items-start justify-center">
-				<div class="grid grid-cols-3 gap-0 relative">
+			<div class="flex-1 p-6 md:p-12 flex items-center justify-center">
+				<div class="grid grid-cols-2 gap-4 relative max-w-xl" id="memoji-grid">
 					<!-- Moved blobs to memoji grid area -->
 					<div class="absolute -top-8 -left-8 w-32 h-32 bg-gradient-to-br from-amber-500 to-pink-500 rounded-full opacity-20 blur-2xl"></div>
 					<div class="absolute bottom-20 -right-8 w-24 h-24 bg-gradient-to-br from-amber-500 to-purple-600 rounded-full opacity-20 blur-xl"></div>
 					
-					<img src="photos/1.png" alt="Image 1" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/2.png" alt="Image 2" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/3.png" alt="Image 3" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/4.png" alt="Image 4" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/5.png" alt="Image 5" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/6.png" alt="Image 6" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/7.png" alt="Image 7" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/8.png" alt="Image 8" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
-					<img src="photos/9.png" alt="Image 9" class="w-full h-auto block relative z-10 hover:scale-105 transition-transform duration-300">
+					<img src="photos/1.png" alt="Image 1" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
+					<img src="photos/5.png" alt="Image 5" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
+					<img src="photos/8.png" alt="Image 8" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
+					<img src="photos/9.png" alt="Image 9" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
 				</div>
 			</div>
 		</div>
 	</body>
+	<script>
+		// Hero memoji functionality
+		document.addEventListener('DOMContentLoaded', function() {
+			const memojiGrid = document.getElementById('memoji-grid');
+			const memojiImages = memojiGrid.querySelectorAll('img');
+			const defaultHeroIndex = 0; // First image is default hero
+			
+			// Set initial states
+			function setInitialState() {
+				memojiImages.forEach((img, index) => {
+					if (index === defaultHeroIndex) {
+						img.classList.remove('opacity-30');
+						img.classList.add('opacity-100', 'scale-105');
+					} else {
+						img.classList.remove('opacity-100', 'scale-105');
+						img.classList.add('opacity-30');
+					}
+				});
+			}
+			
+			// Set hero image
+			function setHero(heroIndex) {
+				memojiImages.forEach((img, index) => {
+					if (index === heroIndex) {
+						img.classList.remove('opacity-30');
+						img.classList.add('opacity-100', 'scale-105');
+					} else {
+						img.classList.remove('opacity-100', 'scale-105');
+						img.classList.add('opacity-30');
+					}
+				});
+			}
+			
+			// Add hover listeners to each image
+			memojiImages.forEach((img, index) => {
+				img.addEventListener('mouseenter', () => {
+					setHero(index);
+				});
+			});
+			
+			// Reset to default hero when leaving the grid
+			memojiGrid.addEventListener('mouseleave', () => {
+				setHero(defaultHeroIndex);
+			});
+			
+			// Set initial state
+			setInitialState();
+		});
+	</script>
 </html>

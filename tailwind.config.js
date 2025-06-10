@@ -14,7 +14,8 @@ module.exports = {
       colors: {
         'custom-dark': '#18272F',
         'custom-light': '#F5F5F5',
-        'custom-teal': '#2e898e8a'
+        'custom-teal': '#2e898e8a',
+        'bg-dark': '#304050',
       }
     }
   },

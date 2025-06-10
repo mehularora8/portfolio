@@ -11,15 +11,15 @@
 				theme: {
 					extend: {
 						fontFamily: {
-							'playfair': ['Playfair Display', 'serif'],
-							'source-sans-pro': ['"Source Sans Pro"', 'sans-serif'],
 							'ibm-plex-sans': ['"IBM Plex Sans"', 'sans-serif'],
-							'cousine': ['Cousine', 'monospace']
+							'cousine': ['Cousine', 'monospace'],
+							'spectral': ['Spectral', 'serif']
 						},
 						colors: {
 							'custom-dark': '#18272F',
-							'custom-light': '#F5F5F5',
-							'custom-teal': '#2e898e8a'
+							'custom-light': '#f4f0e8',
+							'custom-teal': '#2e898e8a',
+							'title-dark': '#0C131A'
 						}
 					}
 				}
@@ -27,109 +27,140 @@
 		</script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
 		<link rel="icon" href="photos/6.png" type="image/png">
+		
+		<style>
+			.title-intro {
+				opacity: 0;
+				transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+			
+			.title-intro.visible {
+				opacity: 1;
+			}
+			
+			.content-hidden {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: all 0.8s ease-out;
+			}
+			
+			.content-visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			
+			.main-content {
+				opacity: 0;
+				transition: opacity 0.8s ease-out;
+			}
+			
+			.main-content.visible {
+				opacity: 1;
+			}
+			
+			.memoji-inline {
+				transition: all 0.3s ease-in-out;
+			}
+			
+			.memoji-inline:hover {
+				transform: scale(1.05);
+			}
+			
+			@media (max-width: 768px) {
+				.title-intro {
+					font-size: 2.5rem;
+				}
+			}
+		</style>
 	</head>
-	<body class="font-ibm-plex-sans font-light text-base leading-relaxed text-custom-dark bg-stone-50 p-0 m-0">
-		<div class="flex flex-col md:flex-row min-h-screen">
-			<div class="flex-1 p-6 md:p-12 max-w-2xl">
+	<body class="font-ibm-plex-sans font-light text-base leading-relaxed text-custom-dark bg-gradient-to-br from-[#fffdf7] to-[#FFF2FE] p-0 m-0">
+		<div class="min-h-screen main-content">
+			<div class="max-w-4xl mx-auto p-8 md:p-16">
 				<div class="relative">
-					<h1 class="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight relative z-10">Hi there! I'm Mehul.</h1>
+					<h1 id="main-title" class="font-spectral text-4xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight relative z-10 text-title-dark title-intro">Hi! I'm Mehul.</h1>
 					
-					<div class="space-y-12 relative z-10">
+					<div id="main-content" class="space-y-16 relative z-10 content-hidden">
+						<div class="space-y-8">
+							<p class="leading-relaxed text-gray-600"></p>
+
+							<div class="space-y-6 pt-6">
+								<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">"what are you working on?"</h2>
+								<div class="flex items-center gap-6">
+									<div class="space-y-6">
+										<p class="leading-loose">I'm currently building agents for patent prosecution at <a target="_blank" href="https://schox.com" class="text-amber-700 no-underline hover:text-amber-800 font-normal">Schox</a>. I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="text-amber-700 no-underline hover:text-amber-800 font-normal">a company</a> in the IPxAI space.</p>
+										<p class="leading-loose">I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">IMDb</a>, redesigned survey software for <a target="_blank" href="https://www.office.com/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="text-amber-700 no-underline hover:text-amber-800 font-normal">lab study</a> to production at Stanford.</p>
+									</div>
+								
+									<img src="photos/5.png" alt="Working memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
+								</div>
+							</div>
+						</div>
+
 						<div class="space-y-6">
-							<p class="leading-relaxed">This page is a snapshot of my life, currently containing my work, projects, and things I do for fun.</p>
-
-							<p class="leading-relaxed">My work has led me around the tech industry. In college, I brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="custom-link no-underline text-custom-dark font-medium">lab study</a> to production, wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="custom-link no-underline text-custom-dark font-medium">IMDb</a>, and redesigned surveys for <a target="_blank" href="https://www.office.com/" class="custom-link no-underline text-custom-dark font-medium">Microsoft Office</a>.</p>
-
-							<p class="leading-relaxed">In 2023, I built <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="custom-link no-underline text-custom-dark font-medium">LightbulbML</a>. I'm now building agents for patent prosecution at <a target="_blank" href="https://schox.com" class="custom-link no-underline text-custom-dark font-medium">Schox</a>.</p>
+							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">i also build things for fun</h2>
+							<div class="flex items-center gap-6">
+								<ul class="list-disc list-inside space-y-3 ml-4 flex-1 leading-loose">
+									<li>a <a target="_blank" href="https://caffeinechronicles.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">directory</a> of 100+ local cafes I've visited around the country.</li>
+									<li>a <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">gyro-scope</a>. You'll see.</li>
+								</ul>
+								<img src="photos/9.png" alt="Fun projects memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
+							</div>
 						</div>
 
-						<div class="space-y-4">
-							<h2 class="font-playfair text-lg md:text-xl font-semibold text-custom-dark">Some other stuff I've built:</h2>
-							<ul class="list-disc list-inside space-y-2 ml-4">
-								<li>a <a target="_blank" href="https://caffeinechronicles.vercel.app/" class="custom-link no-underline text-custom-dark font-medium">directory</a> of 100+ local cafes I've visited around the country</li>
-								<li>a <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="custom-link no-underline text-custom-dark font-medium">gyro-scope</a>. You'll see.</li>
-							</ul>
+						<div class="space-y-6">
+							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">i'm a big fan of doing things for the plot</h2>
+							<div class="flex items-center gap-6">
+								<ul class="list-disc list-inside space-y-3 ml-4 flex-1 leading-loose">	
+									<li>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="text-amber-700 no-underline hover:text-amber-800 font-normal">shot by iPhone ad</a>.</li>
+									<li>I cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="text-amber-700 no-underline hover:text-amber-800 font-normal">broadcast talent</a> for a Counter Strike tournament.</li>
+									<li>I <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="text-amber-700 no-underline hover:text-amber-800 font-normal">dance</a> like no one's watching.</li>
+									<li>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="text-amber-700 no-underline hover:text-amber-800 font-normal">improv</a> show for 50 people.</li>
+								</ul>
+								<img src="photos/1.png" alt="Adventurous memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
+							</div>
 						</div>
 
-						<div class="space-y-4">
-							<h2 class="font-playfair text-lg md:text-xl font-semibold text-custom-dark">I often do things for the plot. Some favorites:</h2>
-							<ul class="list-disc list-inside space-y-2 ml-4">	
-								<li>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="custom-link no-underline text-custom-dark font-medium">shot by iPhone ad</a>.</li>
-								<li>I cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="custom-link no-underline text-custom-dark font-medium">broadcast talent</a> for a Counter Strike tournament.</li>
-								<li>I <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="custom-link no-underline text-custom-dark font-medium">dance</a> like no one's watching.</li>
-								<li>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="custom-link no-underline text-custom-dark font-medium">improv</a> show for 50 people.</li>
-							</ul>
+						<div class="space-y-6">
+							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">say hi, anon</h2>
+							<div class="flex items-center gap-6">
+								<p class="leading-loose flex-1">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="text-amber-700 no-underline hover:text-amber-800 font-normal">on substack</a>.
+									You can also reach me via 
+									<a href="https://twitter.com/luhemarora" target="_blank" class="text-amber-700 no-underline hover:text-amber-800 font-normal">bird app</a> or
+									<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="text-amber-700 no-underline hover:text-amber-800 font-normal">job app</a>.
+								</p>
+								<img src="photos/8.png" alt="Friendly memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0">
+							</div>
 						</div>
-
-						<p class="leading-relaxed">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="custom-link no-underline text-custom-dark font-medium">on substack</a>.
-								You can also reach me via 
-								<a href="https://twitter.com/luhemarora" target="_blank" class="custom-link no-underline text-custom-dark font-medium">bird app</a> or
-								<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="custom-link no-underline text-custom-dark font-medium">job app</a>.
-							</p>
 					</div>
 				</div>
 			</div>
-			<div class="flex-1 p-6 md:p-12 flex items-center justify-center">
-				<div class="grid grid-cols-2 gap-4 relative max-w-xl" id="memoji-grid">
-					<img src="photos/1.png" alt="Image 1" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
-					<img src="photos/5.png" alt="Image 5" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
-					<img src="photos/8.png" alt="Image 8" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
-					<img src="photos/9.png" alt="Image 9" class="w-full h-auto block relative z-10 transition-all duration-300 ease-in-out cursor-pointer">
-				</div>
-			</div>
 		</div>
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const title = document.getElementById('main-title');
+				const mainContent = document.getElementById('main-content');
+				const mainContainer = document.querySelector('.main-content');
+				const contentHiddenElements = document.querySelectorAll('.content-hidden');
+				
+				// Start the animation sequence
+				setTimeout(() => {
+					// Step 1: Fade in the title and show main container
+					title.classList.add('visible');
+					mainContainer.classList.add('visible');
+				}, 50);
+				
+				setTimeout(() => {
+					// Step 2: Show the rest of the content after 500ms delay
+					contentHiddenElements.forEach(element => {
+						element.classList.add('content-visible');
+					});
+				}, 800);
+			});
+		</script>
 	</body>
-	<script>
-		// Hero memoji functionality
-		document.addEventListener('DOMContentLoaded', function() {
-			const memojiGrid = document.getElementById('memoji-grid');
-			const memojiImages = memojiGrid.querySelectorAll('img');
-			const defaultHeroIndex = 0; // First image is default hero
-			
-			// Set initial states
-			function setInitialState() {
-				memojiImages.forEach((img, index) => {
-					if (index === defaultHeroIndex) {
-						img.classList.remove('opacity-30');
-						img.classList.add('opacity-100', 'scale-105');
-					} else {
-						img.classList.remove('opacity-100', 'scale-105');
-						img.classList.add('opacity-30');
-					}
-				});
-			}
-			
-			// Set hero image
-			function setHero(heroIndex) {
-				memojiImages.forEach((img, index) => {
-					if (index === heroIndex) {
-						img.classList.remove('opacity-30');
-						img.classList.add('opacity-100', 'scale-105');
-					} else {
-						img.classList.remove('opacity-100', 'scale-105');
-						img.classList.add('opacity-30');
-					}
-				});
-			}
-			
-			// Add hover listeners to each image
-			memojiImages.forEach((img, index) => {
-				img.addEventListener('mouseenter', () => {
-					setHero(index);
-				});
-			});
-			
-			// Reset to default hero when leaving the grid
-			memojiGrid.addEventListener('mouseleave', () => {
-				setHero(defaultHeroIndex);
-			});
-			
-			// Set initial state
-			setInitialState();
-		});
-	</script>
 </html>

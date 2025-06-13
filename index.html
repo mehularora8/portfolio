@@ -70,6 +70,40 @@
 				transform: scale(1.05);
 			}
 			
+			.list-image-heart {
+				list-style-image: url('./photos/basket.svg');
+			}
+			
+			.list-image-heart li::marker {
+				font-size: 0.75rem;
+			}
+			
+			.list-image-heart li {
+				background-image: url('./photos/basket.svg');
+				background-size: 12px 12px;
+				background-repeat: no-repeat;
+				background-position: 0 0.7em;
+				padding-left: 20px;
+				list-style: none;
+			}
+			
+			.list-image-umbrella {
+				list-style-image: url('./photos/umbrella.svg');
+			}
+			
+			.list-image-umbrella li::marker {
+				font-size: 0.75rem;
+			}
+			
+			.list-image-umbrella li {
+				background-image: url('./photos/umbrella.svg');
+				background-size: 12px 12px;
+				background-repeat: no-repeat;
+				background-position: 0 0.75em;
+				padding-left: 20px;
+				list-style: none;
+			}
+			
 			@media (max-width: 768px) {
 				.title-intro {
 					font-size: 2.5rem;
@@ -88,7 +122,7 @@
 							<p class="leading-relaxed text-gray-600"></p>
 
 							<div class="space-y-6 pt-6">
-								<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">What are you working on?</h2>
+								<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">what are you working on?</h2>
 								<div class="flex items-center gap-6">
 									<div class="space-y-6">
 										<p class="leading-loose">I'm currently obsessing over building agents for patent prosecution at <a target="_blank" href="https://schox.com" class="text-amber-700 no-underline hover:text-amber-800 font-normal">Schox</a>. I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="text-amber-700 no-underline hover:text-amber-800 font-normal">a company</a> in the IPxAI space.</p>
@@ -101,11 +135,11 @@
 						</div>
 
 						<div class="space-y-6">
-							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">i also build things for fun</h2>
+							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">i also build things for fun.</h2>
 							<div class="flex items-center gap-6">
-								<ul class="list-disc list-inside space-y-3 ml-4 flex-1 leading-loose">
+								<ul class="list-image-umbrella list-inside space-y-3 ml-4 flex-1 leading-loose">
 									<li>a <a target="_blank" href="https://caffeinechronicles.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">directory</a> of 100+ local cafes I've visited around the country.</li>
-									<li>a <a target="_blank" href="https://yesand-peach.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">improv games</a> website.</li>
+									<li>an <a target="_blank" href="https://yesand-peach.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">improv game</a> app.</li>
 									<li>a <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">gyro-scope</a>. You'll see.</li>
 								</ul>
 								<img src="photos/9.png" alt="Fun projects memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
@@ -113,9 +147,9 @@
 						</div>
 
 						<div class="space-y-6">
-							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">i'm a big fan of doing things for the plot</h2>
+							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">i'm a big fan of doing things for the plot.</h2>
 							<div class="flex items-center gap-6">
-								<ul class="list-disc list-inside space-y-3 ml-4 flex-1 leading-loose">	
+								<ul class="list-image-heart list-inside space-y-3 ml-4 flex-1 leading-loose">	
 									<li>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="text-amber-700 no-underline hover:text-amber-800 font-normal">shot by iPhone ad</a>.</li>
 									<li>I cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="text-amber-700 no-underline hover:text-amber-800 font-normal">broadcast talent</a> for a Counter Strike tournament.</li>
 									<li>I <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="text-amber-700 no-underline hover:text-amber-800 font-normal">dance</a> like no one's watching.</li>

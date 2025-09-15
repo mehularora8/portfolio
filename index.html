@@ -13,13 +13,16 @@
 						fontFamily: {
 							'ibm-plex-sans': ['"IBM Plex Sans"', 'sans-serif'],
 							'cousine': ['Cousine', 'monospace'],
-							'spectral': ['Spectral', 'serif']
 						},
 						colors: {
 							'custom-dark': '#18272F',
 							'custom-light': '#f4f0e8',
 							'custom-teal': '#2e898e8a',
-							'title-dark': '#0C131A'
+							'title-dark': '#0C131A',
+							// rgb(228,226,222)
+							'custom-background': '#e4e2de',
+							// rgb (252, 79, 20)
+							'custom-accent': '#fc4f14'
 						}
 					}
 				}
@@ -28,7 +31,6 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
 		<link rel="icon" href="photos/6.png" type="image/png">
 		
@@ -39,6 +41,15 @@
 			}
 			
 			.title-intro.visible {
+				opacity: 1;
+			}
+
+			.subtitle-intro {
+				opacity: 0;
+				transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+			
+			.subtitle-intro.visible {
 				opacity: 1;
 			}
 			
@@ -111,22 +122,22 @@
 			}
 		</style>
 	</head>
-	<body class="font-ibm-plex-sans font-light text-base leading-relaxed text-custom-dark bg-gradient-to-br from-[#fffdf7] to-[#FFF2FE] p-0 m-0">
+	<body class="font-ibm-plex-sans font-light text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
 		<div class="min-h-screen main-content">
 			<div class="max-w-4xl mx-auto p-8 md:p-16">
 				<div class="relative">
-					<h1 id="main-title" class="font-spectral text-4xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight relative z-10 text-title-dark title-intro">Hi! I'm Mehul.</h1>
+					<h1 id="main-title" class="font-ibm-plex-sans text-4xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight relative z-10 text-title-dark title-intro">Hi! I'm Mehul.</h1>
+					<p id="subtitle" class="text-custom-dark font-extralight text-lg mb-8 subtitle-intro">I'm a San Francisco based tech enjoyer, currently focused on giving language models long-term memory.</p>
+					<hr class="border-gray-300 mb-8">
 					
 					<div id="main-content" class="space-y-16 relative z-10 content-hidden">
-						<div class="space-y-8">
-							<p class="leading-relaxed text-gray-600"></p>
-
+						<div class="space-y-8 justify-between">
 							<div class="space-y-6 pt-6">
-								<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">What are you working on?</h2>
-								<div class="flex items-center gap-6">
-									<div class="space-y-6">
-										<p class="leading-loose">I'm currently obsessed with personalizing AI-native apps using long-term memory (something like <a href="https://youtu.be/KPgZJzQF1Yg?si=8CuULxNgLKEApmCT&t=55" class="text-amber-700 no-underline hover:text-amber-800 font-normal" target="_blank">this</a>). I spend most of my time hanging out at <a class="text-amber-700 no-underline hover:text-amber-800 font-normal" href="https://southparkcommons.com" target="_blank">South Park Commons</a>. 
-										<p class="leading-loose">I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="text-amber-700 no-underline hover:text-amber-800 font-normal">LightbulbML</a>, a company building AI agents for patent prosecution. I subsequently automated patent prosecution at <a target="_blank" href="https://schox.com" class="text-amber-700 no-underline hover:text-amber-800 font-normal">Schox</a>. I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">IMDb</a>, optimized survey software for <a target="_blank" href="https://www.office.com/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="text-amber-700 no-underline hover:text-amber-800 font-normal">lab study</a> to production at Stanford.
+								<h2 class="font-ibm-plex-sans text-2xl md:text-2xl font-semibold text-custom-dark">Current obsessions</h2>
+								<div class="flex items-center gap-6 font">
+									<div class="space-y-6 text-gray-600 font-extralight justify-between">
+										<p class="leading-loose">I'm currently working giving AI agents long-term memory (something like <a href="https://youtu.be/KPgZJzQF1Yg?si=8CuULxNgLKEApmCT&t=55" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" target="_blank">this</a>). I spend most of my time hanging out at <a class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" href="https://southparkcommons.com" target="_blank">South Park Commons</a>. 
+										<p class="leading-loose">I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">LightbulbML</a>, a company building AI agents for patent prosecution. I subsequently automated patent prosecution at <a target="_blank" href="https://schox.com" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Schox</a>. I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">IMDb</a>, optimized survey software for <a target="_blank" href="https://www.office.com/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">lab study</a> to production at Stanford.
 									</div>
 								
 									<img src="photos/5.png" alt="Working memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
@@ -135,37 +146,39 @@
 						</div>
 
 						<div class="space-y-6">
-							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">I sometimes build things for fun.</h2>
-							<div class="flex items-center gap-6">
-								<ul class="list-image-umbrella list-inside space-y-3 ml-4 flex-1 leading-loose">
-									<li>a <a target="_blank" href="https://caffeinechronicles.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">directory</a> of 100+ local cafes I've visited around the country.</li>
-									<li>an <a target="_blank" href="https://yesand-peach.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">improv game</a> app.</li>
-									<li>a <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="text-amber-700 no-underline hover:text-amber-800 font-normal">gyro-scope</a>. You'll see.</li>
-								</ul>
+							<h2 class="font-ibm-plex-sans text-2xl md:text-2xl font-semibold text-custom-dark">I sometimes build things for fun.</h2>
+							<div class="flex items-center gap-6 justify-between">
+								<div class="flex flex-col gap-2 font-sm text-gray-600 font-extralight">
+									<p>a benchmark for LLMs to play <a href="https://github.com/mehularora8/PocketBench" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Pocket Tanks</a></p>
+									<p>an app to practice <a target="_blank" href="https://yesand-peach.vercel.app/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">improv</a> with Voice Models.</p>
+									<p>a <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">gyro-scope</a>. You'll see.</p>
+								</div>
+
 								<img src="photos/9.png" alt="Fun projects memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
 							</div>
 						</div>
 
 						<div class="space-y-6">
-							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">I'm a big fan of doing things for the plot.</h2>
-							<div class="flex items-center gap-6">
-								<ul class="list-image-heart list-inside space-y-3 ml-4 flex-1 leading-loose">	
-									<li>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="text-amber-700 no-underline hover:text-amber-800 font-normal">shot by iPhone ad</a>.</li>
-									<li>I cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="text-amber-700 no-underline hover:text-amber-800 font-normal">broadcast talent</a> for a Counter Strike tournament.</li>
-									<li>I <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="text-amber-700 no-underline hover:text-amber-800 font-normal">dance</a> like no one's watching.</li>
-									<li>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="text-amber-700 no-underline hover:text-amber-800 font-normal">improv</a> show for 50 people.</li>
-								</ul>
+							<h2 class="font-playfair-display text-2xl md:text-2xl font-semibold text-custom-dark">Side Quests</h2>
+							<div class="flex items-center gap-6 justify-between">
+								<div class="flex flex-col gap-2 text-md font-extralight text-gray-600">	
+									<p>a <a target="_blank" href="https://caffeinechronicles.vercel.app/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">directory</a> of 100+ local cafes I've visited around the country.</p>
+									<p>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">shot by iPhone ad</a>.</p>
+									<p>I cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">broadcast talent</a> for a Counter Strike tournament.</p>
+									<p>I <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">dance</a> like no one's watching.</p>
+									<p>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">improv</a> show for 50 people.</p>
+								</div>
 								<img src="photos/1.png" alt="Adventurous memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-1">
 							</div>
 						</div>
 
 						<div class="space-y-6">
-							<h2 class="font-spectral text-2xl md:text-2xl font-semibold text-custom-dark">say hi, anon</h2>
-							<div class="flex items-center gap-6">
-								<p class="leading-loose flex-1">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="text-amber-700 no-underline hover:text-amber-800 font-normal">on substack</a>.
+							<h2 class="font-ibm-plex-sans text-2xl md:text-2xl font-semibold text-custom-dark">Say hi, anon!</h2>
+							<div class="flex items-center gap-6 justify-between">
+								<p class="leading-loose flex-1 text-gray-600 font-extralight">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">on substack</a>.
 									You can also reach me via 
-									<a href="https://twitter.com/luhemarora" target="_blank" class="text-amber-700 no-underline hover:text-amber-800 font-normal">bird app</a> or
-									<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="text-amber-700 no-underline hover:text-amber-800 font-normal">job app</a>.
+									<a href="https://twitter.com/luhemarora" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">bird app</a> or
+									<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">job app</a>.
 								</p>
 								<img src="photos/8.png" alt="Friendly memoji" class="w-20 h-20 md:w-24 md:h-24 memoji-inline flex-shrink-0">
 							</div>
@@ -181,13 +194,20 @@
 				const mainContent = document.getElementById('main-content');
 				const mainContainer = document.querySelector('.main-content');
 				const contentHiddenElements = document.querySelectorAll('.content-hidden');
-				
+				const subtitle = document.getElementById('subtitle');
+
 				// Start the animation sequence
 				setTimeout(() => {
 					// Step 1: Fade in the title and show main container
 					title.classList.add('visible');
 					mainContainer.classList.add('visible');
 				}, 50);
+
+				setTimeout(() => {
+					// Step 2: Fade in the subtitle after 200ms
+					subtitle.classList.add('visible');
+				}, 200);
+				
 				
 				setTimeout(() => {
 					// Step 2: Show the rest of the content after 500ms delay

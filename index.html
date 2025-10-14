@@ -21,8 +21,8 @@
 							'title-dark': '#0C131A',
 							// rgb(228,226,222)
 							'custom-background': '#e9e7e0',
-							// rgb (252, 79, 20)
-							'custom-accent': '#ec4f14'
+							// rgb (217, 70, 18)
+							'custom-accent': '#d94612'
 						}
 					}
 				}
@@ -35,11 +35,24 @@
 		<link rel="icon" href="photos/6.png" type="image/png">
 		
 		<style>
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0.03;
+				z-index: -1;
+				pointer-events: none;
+				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+			}
+
 			.title-intro {
 				opacity: 0;
 				transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 			}
-			
+
 			.title-intro.visible {
 				opacity: 1;
 			}
@@ -48,97 +61,264 @@
 				opacity: 0;
 				transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 			}
-			
+
 			.subtitle-intro.visible {
 				opacity: 1;
 			}
-			
-			.content-hidden {
-				opacity: 0;
-				transform: translateY(20px);
-				transition: all 0.8s ease-out;
-			}
-			
-			.content-visible {
-				opacity: 1;
-				transform: translateY(0);
-			}
-			
+
 			.main-content {
 				opacity: 0;
 				transition: opacity 0.8s ease-out;
 			}
-			
+
 			.main-content.visible {
 				opacity: 1;
 			}
-			
+
 			.memoji-inline {
 				transition: all 0.3s ease-in-out;
 			}
-			
+
 			.memoji-inline:hover {
 				transform: scale(1.05);
 			}
-		
-			
-			@media (max-width: 768px) {
+
+			.contact-links {
+				opacity: 0;
+				transition: opacity 0.8s ease-out;
+			}
+
+			/* Section Navigation Styles */
+			.section-content {
+				display: none;
+				opacity: 0;
+				transform: translateY(20px);
+				transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			.section-content.active {
+				display: block;
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			.section-content.fading-out {
+				opacity: 0;
+				transform: translateY(-10px);
+			}
+
+			.nav-item {
+				position: relative;
+				color: #6b7280;
+				padding-left: 1.5rem;
+			}
+
+			.nav-item::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 0;
+				height: 2px;
+				background-color: #d94612;
+				transition: width 0.3s ease-out;
+			}
+
+			.nav-item.active-nav {
+				color: #d94612;
+				font-weight: 400;
+			}
+
+			.nav-item.active-nav::before {
+				width: 1rem;
+			}
+
+			.nav-item:hover::before {
+				width: 0.75rem;
+			}
+
+			/* Mobile Navigation */
+			.mobile-nav {
+				display: none;
+			}
+
+			@media (max-width: 1024px) {
 				.title-intro {
 					font-size: 2.5rem;
+				}
+
+				.desktop-nav {
+					display: none !important;
+				}
+
+				.mobile-nav {
+					display: block;
+					position: fixed;
+					top: 0;
+					left: 0;
+					right: 0;
+					background-color: #e9e7e0;
+					border-bottom: 1px solid #d1d5db;
+					z-index: 100;
+					padding: 1rem;
+				}
+
+				.mobile-nav-buttons {
+					display: flex;
+					gap: 1rem;
+					overflow-x: auto;
+					white-space: nowrap;
+					-webkit-overflow-scrolling: touch;
+					scrollbar-width: none;
+				}
+
+				.mobile-nav-buttons::-webkit-scrollbar {
+					display: none;
+				}
+
+				.mobile-nav-item {
+					font-size: 0.875rem;
+					padding: 0.5rem 0.75rem;
+					background-color: transparent;
+					transition: color 0.2s;
+					border-bottom: 2px solid transparent;
+				}
+
+				.mobile-nav-item.active-nav {
+					color: #d94612 !important;
+					border-bottom-color: #d94612;
+				}
+
+				body {
+					overflow: auto !important;
+				}
+
+				.main-content {
+					margin-left: 0 !important;
+					padding-top: 4rem !important;
+					overflow-y: auto !important;
+					height: auto !important;
+				}
+
+				.main-content > div {
+					margin-left: 0 !important;
+					padding: 1rem !important;
+				}
+
+				.section-content h2 {
+					font-size: 1.5rem !important;
+				}
+
+				.memoji-inline {
+					width: 4rem !important;
+					height: 4rem !important;
 				}
 			}
 		</style>
 	</head>
-	<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
-		<div class="min-h-screen main-content">
-			<div class="max-w-4xl mx-auto p-8 md:p-16">
+	<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0 overflow-hidden">
+		<!-- Mobile Navigation -->
+		<nav class="mobile-nav">
+			<div class="mobile-nav-buttons">
+				<button onclick="showSection('work')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="work">
+					Work
+				</button>
+				<button onclick="showSection('fun')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="fun">
+					Projects
+				</button>
+				<button onclick="showSection('sidequests')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="sidequests">
+					Side quests
+				</button>
+				<button onclick="showSection('writing')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="writing">
+					Writing
+				</button>
+			</div>
+		</nav>
+
+		<!-- Desktop Sidebar Navigation -->
+		<nav class="desktop-nav fixed left-0 top-0 h-screen w-64 bg-custom-background p-8 flex flex-col justify-center z-50">
+			<div class="space-y-6">
+				<button onclick="showSection('work')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="work">
+					Work
+				</button>
+				<button onclick="showSection('fun')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="fun">
+					Projects
+				</button>
+				<button onclick="showSection('sidequests')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="sidequests">
+					Side quests
+				</button>
+				<button onclick="showSection('writing')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="writing">
+					Writing
+				</button>
+			</div>
+		</nav>
+
+		<!-- Main Content Area -->
+		<div class="min-h-screen main-content overflow-y-auto flex justify-center">
+			<div class="max-w-4xl w-full p-8 md:p-16" style="margin-left: 8rem;">
 				<div class="relative">
-					<div class="flex items-center mb-8 justify-between">
+					<!-- Header with Contact Info -->
+					<div class="flex items-start mb-8 justify-between">
 						<div class="flex-1">
-							<h1 id="main-title" class="font-space-mono text-4xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight relative z-10 text-title-dark title-intro">Hi! I'm Mehul.</h1>
-							<p id="subtitle" class="text-custom-dark font-extralight text-lg subtitle-intro">I'm a San Francisco based tech enjoyer, currently focused on giving language models long-term memory.</p>
+							<h1 id="main-title" class="font-space-mono text-4xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight relative z-10 text-title-dark title-intro">Hi! I'm Mehul.</h1>
+							<p id="subtitle" class="text-custom-dark font-extralight text-lg mb-4 subtitle-intro">I'm a San Francisco based technologist, currently focused on giving language models long-term memory.</p>
+							<div class="flex gap-4 text-sm font-light contact-links">
+								<a href="https://substack.com/@mehularora" target="_blank" class="text-custom-accent hover:underline underline-offset-2 decoration-gray-300">substack</a>
+								<a href="https://twitter.com/luhemarora" target="_blank" class="text-custom-accent hover:underline underline-offset-2 decoration-gray-300">twitter</a>
+								<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="text-custom-accent hover:underline underline-offset-2 decoration-gray-300">linkedin</a>
+							</div>
 						</div>
 						<img src="photos/5.png" alt="Mehul memoji" class="w-24 h-24 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-2">
 					</div>
 					<hr class="border-gray-300 mb-8">
-					<div id="main-content" class="space-y-16 relative z-10 content-hidden">
-						<div class="space-y-8 justify-between">
+
+					<!-- Sections -->
+					<div id="main-content" class="relative z-10">
+						<!-- Work Section -->
+						<div id="work-section" class="section-content active">
 							<div class="space-y-6 pt-6">
-								<h2 class="font-space-mono text-2xl md:text-2xl font-bold text-custom-dark">Current obsessions</h2>
+								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes create shareholder value.</h2>
 								<div class="space-y-6 text-gray-600 font-extralight">
-									<p class="leading-loose">My current hypothesis is that memory is the only problem left to be solved before we reach AGI. So I'm working on giving AI agents long-term memory (something like <a href="https://youtu.be/KPgZJzQF1Yg?si=8CuULxNgLKEApmCT&t=55" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" target="_blank">this</a>). I spend most of my time hanging out at <a class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" href="https://southparkcommons.com" target="_blank">South Park Commons</a>. 
-									<p class="leading-loose">I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">LightbulbML</a>, a company building AI agents for patent prosecution. I subsequently automated patent prosecution at <a target="_blank" href="https://schox.com" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Schox</a>. I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">IMDb</a>, optimized survey software for <a target="_blank" href="https://www.office.com/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">lab study</a> to production at Stanford.
+									<p class="leading-loose">I am currently working on giving large language models long-term memory (something like <a href="https://youtu.be/KPgZJzQF1Yg?si=8CuULxNgLKEApmCT&t=55" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" target="_blank">this</a>). I spend most of my time hanging out at <a class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" href="https://southparkcommons.com" target="_blank">South Park Commons</a>.
+									<p class="leading-loose">I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">LightbulbML</a>, a company building AI agents for patent prosecution, which got acquired by <a target="_blank" href="https://schox.com" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Schox Patent Group</a>. I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">IMDb</a>, optimized survey software for <a target="_blank" href="https://www.office.com/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">lab study</a> to production at Stanford.
 								</div>
 							</div>
 						</div>
 
-						<div class="space-y-6">
-							<h2 class="font-space-mono text-2xl md:text-2xl font-bold text-custom-dark">I sometimes build things for fun.</h2>
-							<div class="flex flex-col gap-2 font-sm text-gray-600 font-extralight">
-								<p>A benchmark for LLMs to play <a href="https://github.com/mehularora8/PocketBench" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Pocket Tanks</a></p>
-								<p>An app to practice <a target="_blank" href="https://yesand-peach.vercel.app/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">improv</a> with Voice Models.</p>
-								<p>A <a target="_blank" href="https://gyroscope-lake.vercel.app/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">gyro-scope</a>. You'll see.</p>
+						<!-- Fun Projects Section -->
+						<div id="fun-section" class="section-content">
+							<div class="space-y-6 pt-6">
+								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes build things for fun.</h2>
+								<div class="flex flex-col gap-4 font-sm text-gray-600 font-extralight">
+									<p class="leading-loose"><a href="https://github.com/mehularora8/PocketBench" target="_blank" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">PocketBench</a>: A benchmark for LLMs to play Pocket Tanks.</p>
+									<p class="leading-loose"><a target="_blank" href="https://yesand-peach.vercel.app/" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">YesAnd</a>: An app to practice improv with Voice Models.</p>
+									<p class="leading-loose"><a target="_blank" href="https://gyroscope-lake.vercel.app/" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">GyroScope</a>: Find gyros closest to you.</p>
+									<p class="leading-loose"><a target="_blank" href="https://github.com/mehularora8/pixel8" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Pixel8</a>: Create pixel art from any image.</p>
+								</div>
 							</div>
 						</div>
 
-						<div class="space-y-6">
-							<h2 class="font-space-mono text-2xl md:text-2xl font-bold text-custom-dark">Side Quests</h2>
-							<div class="flex flex-col gap-2 text-md font-extralight text-gray-600">	
-								<p>I visit tons of <a target="_blank" href="https://caffeinechronicles.vercel.app/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">local coffee shops</a>.</p>
-								<p>I tried getting featured in a <a target="_blank" href="https://instagram.com/cameraseesfirst" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">shot by iPhone ad</a>.</p>
-								<p>I cosplayed as <a target="_blank" href="https://twitch.tv/scorchcs2" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">broadcast talent</a> for a Counter Strike tournament.</p>
-								<p>I <a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">dance</a> like no one's watching.</p>
-								<p>I performed an <a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">improv</a> show for 50 people.</p>
+						<!-- Side Quests Section -->
+						<div id="sidequests-section" class="section-content">
+							<div class="space-y-6 pt-6">
+								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes do things for the plot.</h2>
+								<div class="flex flex-col gap-4 text-md font-extralight text-gray-600">
+									<p class="leading-loose"><a target="_blank" href="#" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">SF GeoGuessr Cup</a>: A geoguessr tournament with only SF locations.</p>
+									<p class="leading-loose"><a target="_blank" href="https://caffeinechronicles.vercel.app/" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Caffeine Chronicles</a>: On a mission to visit all local coffee shops in SF.</p>
+									<p class="leading-loose"><a target="_blank" href="https://instagram.com/cameraseesfirst" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">What Mehul's camera sees</a>: Trying to get featured in a shot by iPhone ad.</p>
+									<p class="leading-loose"><a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Bhangra</a>: Dancing like no one's watching.</p>
+									<p class="leading-loose"><a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Improv</a>: Performed a show for 50 people.</p>
+								</div>
 							</div>
 						</div>
 
-						<div class="space-y-6">
-							<h2 class="font-space-mono text-2xl md:text-2xl font-bold text-custom-dark">Say hi, anon!</h2>
-							<p class="leading-loose text-gray-600 font-extralight">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">on substack</a>.
-								You can also reach me via 
-								<a href="https://twitter.com/luhemarora" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">bird app</a> or
-								<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">job app</a>.
-							</p>
+						<!-- Writing Section -->
+						<div id="writing-section" class="section-content">
+							<div class="space-y-6 pt-6">
+								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes put my thoughts to paper.</h2>
+								<p class="leading-loose text-gray-600 font-extralight">I occasionally write about my projects and experiences <a href="https://substack.com/@mehularora" target="_blank" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">on substack</a>. Check it out if you're interested in AI agents, memory systems, or just want to see what I'm thinking about lately.</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -146,12 +326,59 @@
 		</div>
 		
 		<script>
+			// Section Navigation
+			function showSection(sectionName) {
+				// Get current active section
+				const currentSection = document.querySelector('.section-content.active');
+				const targetSection = document.getElementById(sectionName + '-section');
+
+				// Don't do anything if clicking the same section
+				if (currentSection === targetSection) {
+					return;
+				}
+
+				// Add fading-out class to current section
+				if (currentSection) {
+					currentSection.classList.add('fading-out');
+				}
+
+				// Wait for fade-out animation to complete
+				setTimeout(() => {
+					// Remove active from all sections
+					const sections = document.querySelectorAll('.section-content');
+					sections.forEach(section => {
+						section.classList.remove('active', 'fading-out');
+					});
+
+					// Show selected section
+					if (targetSection) {
+						targetSection.classList.add('active');
+					}
+
+					// Update active nav item (both desktop and mobile)
+					const navItems = document.querySelectorAll('.nav-item');
+					navItems.forEach(item => {
+						if (item.getAttribute('data-section') === sectionName) {
+							item.classList.add('active-nav');
+						} else {
+							item.classList.remove('active-nav');
+						}
+					});
+
+					// Scroll to top on mobile
+					if (window.innerWidth <= 1024) {
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					}
+				}, 300);
+			}
+
+			// Initial page load animations
 			document.addEventListener('DOMContentLoaded', function() {
 				const title = document.getElementById('main-title');
-				const mainContent = document.getElementById('main-content');
 				const mainContainer = document.querySelector('.main-content');
-				const contentHiddenElements = document.querySelectorAll('.content-hidden');
 				const subtitle = document.getElementById('subtitle');
+				const contactLinks = document.querySelector('.contact-links');
+
 				// Start the animation sequence
 				setTimeout(() => {
 					// Step 1: Fade in the title and show main container
@@ -163,13 +390,28 @@
 					// Step 2: Fade in the subtitle after 200ms
 					subtitle.classList.add('visible');
 				}, 200);
-				
+
 				setTimeout(() => {
-					// Step 3: Show the rest of the content after 500ms delay
-					contentHiddenElements.forEach(element => {
-						element.classList.add('content-visible');
-					});
-				}, 800);
+					// Step 3: Fade in contact links
+					if (contactLinks) {
+						contactLinks.style.opacity = '1';
+					}
+				}, 400);
+
+				setTimeout(() => {
+					// Step 4: Fade in the first section
+					const firstSection = document.querySelector('.section-content.active');
+					if (firstSection) {
+						firstSection.style.opacity = '1';
+						firstSection.style.transform = 'translateY(0)';
+					}
+				}, 600);
+
+				// Set first nav item as active (both desktop and mobile)
+				const firstNavItems = document.querySelectorAll('.nav-item[data-section="work"]');
+				firstNavItems.forEach(item => {
+					item.classList.add('active-nav');
+				});
 			});
 		</script>
 	</body>

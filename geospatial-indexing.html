@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Geospatial Indexing - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		details {
+			margin: 1rem 0;
+			border-left: 2px solid #d1d5db;
+			padding-left: 1rem;
+			transition: all 0.3s ease;
+		}
+
+		details[open] {
+			border-left-color: #d94612;
+		}
+
+		summary {
+			cursor: pointer;
+			font-weight: 600;
+			color: #374151;
+			padding: 0.5rem 0;
+			transition: color 0.2s;
+			user-select: none;
+			list-style: none;
+		}
+
+		summary::-webkit-details-marker {
+			display: none;
+		}
+
+		summary::before {
+			content: '▶';
+			display: inline-block;
+			margin-right: 0.5rem;
+			transition: transform 0.3s;
+			color: #d94612;
+		}
+
+		details[open] summary::before {
+			transform: rotate(90deg);
+		}
+
+		summary:hover {
+			color: #d94612;
+		}
+
+		details > div {
+			margin-top: 0.75rem;
+			padding-left: 1.5rem;
+		}
+
+		code {
+			background: rgba(135, 131, 120, 0.15);
+			border-radius: 3px;
+			padding: 0.2em 0.4em;
+			font-size: 85%;
+			font-family: 'Courier New', monospace;
+		}
+
+		pre {
+			background: rgba(135, 131, 120, 0.08);
+			border-radius: 6px;
+			padding: 1.5rem;
+			overflow-x: auto;
+			margin: 1.5rem 0;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		pre code {
+			background: none;
+			padding: 0;
+			font-size: 0.9rem;
+			line-height: 1.5;
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+			border-radius: 6px;
+			margin: 1.5rem 0;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		ol, ul {
+			margin: 1rem 0;
+			padding-left: 1.5rem;
+		}
+
+		li {
+			margin: 0.5rem 0;
+		}
+
+		hr {
+			margin: 3rem 0;
+			border: none;
+			border-top: 1px solid #d1d5db;
+		}
+
+		blockquote {
+			border-left: 3px solid #d94612;
+			padding-left: 1rem;
+			margin: 1.5rem 0;
+			color: #374151;
+			font-style: italic;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-3xl w-full article-content">
+			<a href="index.html" class="back-link">Back</a>
+
+			<div class="mb-8">
+				<div class="text-4xl mb-4">🗺️</div>
+				<h1 class="text-4xl md:text-5xl font-bold mb-4 text-title-dark">Geospatial Indexing</h1>
+			</div>
+
+			<div class="space-y-4 text-gray-600 font-extralight">
+				<blockquote>
+					<p>There's a ton of data on any Maps application, where and how is it all stored?</p>
+				</blockquote>
+
+				<p>Keeping aside the Apple / Google maps debate, this question sent me down a rabbit hole of where and how geospatial entities are stored.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Motivation</h2>
+
+				<p>In any maps-based application (Maps, Uber etc.), we might want to query things like Nearest Neighbors (e.g. where's my closest friend?), or Range queries (e.g. how many ATMs exist within 2 miles of me?).</p>
+
+				<p>There's no easy way to build such relationships between geospatial entities in a traditional database.</p>
+
+				<p>To illustrate this point, consider a traditional SQL database. Our SQL db might index entries using keys, but that doesn't inherently allow us to query relevant information. Hence the need for a better way to capture the relationships between geospatial entities.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Geospatial Data</h2>
+
+				<p>Geospatial data is fundamentally 2D or "2.5D" where we consider height to be a property of a 2D point, like elevation. There are only a handful of use cases where 3D representations are necessary: underground geology, atmospheric mapping, cave navigation, urban environments (bridges crossing over each other) etc, but for typical use cases this would simply be overkill.</p>
+
+				<p>Let's dig a little deeper into the introduction to this section. What does it mean for our spatial data to be fundamentally 2/2.5D?</p>
+
+				<p>Consider a mountain. In pure 3D space, a mountain would be a volume. But in most geospatial applications, we represent it as a surface with elevation values – essentially a 2.5D representation. This is because:</p>
+
+				<ul class="list-disc">
+					<li>Most of our measurements are taken from above (satellite imagery, aerial photography).</li>
+					<li>Most human activities happen on or near the surface.</li>
+					<li>We rarely need to know what's happening at every point inside the mountain.</li>
+				</ul>
+
+				<p>Even when we do care about what's below the surface, we tend to work with layers or slices rather than true 3D volumes. This structure of layering / using slices is also partly due to how we gather data – drilling core samples gives us information at specific points, which we then interpolate into layers.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Geospatial Queries</h2>
+
+				<p>The nature of geospatial queries is more intuitive. Most of our practical queries are essentially in 2D. For instance, queries like:</p>
+
+				<ul class="list-disc">
+					<li>"What's the nearest restaurant?"</li>
+					<li>"What's the shortest route between these points?"</li>
+					<li>"What's the area of this property?"</li>
+				</ul>
+
+				<p>naturally map to 2D.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Practical Considerations</h2>
+
+				<p>Using 2D representations are also computationally more efficient. Most displays are 2D (screens, paper maps), so we need 2D representations for visualization anyway.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Implementation</h2>
+
+				<p>GIS and other mapping software use techniques like Sinusoidal projections to map the Earth onto a 2D surface. With Sinusoidal projections in particular, a (lat, long) coordinate is converted to a 2D point using the following formulas:</p>
+
+				<p>where ϕ is the latitude in radians, λ is longitude in radians, and λ_0 is the longitude of the central meridian, in radians. These projections can then be scaled to fit the application being built.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Indexing and querying geographical entities</h2>
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">Quadtrees</h3>
+
+				<p class="font-semibold mt-6">Structure</p>
+
+				<p>Quadtrees are adapted tree structures. A quadtree begins with a root node representing the entire spatial area. As points are added, the space is recursively subdivided into four equal quadrants. Each node in the tree corresponds to a specific rectangular region of the space. There are two kinds of nodes:</p>
+
+				<p><strong>Non-leaf nodes:</strong></p>
+				<ul class="list-disc">
+					<li>Have exactly four children</li>
+					<li>Represent four quadrants of a 2D space</li>
+					<li>Don't store points directly</li>
+				</ul>
+
+				<p><strong>Leaf nodes:</strong></p>
+				<ul class="list-disc">
+					<li>Store indexed points up to a maximum capacity</li>
+					<li>Once capacity is exceeded, the node splits into four children</li>
+					<li>If the list exceeds some predetermined maximum number of elements, split the node, and move the points into subnodes based upon where they lie in the 2D space.</li>
+					<li>The maximum capacity is a configurable parameter that affects tree performance</li>
+				</ul>
+
+				<p class="font-semibold mt-6">Querying</p>
+
+				<ol class="list-decimal">
+					<li>Start at the root node</li>
+					<li>For each child node:
+						<ul class="list-disc ml-4">
+							<li>if (node intersects with the query area): recursively search that node</li>
+							<li>if (leaf node): examine all points within for matches</li>
+						</ul>
+					</li>
+					<li>Return all matching points found</li>
+				</ol>
+
+				<p>An emergent property of quadtrees is that they function as a trie structure, since the values of tree nodes do not depend on the data being inserted. In other words, node positions are determined by spatial subdivision rather than inserted data. This enables an elegant node numbering system:</p>
+
+				<p>Each quadrant receives a binary number:</p>
+				<ul class="list-disc">
+					<li>Top-left: 00</li>
+					<li>Top-right: 10</li>
+					<li>Bottom-left: 01</li>
+					<li>Bottom-right: 11</li>
+				</ul>
+
+				<p>A node's full identifier is created by concatenating its ancestors' quadrant numbers from root to leaf</p>
+
+				<img src="photos/tree.png" alt="Quadtree Structure">
+
+				<p>For instance, the node represented by the bottom right circle in this image can be coded as 11 01.</p>
+
+				<p>Source: <a href="https://blog.notdot.net/2009/11/Damn-Cool-Algorithms-Spatial-indexing-with-Quadtrees-and-Hilbert-Curves" class="text-custom-accent hover:underline" target="_blank">This very cool blog</a>.</p>
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">Connection to Geohashes</h3>
+
+				<p>If we fix the depth of a quadtree, you can calculate a point's node number directly. For instance, consider an 8x8 grid. We need a quadtree of depth 3 to map such a grid (4^3 = 64). Take the point (x=5, y=3) and consider the following approach:</p>
+
+				<img src="photos/grid.png" alt="Quadtree Grid">
+
+				<p>Convert them to binary: x = 101, y = 011</p>
+
+				<p>Interleave bits from both coordinates. This gives us [10][01][11]</p>
+
+				<p>Each bit pair identifies a quadrant in the tree.</p>
+
+				<p>If we map this out, we see that the code [10][01][11] leads us exactly to (5, 3) on the chessboard. This allows us to avoid the overhead of storing the tree and calculate a point's node number directly. This approach forms the basic idea behind geohashes.</p>
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">Geohashes</h3>
+
+				<p>A geohash is a hierarchical spatial data structure which subdivides space into buckets of grid shape.<sup>1</sup> A typical geohash could look something like: <code>9q8yy</code>. This particular one falls over my favorite coffee shop in San Francisco.</p>
+
+				<p class="font-semibold mt-6">Creation of Geohashes</p>
+
+				<p>A geohash converts a 2D point (lat/long) into a single string, each extra character in the hash means more precision. To illustrate, let's try and convert (37.779°N, -122.39°W) into the geohash above.</p>
+
+				<p><strong>Step 1: Convert to binary ranges</strong></p>
+
+				<p>Longitude (-180 to 180): -122.39 is in: left half (0), left half of left (1), etc... → 00101...</p>
+
+				<p>Latitude (-90 to 90): 37.779 is in: top half (1), bottom half of top (0), etc... → 10110...</p>
+
+				<p><strong>Step 2: Interleave bits (longitude first)</strong></p>
+				<pre><code>lon: 0 0 1 0 1 ...
+lat: 1 0 1 1 0 ...
+mix: 01 00 11 01 10 ...</code></pre>
+
+				<p><strong>Step 3: Group bits into 5-bit chunks</strong></p>
+				<p>01001 10110 … (Note: we will default to a 32-bit hash. Higher bit hashes will have higher precision.)</p>
+
+				<p><strong>Step 4: Convert each 5-bit chunk to base-32</strong></p>
+
+				<p>01001 → '9'; 10110 → 'q' ... → "9q…"</p>
+
+				<p>Note: The geohash alphabet doesn't allow the characters 'A', 'I', "L', 'O', so it is slightly different than straight encoding into base-32.</p>
+
+				<p>For exact latitude and longitude translations, Geohash is a spatial index of base 4, because it transforms the continuous latitude and longitude space into increasingly smaller quadrants. To be a compact code it uses base-32 and represents its values by the following alphabet, that is the "standard textual representation".</p>
+
+				<p class="font-semibold mt-6">Querying</p>
+
+				<p>Given a query area, we first find the smallest prefix that completely covers the query area. In the worst case, this may be substantially larger than the actual query area – for example, a small shape in the center of the indexed area that intersects all four quadrants would require selecting the root node for this step.</p>
+
+				<p>Let's work through an illustrative example: When you're looking at San Francisco on Google Maps, you're really looking at a bounding box – let's say roughly: Northwest: 37.81° N, 122.52° W; Southeast: 37.70° N, 122.35° W</p>
+
+				<img src="photos/sf.png" alt="San Francisco Bounding Box">
+
+				<p>But if you want to cover all of San Francisco using geohashes, you need to:</p>
+
+				<ul class="list-disc">
+					<li>Find geohashes for all four corners</li>
+					<li>Look for their common prefix</li>
+					<li>Then generate all the geohashes at your desired precision that fall within that box</li>
+				</ul>
+
+				<p>which might look more like this. Notice that the common prefix area might be a lot larger than the area you care about.</p>
+
+				<p class="font-semibold mt-6">Optimizing queries</p>
+
+				<p>We're now faced with a challenge: Balancing Precision and Query Efficiency.</p>
+
+				<ul class="list-disc">
+					<li>You want to cover your query region (like a circle, polygon, etc.) with geohash prefixes</li>
+					<li>You want to minimize the areas outside your actual query region, BUT you can't just use tiny precise geohashes because that would mean too many database queries</li>
+				</ul>
+
+				<p>A solution to this might take the following shape: (more details in <a href="https://blog.mapbox.com/a-dive-into-spatial-search-algorithms-ebd0c5e39d2a" class="text-custom-accent hover:underline" target="_blank">this blog</a>)</p>
+
+				<p><strong>Step 1: Initialize with a Broad Prefix</strong></p>
+
+				<p>Start with the smallest geohash prefix that covers the bounding box (e.g., "9q8" for San Francisco).</p>
+
+				<p><strong>Step 2: Refine Iteratively</strong></p>
+
+				<p>For each iteration:</p>
+				<ul class="list-disc">
+					<li>Evaluate the geohashes in your current set.</li>
+					<li>Identify the geohash that covers the most "unwanted" area (i.e., outside your region).</li>
+					<li>Subdivide that geohash into smaller geohashes.</li>
+				</ul>
+
+				<p><strong>Step 3: Check Query Limit</strong></p>
+
+				<p>After subdividing, ensure that the total number of geohashes remains below the maximum query limit.</p>
+
+				<p>If subdividing creates adjacent geohashes that can be combined, merge them to reduce the total count.</p>
+
+				<p>Geohashes can be further optimized using Hilbert Curves. I highly recommend checking out the blog above as a starting point if you're so inclined, but I'll cut this off here.</p>
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">R-trees</h3>
+
+				<p>R-trees, as the name might suggest, are also adapted trees. The key idea of the R-trees is to group nearby objects and represent them with their minimum bounding rectangle in their parent node. Since all objects lie within this bounding rectangle, a query that does not intersect the bounding rectangle also cannot intersect any of the contained objects.</p>
+
+				<p>R-trees are a complex data structure in themselves, so instead of focusing on their technical details I will focus on higher level differentiation.<sup>2</sup></p>
+
+				<p class="font-semibold mt-6">Why R-trees as opposed to Quadtrees?</p>
+
+				<p>R-trees allow more flexibility by automatically adjusting the areas. Quadtrees are also rigid (always 4 quadrants) but R-trees are a lot more dynamic to where data actually is.</p>
+
+				<p>Imagine Manhattan, for instance. In Midtown, you might have hundreds of restaurants, shops, and landmarks packed into a few blocks but in residential areas, you might have very sparse Points of interest. Then, an R-tree would automatically adjust its rectangles to be smaller in Midtown (to handle the density) and larger in sparse areas.</p>
+
+				<p>Most spatial data clusters naturally (like businesses along streets), R-trees can shape their rectangles to match these natural clusters.</p>
+
+				<p>R-trees enforce minimum/maximum nodes per rectangle, ensuring the tree stays balanced. Quadtrees can get very deep in dense areas, slowing down searches.</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Miscellaneous facts / details</h2>
+
+				<p><strong>Latitude/Longitude decimal places roughly correspond to:</strong></p>
+
+				<ul class="list-disc">
+					<li>0 decimal places (137°): ~111 km precision</li>
+					<li>1 decimal (137.9°): ~11.1 km</li>
+					<li>2 decimals (137.99°): ~1.11 km</li>
+					<li>3 decimals (137.999°): ~111 m</li>
+					<li>…</li>
+				</ul>
+
+				<p><strong>Interplay between geohashing systems and grids:</strong></p>
+
+				<p>Given a point with 1 decimal place like (37.7°N, 122.4°W):</p>
+
+				<p>This effectively means the true point could be anywhere within:</p>
+
+				<ul class="list-disc">
+					<li>Latitude: 37.65° to 37.75° (±0.05°)</li>
+					<li>Longitude: 122.35° to 122.45° (±0.05°)</li>
+				</ul>
+
+				<p>Which creates a rectangular area of roughly 11km x 11km! Not circular!</p>
+
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">Things I hope to cover eventually</h2>
+
+				<p>That about does it for this blog post. If you made it all the way here, I appreciate you sticking through it. As a reward, I'm linking more reading on related topics that I wish to cover at some point.</p>
+
+				<ul class="list-disc">
+					<li><strong>Hilbert Curves:</strong> Method to optimize geohashes. (<a href="https://en.wikipedia.org/wiki/Hilbert_curve" class="text-custom-accent hover:underline" target="_blank">Wikipedia</a>) (<a href="https://blog.notdot.net/2009/11/Damn-Cool-Algorithms-Spatial-indexing-with-Quadtrees-and-Hilbert-Curves" class="text-custom-accent hover:underline" target="_blank">Blog</a>)</li>
+					<li><strong>Space-filling curves:</strong> A general class of curves to cover higher dimensional regions.</li>
+					<li><strong>R-tree technical details and variants</strong> (R*-tree etc.).</li>
+					<li><strong>Adapting to 3D:</strong> Structures like Octrees.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

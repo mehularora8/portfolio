@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Six learnings from being an early stage founder - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-2xl w-full article-content">
+			<a href="index.html" class="back-link">Back to home</a>
+
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-title-dark leading-tight">Six learnings from being an early stage founder</h1>
+			</div>
+
+			<div class="space-y-6 text-gray-600 font-extralight leading-loose">
+				<p>Working on <a href="https://www.crunchbase.com/organization/lightbulbml" class="text-custom-accent hover:underline" target="_blank">LightbulbML</a> was undoubtedly highest growth venture of my life so far. I reflect on that period a lot, and I want to make a conscious effort to document and share those reflections. So here's a long overdue post about what I learned from being an early stage venture-backed founder and what I'd do if and when I go down that route again.</p>
+
+				<hr class="border-gray-300 my-8">
+
+				<div class="space-y-8">
+					<div>
+						<p class="font-semibold text-custom-dark mb-2">1. Build something that enables a future you're obsessed with.</p>
+						<p>I have gone through many versions of this concept. Build a product you're obsessed with. Build for users you're obsessed with. Obsess over the craft of building. While I think these all make sense, the abstraction that feels most right is to be obsessed with the future you're building.</p>
+						<p>In starting a company, you are staking years of your life to change the future for some part of the world. And without you having a stake in it, without you being obsessed to bring about that change, it becomes harder and harder to run through walls over time. And the walls keep coming.</p>
+					</div>
+
+					<div>
+						<p class="font-semibold text-custom-dark mb-2">2. Take time with building conviction.</p>
+						<p>This one goes in tandem with the previous point. Thinking about what future you want to build towards realistically won't happen overnight. The process of finding your life's work takes time. South Park Commons calls this the process of going from <a href="https://www.southparkcommons.com/our-story" class="text-custom-accent hover:underline" target="_blank">-1 to 0</a>.</p>
+					</div>
+
+					<div>
+						<p class="font-semibold text-custom-dark mb-2">3. You need to be delusional enough to think that you'll win.</p>
+						<p>Belief is infectious. And belief in winning is one of the highest leverage things you can have at the earliest stages of a company startup.</p>
+						<p>It's easy to fall into the mindset focused on all the things that could go wrong. And yes, there are a million things that could go wrong. But the skill to execute fast despite all the negatives is the energy you need.</p>
+						<img src="photos/whatifitallworksout.png" alt="What if it all works out" class="w-full max-w-md mx-auto my-6 rounded-lg">
+					</div>
+
+					<div>
+						<p class="font-semibold text-custom-dark mb-2">4. <a href="https://substack.com/home/post/p-160722576" class="text-custom-accent hover:underline" target="_blank">Have fun</a>.</p>
+						<p>Fun is an underrated life metric because it's brutally honest. To me, fun as a metric shines because it helps align your value system and desires with your actions. While I try and apply this in my life broadly, in a startup environment having fun was a function of three big things: who I was working with, what I was building, how much I was learning. Whenever the fun metric was off, tweaking one of those three fixed it.</p>
+					</div>
+
+					<div>
+						<p class="font-semibold text-custom-dark mb-2">5. Ask yourself whether you like your users.</p>
+						<p>Early on with the company, we were trying to sell to law firms. At some point, we realized that we cared a lot more about supporting the companies which created the IP and pivoted to selling to in-house IP teams instead. If this is not a hell yes, it'll be exponentially harder for you to build something truly crafty and useful.</p>
+					</div>
+
+					<div>
+						<p class="font-semibold text-custom-dark mb-2">6. Ship fast doesn't mean much if you don't learn fast.</p>
+						<p>The point of shipping fast is that it enables you to understand the things that actually matter and the things that don't. It is <span class="italic">always</span> possible to ship a new shiny feature with little thought behind what you're trying to learn from it.</p>
+						<p>Every thing you ship is an experiment in understanding the reality of your user. How you design that experiment design matters a ton.</p>
+					</div>
+				</div>
+
+				<hr class="border-gray-300 my-8">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

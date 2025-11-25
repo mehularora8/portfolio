@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Using Edge Detection to design my next tattoo - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+
+		.math-formula {
+			font-family: 'Times New Roman', serif;
+			font-style: italic;
+			background-color: #f8f7f4;
+			padding: 0.5rem 1rem;
+			border-radius: 0.25rem;
+			display: inline-block;
+			margin: 0.5rem 0;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-2xl w-full article-content">
+			<a href="index.html" class="back-link">Back to home</a>
+
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-title-dark leading-tight">Using Edge Detection to design my next tattoo</h1>
+			</div>
+
+			<div class="space-y-6 text-gray-600 font-extralight leading-loose">
+				<p><span class="font-semibold text-custom-dark">Note:</span> If you just want to see the code, you can find it at <a href="https://github.com/mehularora8/pixel8" class="text-custom-accent hover:underline" target="_blank">mehularora8/pixel8</a>.</p>
+
+				<hr class="border-gray-300 my-8">
+
+				<p>I got my first tattoo in 2022 through a company called <a href="https://ephemeral.tattoo/" class="text-custom-accent hover:underline" target="_blank">Ephemeral Tattoo</a>. It was scheduled to fade after 1 year, but lasted a significant bit longer than that. When it finally started to fade, I decided to redesign the same concept using pixel art as the medium. Here's how I used Edge Detection to create pixel art.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Prerequisites</h2>
+				<p>Convolution: <a href="https://en.wikipedia.org/wiki/Convolution" class="text-custom-accent hover:underline" target="_blank">https://en.wikipedia.org/wiki/Convolution</a></p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">What is an Edge?</h2>
+				<p>When trying to detecting edges, we're primarily dealing with pixel values. An "edge" can be defined as a sharp change in intensity in the image, or in other words, a high gradient in pixel values. The Canny Edge detector uses this trick to find edges.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Step 1: Input and Smoothing</h2>
+				<p>Following some standard image reading using <a href="https://scikit-image.org/docs/stable/api/skimage.io.html" class="text-custom-accent hover:underline" target="_blank">scikit-io</a>, we use a 5x5 Gaussian Kernel to convolve the input image. This helps with noise reduction, i.e. reduces abrupt changes in pixel values. Noise can create false positives, which we want to avoid.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Step 2: Gradient Magnitude and Angle</h2>
+				<p>We calculate the <code class="bg-gray-200 px-2 py-1 rounded">x</code> (or horizontal) derivative of the image by convolving the image with a filter in the x direction and the <code class="bg-gray-200 px-2 py-1 rounded">y</code> (or vertical) derivative of the image by convolving the image with a filter in the y direction. We get the total gradient magnitude by combining the x and y derivatives as</p>
+				<div class="math-formula">√(x² + y²)</div>
+				<p>We then calculate the Gradient Angle, or <code class="bg-gray-200 px-2 py-1 rounded">theta</code>, i.e. the direction perpendicular to the edge at every pixel. This can be accomplished by calculating the arctan of the y over x gradients.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Step 3: Non Max Suppression</h2>
+				<p>Simply put, non-max suppression picks the pixel with the strongest gradient in a given direction from setting the other gradients in the area to 0 for every pixel in the image. This helps with the precision of calculating edges.</p>
+				<p>To perform this step, we check each pixel's nearest neighbors in the direction of the gradient, and keep the one with the highest value.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Step 4: Thresholding and Linking</h2>
+				<p>The Canny Edge Detector relies on the concept of "strong" edges, defined as pixel values that lie above a <code class="bg-gray-200 px-2 py-1 rounded">high</code> threshold, and "weak" edges, defined as pixel values that lie between the <code class="bg-gray-200 px-2 py-1 rounded">high</code> and a <code class="bg-gray-200 px-2 py-1 rounded">low</code> threshold.</p>
+				<p>We use predetermined high and low thresholds, and set other values to 0. This process leaves us with two sets — a <code class="bg-gray-200 px-2 py-1 rounded">strong_edges</code> set, and a <code class="bg-gray-200 px-2 py-1 rounded">weak_edges</code> set. From now on, we can safely assume these exist as part of an edge.</p>
+				<p>Now, we don't want two different sets of edges. We want a single set of edges in the image. On a related note, we might also notice that these edges aren't necessary to be contiguous — and we'd be correct. The last step of edge detection process is linking strong and weak edges, which can be done by performing a Breadth First Search (or Depth First, depending on your preferences) over the our set of <code class="bg-gray-200 px-2 py-1 rounded">strong_edges</code>. For each of these, we check if their neighbors belong in the <code class="bg-gray-200 px-2 py-1 rounded">weak_edges</code> set, and if so, we consider them to be part of the strong edge.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Step 5: Pixelation</h2>
+				<p>After thresholding, we only have pixel values that correspond to an edge. Here, we sample down by 2x. This step is optional, but I found that this helps with enhance pixelation effect.</p>
+				<p>And that's it! We have now implemented all the functions necessary to read an image, extract its edges and pixelate them to create pixel art from it.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Links</h2>
+				<p>You can find the code here: <a href="https://github.com/mehularora8/pixel8" class="text-custom-accent hover:underline" target="_blank">mehularora8/pixel8</a> and the twitter thread <a href="https://twitter.com/luhemarora/status/1778208211335786904" class="text-custom-accent hover:underline" target="_blank">here</a>.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

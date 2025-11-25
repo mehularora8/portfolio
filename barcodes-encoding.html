@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Barcodes: ubiquitous, straightforward message encoding - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+
+		pre {
+			background-color: #f8f7f4;
+			padding: 1rem;
+			border-radius: 0.5rem;
+			overflow-x: auto;
+			font-size: 0.9rem;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-2xl w-full article-content">
+			<a href="index.html" class="back-link">Back to home</a>
+
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-title-dark leading-tight">Barcodes: ubiquitous, straightforward message encoding</h1>
+			</div>
+
+			<div class="space-y-6 text-gray-600 font-extralight leading-loose">
+				<p>Barcodes have been around for a while. They were <a href="https://patents.google.com/patent/US2612994A/en?oq=US2612994+" class="text-custom-accent hover:underline" target="_blank">patented</a> in 1952, under what is one of the broadest patents I have ever read. Despite being a huge part of our daily lives, I realized I didn't understand how they work.</p>
+
+				<p>So, here's a deep technical dive into the mechanism that drives everything from shipping containers to airplane boarding passes.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Types and examples of barcodes</h2>
+				<p>When I think of barcodes, I imagine the black and white code behind the groceries we buy. But that corresponds to just one category of barcodes. Here's a list of barcodes types and some of their use cases:</p>
+
+				<ul class="list-disc pl-6 space-y-2">
+					<li><span class="font-semibold text-custom-dark">1D Barcodes (a.k.a Linear)</span>
+						<ul class="list-disc pl-6 mt-2 space-y-1">
+							<li>UPC-A: Universal Product Code used in retail/groceries</li>
+							<li>Code 39: Industrial/military use</li>
+							<li>Interleaved 2 of 5: Shipping/warehouses</li>
+						</ul>
+					</li>
+					<li><span class="font-semibold text-custom-dark">2D Matrix</span>
+						<ul class="list-disc pl-6 mt-2 space-y-1">
+							<li>QR Code: you've seen this one.</li>
+							<li>Data Matrix: Small items marking, electronics, healthcare instruments</li>
+							<li>Aztec Code: Travel documents, airline/train tickets</li>
+						</ul>
+					</li>
+					<li><span class="font-semibold text-custom-dark">Stacked Barcodes</span>
+						<ul class="list-disc pl-6 mt-2 space-y-1">
+							<li>PDF417: ID cards, shipping labels</li>
+							<li>Code 49: Compact alternative when linear codes are too long</li>
+						</ul>
+					</li>
+					<li><span class="font-semibold text-custom-dark">Composite Barcodes</span>
+						<ul class="list-disc pl-6 mt-2 space-y-1">
+							<li>RSS Composite: Retail supply chain, pharmaceutical products</li>
+							<li>EAN.UCC Composite: Links linear retail codes with additional data</li>
+						</ul>
+					</li>
+				</ul>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Technical Components</h2>
+				<p>In the following sections, I'll elaborate the technical components of barcodes through the example of <span class="font-semibold text-custom-dark">Universal Product Codes (UPC)</span>, which is a simple 1D barcode you will see on the back of most things you purchase at grocery stores.</p>
+
+				<p>The mapping between messages and barcodes is known as a <span class="font-semibold text-custom-dark">symbology</span>. A symbology specifies the technical components of a barcode.</p>
+
+				<h3 class="text-xl font-bold text-custom-dark mt-8 mb-4">Character Set</h3>
+				<p>Character sets in barcodes define the kind of data that can be encoded (numeric only, alphanumeric, ASCII, etc.).</p>
+
+				<p>In addition to the typical character sets like the ones above, specialized barcodes can encode custom character sets. For instance, LOGMARS codes (used in military / government) and HIBC codes (used in healthcare) both use only uppercase letters for improved readability in their respective applications.</p>
+
+				<p>The character set used in UPCs is numeric only. In other words, something like "052302" can be encoded as a UPC, but something like "Banana" cannot.</p>
+
+				<h3 class="text-xl font-bold text-custom-dark mt-8 mb-4">Encoding Schemes</h3>
+				<p>The high level idea of an encoding scheme is to convert data from one format to another. In the context of barcodes, the idea is to convert characters into patterns of bars and spaces. There are quite a few types of encoding schemes. <span class="font-semibold text-custom-dark">Binary encoding</span> is a class of encoding schemes where the end product is binary data, which is what we'll discuss in this section.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Encoding Scheme in UPCs: The 7-module system</h4>
+				<p>UPCs use what's known as a 7-module system. Note that the 7-module system is just one way to use binary encodings, and other such systems exist.</p>
+
+				<p>Think of a module as the smallest unit of space in the barcode — each one can either be a black bar or light space. As the name implies, a 7-module system is a barcode where each digit is represented using 7 modules.</p>
+
+				<p>Each digit is encoded using 2 bars and 2 spaces, and their total width must add up to 7 modules. The pattern for a digit can be written in the form L1-B1-L2-B2 where:</p>
+
+				<ul class="list-disc pl-6 space-y-1">
+					<li>L1/L2 = width of light space (1-4 modules)</li>
+					<li>B1/B2 = width of black bar (1-4 modules)</li>
+				</ul>
+
+				<p>Following this, 0 is represented as 3-2-1-1, 1 is represented as 2-2-2-1 and so on. The full list can be found in the appendix.</p>
+
+				<h3 class="text-xl font-bold text-custom-dark mt-8 mb-4">Structure Requirements</h3>
+				<p>Each symbology has its own set of structure requirements. These can come in a few forms, but can be broadly categorized as:</p>
+
+				<ol class="list-decimal pl-6 space-y-1">
+					<li>Boundary patterns: Patterns that help recognize start points, end points and orientation for barcodes.</li>
+					<li>Quiet zones: Mandatory blank spaces around the barcode symbol that prevent interference from surrounding elements or graphics.</li>
+					<li>Internal Structure Elements: Built-in reference points and patterns that help scanners maintain orientation and module alignment during reading.</li>
+					<li>Module Organization: The fundamental arrangement of data elements that defines physical layout.</li>
+				</ol>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Structure of a UPC: Left / Right encoding in UPCs</h4>
+				<p>The items in pink are boundary patterns for UPCs. All UPCs have a few shared boundary patterns:</p>
+
+				<ol class="list-decimal pl-6 space-y-2">
+					<li><span class="font-semibold text-custom-dark">Start Pattern (Left Guard):</span> Three bars in the pattern: bar-space-bar. Always encoded as "101".</li>
+					<li><span class="font-semibold text-custom-dark">Middle Pattern (Center Guard):</span> Five bars in the pattern: space-bar-space-bar-space. Always encoded as "01010". The middle pattern divides the barcode into left and right halves.</li>
+					<li><span class="font-semibold text-custom-dark">End Pattern (Right Guard):</span> Three bars in the pattern: bar-space-bar. Always encoded as "101".</li>
+				</ol>
+
+				<p>The Quiet Zone consists of blank spaces that appear before and after the code which MUST be:</p>
+
+				<ol class="list-decimal pl-6 space-y-1">
+					<li>At least 9 times the width of the narrowest bar on the left side</li>
+					<li>At least 7 times the width of the narrowest bar on the right side</li>
+				</ol>
+
+				<p>And lastly, you'll notice that UPCs have fixed-width bars, which speaks to the module organization.</p>
+
+				<h3 class="text-xl font-bold text-custom-dark mt-8 mb-4">Data Characteristics</h3>
+				<p>When designing a barcode system, two key characteristics determine how much information we can pack into a symbol: capacity and density.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Capacity</h4>
+				<p>A barcode's capacity refers to the maximum amount of data it can hold. For example, a UPC barcode we discussed earlier can only contain 12 numeric digits. While limited, this is great for the retail use case.</p>
+
+				<p>As you might imagine, modern applications often need more storage space. For these purposes, a QR code, for instance, can store up to 4,296 alphanumeric characters – which is much less limiting than the 12 digits a UPC can store.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Density</h4>
+				<p>Data density addresses the question: how efficiently can we pack information into a given space?</p>
+
+				<p>In UPC barcodes, each digit requires exactly seven modules, plus additional space for structural elements like guard patterns. Overall, UPCs can only store about 1.5 characters per linear inch at typical printing sizes.</p>
+
+				<p>Modern 2D barcodes dramatically improve on this efficiency. By using both horizontal and vertical dimensions (like a crossword puzzle instead of a single line of text), QR codes can achieve much higher data density. This is why a QR code can contain a full website address in roughly the same space that a UPC uses for 12 digits.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Capacity / Density trade-offs</h4>
+				<p>The fixed structure of UPCs makes them reliable but relatively space-hungry. On the other hand, denser barcodes require more sophisticated scanning equipment, higher quality printing, and more precise alignment during scanning among other things.</p>
+
+				<p>This explains why simple UPC codes remain prevalent in retail environments where speed and reliability are paramount.</p>
+
+				<h3 class="text-xl font-bold text-custom-dark mt-8 mb-4">Error Detection and Correction</h3>
+				<p>Every time we scan a barcode, we're asking a machine to interpret patterns of light and dark in the real world. We'd like to make our barcodes robust to errors in interpretation.</p>
+
+				<p>But first: what causes errors in barcodes? They might get damaged during shipping, partially obscured by dirt, faded from sun exposure, or poorly printed to begin with. Even a small coffee stain or scratch could potentially change how a scanner interprets the patterns of bars and spaces.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Simple Error Detection: Check Digits</h4>
+				<p>The most basic form of error detection uses check digits, and our familiar UPC barcode provides a perfect example.</p>
+
+				<p>In a UPC, the last digit isn't actually part of the product code – it's a check digit calculated from all the other digits using the following method:</p>
+
+				<ul class="list-disc pl-6 space-y-1">
+					<li>Starting from the rightmost digit (excluding check digit), multiply odd positions by 3 and even positions by 1. Add all these numbers together.</li>
+					<li>The check digit is whatever number needs to be added to make the sum divisible by 10.</li>
+					<li>Append the check digit at the end.</li>
+				</ul>
+
+				<p class="font-semibold text-custom-dark">Example</p>
+				<p>Start with UPC above: <code class="bg-gray-200 px-2 py-1 rounded">72527273070</code>.</p>
+
+				<p>7×1 + 2×3 + 5×1 + 2×3 + 7×1 + 2×3 + 7×1 + 3×3 + 0×1 + 7×3 + 0×1 = 74</p>
+
+				<p>Check digit = 80 - 74 = 6</p>
+
+				<p>Final UPC: <code class="bg-gray-200 px-2 py-1 rounded">725272730706</code> (you see 6 at the end of that UPC)</p>
+
+				<p>When a scanner reads the barcode, it performs the same calculation and compares its result with the check digit. If they don't match, the scanner knows something went wrong, which is when you see the person processing your checkout enter the product details manually.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Advanced Error Correction: Reed-Solomon Codes</h4>
+				<p>The biggest downside of simplistic methods like Check Digits is that they simply detect errors but can't do much to fix them. Modern barcodes like QR codes use more advanced error-correction methods like Reed-Solomon error correction to get around this limitation.</p>
+
+				<p>The high level idea of Reed Solomon Error correction involves converting data into polynomials, then generating extra "redundancy" values by evaluating these polynomials at additional points. If parts of the message get corrupted during transmission, the mathematical properties of polynomials allow us to reconstruct the original data as long as we have enough uncorrupted points.</p>
+
+				<p>I hope to cover this topic in-depth at some point, but until then, all about this fascinating method <a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction#Properties" class="text-custom-accent hover:underline" target="_blank">here</a>.</p>
+
+				<h4 class="text-lg font-semibold text-custom-dark mt-6 mb-3">Space vs. Robustness trade-off</h4>
+				<p>Adding error correction capabilities requires extra space in the barcode. The more error correction capability you want, the more space you need to dedicate to parity data instead of actual message content.</p>
+
+				<p>A UPC barcode on a cereal box might only need basic check digit verification because it's scanned in controlled conditions. But a QR code on an outdoor billboard might need high-level error correction to remain readable despite weather exposure and viewing angle variations.</p>
+
+				<p>With that, we should have all the tools we need to break down a simple UPC.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Conclusion</h2>
+				<p>That about does it for the technical components of barcodes. In summary, we covered:</p>
+
+				<ol class="list-decimal pl-6 space-y-1">
+					<li>Types and use cases of barcodes</li>
+					<li>Character sets: what data can be encoded</li>
+					<li>Encoding schemes: how the character sets are encoded</li>
+					<li>Structure requirements: how a given barcode is structured</li>
+					<li>Data characteristics: tradeoffs in capacity and density of a barcode</li>
+					<li>Error correction: how do we make our barcodes robust?</li>
+				</ol>
+
+				<p>I also left a few interesting tidbits about barcode development in the appendix below.</p>
+
+				<p>I appreciate you making it this far in the blog! Have a cookie: 🍪.</p>
+
+				<hr class="border-gray-300 my-8">
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Appendix</h2>
+
+				<h3 class="text-xl font-semibold text-custom-dark mt-6 mb-3">Digit encoding in UPC</h3>
+				<pre>Digit   Left Encoding          Right Encoding
+ 0       0001101                1110010
+ 1       0011001                1100110
+ 2       0010011                1101100
+ 3       0111101                1000010
+ 4       0100011                1011100
+ 5       0110001                1001110
+ 6       0101111                1010000
+ 7       0111011                1000100
+ 8       0110111                1001000
+ 9       0001011                1110100</pre>
+
+				<h3 class="text-xl font-semibold text-custom-dark mt-6 mb-3">Practical Considerations of Barcode development</h3>
+				<p>A few interesting practical nuggets, which inform considerations when developing barcodes.</p>
+
+				<ul class="list-disc pl-6 space-y-2">
+					<li>The environment of deployment needs to be considered when printing barcodes. For example, in industrial settings, barcodes need to be printed on materials that are resistant to high heat.</li>
+					<li><span class="font-semibold text-custom-dark">Physical Requirements</span>
+						<ul class="list-disc pl-6 mt-2 space-y-1">
+							<li><span class="font-semibold text-custom-dark">Size Constraints:</span> Barcodes must maintain minimum dimensions to ensure scanner readability, typically requiring at least 0.25 inches in height for standard applications.</li>
+							<li><span class="font-semibold text-custom-dark">Print Quality Standards:</span> Print resolution should be at least 300 DPI to ensure clear, sharp bars with minimal bleeding or distortion. This precision is crucial because scanners rely on the precise width of bars and spaces to decode information - even slight distortions can cause misreads or complete scan failures.</li>
+							<li><span class="font-semibold text-custom-dark">Contrast Requirements:</span> A minimum contrast ratio of 70% between dark and light elements is essential for reliable scanning. This high contrast is necessary because barcode scanners work by measuring the reflected light from the surface - dark bars absorb light while light spaces reflect it. Without sufficient contrast, scanners struggle to differentiate between bars and spaces, leading to read errors or failed scans.</li>
+						</ul>
+					</li>
+				</ul>
+
+				<h3 class="text-xl font-semibold text-custom-dark mt-6 mb-3">Barcode Trivia</h3>
+				<p>In 1981 the US Department of Defense adopted the use of <a href="https://en.wikipedia.org/wiki/Code_39" class="text-custom-accent hover:underline" target="_blank">Code 39</a> for marking all products sold to the United States military.</p>
+
+				<h3 class="text-xl font-semibold text-custom-dark mt-6 mb-3">Further Reading</h3>
+				<p>Text encoding with UTF-8: <a href="https://blog.hubspot.com/website/what-is-utf-8" class="text-custom-accent hover:underline" target="_blank">https://blog.hubspot.com/website/what-is-utf-8</a></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>The science of staying awake - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+
+		.footnote {
+			font-size: 0.85rem;
+			color: #6b7280;
+			margin-top: 2rem;
+			padding-top: 1rem;
+			border-top: 1px solid #d1d5db;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-2xl w-full article-content">
+			<a href="index.html" class="back-link">Back to home</a>
+
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-title-dark leading-tight">The science of staying awake</h1>
+			</div>
+
+			<div class="space-y-6 text-gray-600 font-extralight leading-loose">
+				<p>Over the last 24 years, I have consumed a LOT of caffeine. But I never really did any research into what it is, how we know what we know about it and just generally found myself very undereducated on what it is. So here's a deep dive into humanity's most successful affair with a plant compound.</p>
+
+				<hr class="border-gray-300 my-8">
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">The alertness economy</h2>
+				<p>This is Thak.</p>
+
+				<img src="photos/thak.png" alt="Thak the prehistoric guy" class="w-full max-w-md mx-auto my-6 rounded-lg">
+
+				<p>Thak is a regular prehistoric guy who relies on hunting and gathering for his survival. At night, while his clan sleeps, Thak takes his turn keeping watch. But staying awake is hard. His eyes droop, his mind wanders – generally, not good for survival in Thak's world.</p>
+
+				<p>The concept of an "alertness economy" started with people like Thak. When survival depends on staying awake to detect predators or track nocturnal prey, combating fatigue is life-or-death.</p>
+
+				<p>Different regions developed their own solutions to combat fatigue. South Americans chewed <a href="https://en.wikipedia.org/wiki/Coca" class="text-custom-accent hover:underline" target="_blank">coca leaves</a>, East Asians used <a href="https://www.nccih.nih.gov/health/ephedra" class="text-custom-accent hover:underline" target="_blank">ephedra</a>, and East Africans relied on <a href="https://adf.org.au/drug-facts/khat/" class="text-custom-accent hover:underline" target="_blank">khat</a>. Each culture independently found plants that gave them cognitive edges when they needed them most.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Sleep regulation</h2>
+				<p>In order to understand how you stay awake, we need to start at your brain's natural sleep-regulation system. Sleep regulation in your body relies on two big things: a compound called <span class="font-semibold text-custom-dark">adenosine</span>, and protein molecules known as <span class="font-semibold text-custom-dark">adenosine receptors</span>. Adenosine receptors line your cell membranes, while adenosine molecules are just floating around in your body.</p>
+
+				<img src="photos/atp.png" alt="Adenosine and ATP molecules" class="w-full max-w-lg mx-auto my-6 rounded-lg">
+
+				<p>The cells in your body use <span class="italic">adenosine tri-phosphate</span> (ATP) molecules for energy. Each time your cells use ATP for energy, they release adenosine into your system as a by-product of that process.</p>
+
+				<p>Receptors are a cell's way of listening to the world around it. Think of them as sensors in the cell membrane, whose sole purpose is to recognize when specific messengers—proteins, molecules, drugs—come knocking. Cells can have many many different types of receptors, but adenosine receptors are specifically configured to detect adenosine. When an adenosine molecule fits into an adenosine receptor, it's like pressing a doorbell, triggering a chain of events inside the cell that changes its behavior. We'll dive into some of these behavioral changes in the next section.</p>
+
+				<p>The harder your brain works, the more adenosine accumulates. This adenosine gradually <span class="font-semibold text-custom-dark">binds</span> to certain receptors in your brain and sends what's essentially a "I'm sleepy" signal to your brain.</p>
+
+				<h3 class="text-xl font-bold text-custom-dark mt-8 mb-4">Binding at a molecular level</h3>
+				<p>Adenosine receptors work hand in hand with proteins known as G-proteins.<sup>1</sup> G-proteins are a cell's message relay team that hang out next to the inner portion of the receptor, waiting to be activated. Before activation, a G-protein exists as a single unit made up of three protein <a href="https://en.wikipedia.org/wiki/Protein_subunit" class="text-custom-accent hover:underline" target="_blank">subunits</a>: one alpha (α) subunit, one beta (β) subunit, one gamma (γ) subunit.</p>
+
+				<img src="photos/ChatGPT Image Apr 13, 2025, 01_26_57 PM.png" alt="G-protein structure before activation" class="w-full max-w-lg mx-auto my-6 rounded-lg">
+
+				<p>When adenosine settles into the adenosine receptor, it triggers a shape change (known as "conformational change"). This shape change activates the G-proteins attached to the receptor's inner portion, causing them to split into two parts: 1) an alpha subunit, and 2) a beta-gamma complex. These two parts then zoom off to interact with other cellular proteins, starting a domino effect that magnifies the initial signal.</p>
+
+				<img src="photos/ChatGPT Image Apr 13, 2025, 01_34_25 PM.png" alt="G-protein activation and splitting" class="w-full max-w-lg mx-auto my-6 rounded-lg">
+
+				<p>As a result of this signal, neural activity slows, blood vessels dilate, and your brain's arousal systems power down. As adenosine builds up during your waking hours, it essentially acts as a neurochemical marker of mental fatigue. This mechanism evolved as a brilliant self-regulating mechanism that ensures we get adequate rest.</p>
+
+				<div class="footnote">
+					<p><sup>1</sup> Adenosine receptors are what's known as <span class="font-semibold text-custom-dark">G-protein coupled receptors (GPCRs)</span> because of their mechanism of working hand-in-hand with G-proteins. Structurally, GCPRs snake across the cell membrane seven times in order to create the perfect pocket for adenosine to bind. <a href="https://www.nature.com/articles/nrm908" class="text-custom-accent hover:underline" target="_blank">Why 7?</a></p>
+				</div>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Caffeine</h2>
+				<p>People had observed for centuries that certain plants like tea and coffee could help them mitigate the adverse effects of adenosine. The 1800s brought about a movement focused on identifying the "active principles" in these plants. When caffeine was isolated from coffee beans in 1821. Unlike other stimulants, caffeine offered a nearly perfect balance: strong enough to be effective, mild enough to use daily, and compatible with work rather than disrupting it.</p>
+
+				<p>The magic of caffeine lies in its structure. Here's caffeine and adenosine, side by side. See if anything sticks out.</p>
+
+				<img src="photos/advcaf.png" alt="Caffeine vs Adenosine molecular structure comparison" class="w-full max-w-lg mx-auto my-6 rounded-lg">
+
+				<p>Notice how the double ring structure of caffeine is quite similar to the double ring structure protruding from the adenosine molecule. Due to the similarity in shapes, caffeine can bind to adenosine receptors in the same spot, which allows it to compete with adenosine. But unlike adenosine, when caffeine settles into adenosine receptors, it doesn't send the "sleepy" signal. Instead, it just blocks adenosine from delivering the signal.<sup>2</sup></p>
+
+				<img src="photos/ChatGPT Image Apr 10, 2025, 03_54_01 PM.png" alt="Caffeine blocking adenosine receptors" class="w-full max-w-lg mx-auto my-6 rounded-lg">
+
+				<div class="footnote">
+					<p><sup>2</sup> Caffeine is what's called a "competitive antagonist" for adenosine.</p>
+				</div>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Why Your Caffeine Experience Is Unique</h2>
+				<p>I'm willing to wager that you know people that can pound an espresso at 8 PM and sleep like a baby, and also people who stay up all night after a cup of coffee at noon. This section will dig deeper into the processes that make it so.</p>
+
+				<p>Caffeine gets absorbed through your digestive tract <span class="italic">very quickly</span>—reaching peak levels in just 30-60 minutes. Once in your bloodstream, it travels everywhere, crossing the <a href="https://www.ncbi.nlm.nih.gov/books/NBK519556/" class="text-custom-accent hover:underline" target="_blank">blood-brain barrier</a> with ease (which is why it affects your brain so efficiently).</p>
+
+				<p>The caffeine in your body needs to get broken down eventually. Your body relies primarily on an enzyme called CYP1A2 to accomplish this. CYP1A2 functions incredibly efficiently for some people, and leisurely for others — making you either a "fast metabolizer" or "slow metabolizer" when it comes to caffeine. As with many other things, this difference is largely genetic. That said, a practical number to understand is caffeine's half-life—the time it takes your body to eliminate half of the caffeine you've consumed.</p>
+
+				<p>Here's a counterintuitive hack: drinking a cup of coffee and immediately taking a 20-minute nap works wonders. Since caffeine takes about 20-30 minutes to kick in, you wake up just as it reaches peak effectiveness. Meanwhile, your nap has cleared some adenosine from those receptors, creating a double whammy of alertness when you wake.</p>
+
+				<h2 class="text-2xl font-bold text-custom-dark mt-8 mb-4">Engineering the Next Generation of Stimulants</h2>
+				<p>While we love the enhanced mental clarity and less fatigue that caffeine provides, we hate the jitters and sleep disruptions. So what does it mean to engineer the next generation of stimulants? The frontier of improvement is to develop a compound that can deliver sustained energy without anxiety, focus without a crash, and better performance without building tolerance.</p>
+
+				<p>Two promising directions are either replacing or complementing caffeine. <a href="https://www.webmd.com/vitamins/ai/ingredientmono-1280/theacrine" class="text-custom-accent hover:underline" target="_blank">Theacrine</a> and <a href="https://en.wikipedia.org/wiki/Methylliberine" class="text-custom-accent hover:underline" target="_blank">Dynamine</a> have emerged as frontrunners to replace caffeine. Studies suggest that Theacrine works longer without a harsh comedown and doesn't deliver a crash, whereas Dynamine hits faster but doesn't last as long. Some pair caffeine with <a href="https://www.webmd.com/vitamins/ai/ingredientmono-1053/theanine" class="text-custom-accent hover:underline" target="_blank">L-theanine</a> (found naturally in tea) to edge off the jitters while preserving the alertness.</p>
+
+				<p>I hope we succeed in finding a single miracle molecule. If you or someone you know has any information on this, I would love to chat. But until that happens, it seems like we are headed in the direction of developing stimulant stacks — a different stimulant based on whether you need a short burst of energy, sustained focus, or physical performance without sacrificing sleep.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

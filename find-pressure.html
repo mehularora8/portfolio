@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Find Pressure - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-2xl w-full article-content">
+			<a href="index.html" class="back-link">Back to home</a>
+
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-title-dark leading-tight">Find Pressure</h1>
+			</div>
+
+			<div class="space-y-6 text-gray-600 font-extralight leading-loose">
+				<p>On paper, I have done some cool stuff in my life so far. I graduated from a top college, interned at huge tech companies, and other stuff that would make my Indian parents very proud. Yet, I keep yearning to do something "meaningful". Meaningful in the way that is palpable when an Olympian wins their first medal, meaningful in the way that is visible when someone who grew up poor buys their parents their first house.</p>
+
+				<p>As I pulled this feeling apart, I realized that all the times I felt like I did something meaningful, I was under pressure to perform. The outcome didn't matter, neither did my circumstances. And as of recently, I have tended to avoid situations where I feel that pressure.</p>
+
+				<p>I started noticing all the areas of my life that were impacted by this.</p>
+
+				<p>In college, I would choose the less challenging parts of team projects. I'd brand myself as a flexible team player, taking up things that were more grunt work, but the reality was that I was scared of the pressure that came with building a term project on my ideas.</p>
+
+				<p>On the frisbee teams I played on, I would prefer to play on the defensive line because in ultimate, being the incredibly offense-sided sport it is, it was expected that we'd get scored on. I had nothing to lose. We got scored on? Oops, I'll do better. But if we end up losing the game it won't be my fault because it was expected we'd get scored on.</p>
+
+				<p>When we started Lightbulb, my cofounder took up a lot of the CEO-type roles. She was the face of the company and I was happy with this arrangement because it took the pressure off me. Internally, we held our product to a high standard, but we didn't need to surface our product quality much for super early-stage startups like ours. What this meant was that I boxed myself into a role that wouldn't face the pressures of investors, stakeholders and everything else that came along with it. I remember whenever we'd get asked a tough question during a meeting I'd instantly just look over at her, hoping she'd have the answers.</p>
+
+				<p>Now, I have also felt pressure from random aunties asking me how IIT prep is going. Allow me to explain the difference and where I found "good pressure" came from.</p>
+
+				<p>"Good pressure" is what I feel when there's mental alignment between my identity and desires, with actions being the only thing that is yet to come. This pushes me to deliver and pour my soul into whatever task I'm taking on. And regardless of the outcome, I very often feel like I did meaningful work.</p>
+
+				<p>The learning I'm taking with me is that meaning comes from seeking out opportunities where you <span class="italic">feel pressured to show up for yourself</span>. Pressure to perform, pressure to win that race, pressure to build a cool product, pressure to get into law school. Pressure to ensure that your effort doesn't come up short.</p>
+
+				<p>There's something to be said about the flipside as well — only when you feel pressured to show up for yourself in a given area of your life can you certainly conclude that it is meaningful to you.</p>
+
+				<p>So, reader, my takeaway for you is: Find pressure. It is incredibly liberating.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

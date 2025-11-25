@@ -35,387 +35,339 @@
 		<link rel="icon" href="photos/6.png" type="image/png">
 		
 		<style>
-			body::before {
-				content: '';
-				position: fixed;
+			body {
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+
+			/* Top Navigation */
+			.top-nav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1.5rem 3rem;
+				background-color: #e9e7e0;
+				flex-shrink: 0;
+			}
+
+			.nav-left, .nav-right {
+				display: flex;
+				gap: 2rem;
+				align-items: center;
+			}
+
+			.nav-brand {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: #0C131A;
+				text-transform: uppercase;
+			}
+
+			.nav-link {
+				color: #6b7280;
+				text-decoration: none;
+				font-size: 1.05rem;
+				font-weight: 300;
+				transition: color 0.3s ease;
+				background: none;
+				border: none;
+				cursor: pointer;
+				font-family: 'Space Mono', monospace;
+			}
+
+			.nav-link:hover, .nav-link.active {
+				color: #0C131A;
+			}
+
+			/* Page Container */
+			.page-container {
+				flex: 1;
+				position: relative;
+				overflow: hidden;
+				padding: 2rem 3rem;
+			}
+
+			/* Image Positioning */
+			.image-top-left {
+				position: absolute;
+				top: 2rem;
+				left: 3rem;
+				width: 400px;
+				height: 250px;
+			}
+
+			.image-top-right {
+				position: absolute;
 				top: 0;
+				right: 0;
+				bottom: 0;
+				width: 350px;
+			}
+
+			.image-bottom-left {
+				position: absolute;
+				bottom: 2rem;
 				left: 0;
+				width: 300px;
+				height: 200px;
+			}
+
+			.img-fluid {
 				width: 100%;
 				height: 100%;
-				opacity: 0.03;
-				z-index: -1;
-				pointer-events: none;
-				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+				object-fit: cover;
 			}
 
-			.title-intro {
-				opacity: 0;
-				transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			.title-intro.visible {
-				opacity: 1;
-			}
-
-			.subtitle-intro {
-				opacity: 0;
-				transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			.subtitle-intro.visible {
-				opacity: 1;
-			}
-
-			.main-content {
-				opacity: 0;
-				transition: opacity 0.8s ease-out;
-			}
-
-			.main-content.visible {
-				opacity: 1;
-			}
-
-			.memoji-inline {
-				transition: all 0.3s ease-in-out;
-			}
-
-			.memoji-inline:hover {
-				transform: scale(1.05);
-			}
-
-			.contact-links {
-				opacity: 0;
-				transition: opacity 0.8s ease-out;
-			}
-
-			/* Section Navigation Styles */
-			.section-content {
-				display: none;
-				opacity: 0;
-				transform: translateY(20px);
-				transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			.section-content.active {
-				display: block;
-				opacity: 1;
-				transform: translateY(0);
-			}
-
-			.section-content.fading-out {
-				opacity: 0;
-				transform: translateY(-10px);
-			}
-
-			.nav-item {
-				position: relative;
-				color: #6b7280;
-				padding-left: 1.5rem;
-			}
-
-			.nav-item::before {
-				content: '';
+			/* Text Content */
+			.content-text {
 				position: absolute;
-				left: 0;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 0;
-				height: 2px;
-				background-color: #d94612;
-				transition: width 0.3s ease-out;
+				bottom: 2rem;
+				left: 330px;
+				max-width: 650px;
 			}
 
-			.nav-item.active-nav {
-				color: #d94612;
-				font-weight: 400;
+			.content-title {
+				font-size: 2rem;
+				font-weight: 700;
+				color: #0C131A;
+				margin-bottom: 1rem;
 			}
 
-			.nav-item.active-nav::before {
-				width: 1rem;
+			.content-description {
+				font-size: 1.15rem;
+				line-height: 1.8;
+				color: #5a6270;
+				font-weight: 300;
 			}
 
-			.nav-item:hover::before {
-				width: 0.75rem;
+			.home-social-links {
+				margin-top: 1rem;
+				font-size: 1rem;
+				display: flex;
+				gap: 0.5rem;
+				align-items: center;
 			}
 
-			/* Mobile Navigation */
-			.mobile-nav {
+			/* Content Sections */
+			.content-section {
 				display: none;
 			}
 
+			.content-section.active {
+				display: block;
+			}
+
+			.section-title {
+				font-size: 1.75rem;
+				font-weight: 700;
+				color: #0C131A;
+				margin-bottom: 1rem;
+			}
+
+			.section-subtitle {
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: #0C131A;
+				margin-top: 1.5rem;
+				margin-bottom: 0.75rem;
+			}
+
+			.section-content-text p {
+				font-size: 1.05rem;
+				line-height: 1.8;
+				color: #5a6270;
+				font-weight: 300;
+				margin-bottom: 0.75rem;
+			}
+
+			.text-link {
+				color: #2d3748;
+				text-decoration: underline;
+				transition: opacity 0.3s ease;
+			}
+
+			.text-link:hover {
+				opacity: 0.6;
+			}
+
+			/* Footer */
+			.page-footer {
+				display: flex;
+				justify-content: space-between;
+				padding: 1.5rem 3rem;
+				background-color: #e9e7e0;
+				flex-shrink: 0;
+			}
+
+			.footer-left, .footer-center, .footer-right {
+				font-size: 0.85rem;
+				color: #6b7280;
+				font-weight: 300;
+			}
+
+			/* Responsive */
 			@media (max-width: 1024px) {
-				.title-intro {
-					font-size: 2.5rem;
+				.top-nav {
+					flex-direction: column;
+					gap: 1rem;
+					padding: 1rem 1.5rem;
 				}
 
-				.desktop-nav {
-					display: none !important;
+				.nav-left, .nav-right {
+					gap: 1rem;
 				}
 
-				.mobile-nav {
-					display: block;
-					position: fixed;
-					top: 0;
-					left: 0;
-					right: 0;
-					background-color: #e9e7e0;
-					border-bottom: 1px solid #d1d5db;
-					z-index: 100;
+				.page-container {
 					padding: 1rem;
 				}
 
-				.mobile-nav-buttons {
-					display: flex;
-					gap: 1rem;
-					overflow-x: auto;
-					white-space: nowrap;
-					-webkit-overflow-scrolling: touch;
-					scrollbar-width: none;
+				.image-top-left, .image-top-right, .image-bottom-left {
+					position: static;
+					width: 100%;
+					height: 150px;
+					margin-bottom: 1rem;
 				}
 
-				.mobile-nav-buttons::-webkit-scrollbar {
-					display: none;
+				.content-text {
+					position: static;
+					max-width: 100%;
+					margin-top: 1rem;
 				}
 
-				.mobile-nav-item {
-					font-size: 0.875rem;
-					padding: 0.5rem 0.75rem;
-					background-color: transparent;
-					transition: color 0.2s;
-					border-bottom: 2px solid transparent;
-				}
-
-				.mobile-nav-item.active-nav {
-					color: #d94612 !important;
-					border-bottom-color: #d94612;
-				}
-
-				body {
-					overflow: auto !important;
-				}
-
-				.main-content {
-					margin-left: 0 !important;
-					padding-top: 4rem !important;
-					overflow-y: auto !important;
-					height: auto !important;
-				}
-
-				.main-content > div {
-					margin-left: 0 !important;
-					padding: 1rem !important;
-				}
-
-				.section-content h2 {
-					font-size: 1.5rem !important;
-				}
-
-				.memoji-inline {
-					width: 4rem !important;
-					height: 4rem !important;
+				.page-footer {
+					flex-direction: column;
+					gap: 0.5rem;
+					padding: 1rem 1.5rem;
 				}
 			}
 		</style>
 	</head>
 	<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0 overflow-hidden">
-		<!-- Mobile Navigation -->
-		<nav class="mobile-nav">
-			<div class="mobile-nav-buttons">
-				<button onclick="showSection('work')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="work">
-					Work
-				</button>
-				<button onclick="showSection('fun')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="fun">
-					Projects
-				</button>
-				<button onclick="showSection('sidequests')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="sidequests">
-					Side quests
-				</button>
-				<button onclick="showSection('writing')" class="mobile-nav-item nav-item block text-left font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="writing">
-					Writing
-				</button>
+		<!-- Top Navigation -->
+		<nav class="top-nav">
+			<div class="nav-left">
+				<span class="nav-brand">Mehul Arora</span>
+			</div>
+			<div class="nav-right">
+				<button onclick="showSection('home')" class="nav-link active" data-section="home">Home</button>
+				<button onclick="showSection('work')" class="nav-link" data-section="work">Work</button>
+				<button onclick="showSection('projects')" class="nav-link" data-section="projects">Projects</button>
+				<button onclick="showSection('sidequests')" class="nav-link" data-section="sidequests">Side Quests</button>
+				<button onclick="showSection('writing')" class="nav-link" data-section="writing">Writing</button>
 			</div>
 		</nav>
 
-		<!-- Desktop Sidebar Navigation -->
-		<nav class="desktop-nav fixed left-0 top-0 h-screen w-64 bg-custom-background p-8 flex flex-col justify-center z-50">
-			<div class="space-y-6">
-				<button onclick="showSection('work')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="work">
-					Work
-				</button>
-				<button onclick="showSection('fun')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="fun">
-					Projects
-				</button>
-				<button onclick="showSection('sidequests')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="sidequests">
-					Side quests
-				</button>
-				<button onclick="showSection('writing')" class="nav-item block text-left text-lg font-light hover:text-custom-accent transition-colors duration-300 focus:outline-none" data-section="writing">
-					Writing
-				</button>
+		<!-- Main Content Container -->
+		<div class="page-container">
+			<!-- Top Left Image -->
+			<div class="image-top-left">
+				<img src="photos/left_high.png" alt="Image 1" class="img-fluid">
 			</div>
-		</nav>
 
-		<!-- Main Content Area -->
-		<div class="min-h-screen main-content overflow-y-auto flex justify-center">
-			<div class="max-w-4xl w-full p-8 md:p-16" style="margin-left: 8rem;">
-				<div class="relative">
-					<!-- Header with Contact Info -->
-					<div class="flex items-start mb-8 justify-between">
-						<div class="flex-1">
-							<h1 id="main-title" class="font-space-mono text-4xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight relative z-10 text-title-dark title-intro">Hi! I'm Mehul.</h1>
-							<p id="subtitle" class="text-custom-dark font-extralight text-lg mb-4 subtitle-intro">I'm a San Francisco based technologist, currently focused on giving language models long-term memory.</p>
-							<div class="flex gap-4 text-sm font-light contact-links">
-								<a href="https://substack.com/@mehularora" target="_blank" class="text-custom-accent hover:underline underline-offset-2 decoration-gray-300">substack</a>
-								<a href="https://twitter.com/luhemarora" target="_blank" class="text-custom-accent hover:underline underline-offset-2 decoration-gray-300">twitter</a>
-								<a href="https://www.linkedin.com/in/mehul-arora/" target="_blank" class="text-custom-accent hover:underline underline-offset-2 decoration-gray-300">linkedin</a>
-							</div>
-						</div>
-						<img src="photos/5.png" alt="Mehul memoji" class="w-24 h-24 md:w-24 md:h-24 memoji-inline flex-shrink-0 mt-2">
+			<!-- Top Right Image -->
+			<div class="image-top-right">
+				<img src="photos/right.png" alt="Image 2" class="img-fluid">
+			</div>
+
+			<!-- Bottom Left Image -->
+			<div class="image-bottom-left">
+				<img src="photos/left_low.png" alt="Image 3" class="img-fluid">
+			</div>
+
+			<!-- Text Content (next to bottom left image) -->
+			<div class="content-text">
+				<!-- Home Section -->
+				<div id="home-section" class="content-section active">
+					<p class="content-description">
+						I'm a San Francisco based technologist, currently focused on giving language models long-term memory.
+					</p>
+					<div class="home-social-links">
+						<a href="https://twitter.com/luhemarora" target="_blank" class="text-link">twitter</a>
+						<span class="text-gray-400">·</span>
+						<a href="https://github.com/mehularora8" target="_blank" class="text-link">github</a>
+						<span class="text-gray-400">·</span>
+						<a href="https://substack.com/@mehularora" target="_blank" class="text-link">substack</a>
 					</div>
-					<hr class="border-gray-300 mb-8">
+				</div>
 
-					<!-- Sections -->
-					<div id="main-content" class="relative z-10">
-						<!-- Work Section -->
-						<div id="work-section" class="section-content active">
-							<div class="space-y-6 pt-6">
-								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes create shareholder value.</h2>
-								<div class="space-y-6 text-gray-600 font-extralight">
-									<p class="leading-loose">I am currently working on giving large language models long-term memory (something like <a href="https://youtu.be/KPgZJzQF1Yg?si=8CuULxNgLKEApmCT&t=55" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" target="_blank">this</a>). I spend most of my time hanging out at <a class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300" href="https://southparkcommons.com" target="_blank">South Park Commons</a>.
-									<p class="leading-loose">I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">LightbulbML</a>, a company building AI agents for patent prosecution, which got acquired by <a target="_blank" href="https://schox.com" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Schox Patent Group</a>. I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">IMDb</a>, optimized survey software for <a target="_blank" href="https://www.office.com/" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="font-light text-custom-accent hover:underline underline-offset-2 decoration-gray-300">lab study</a> to production at Stanford.
-								</div>
-							</div>
-						</div>
+				<!-- Work Section -->
+				<div id="work-section" class="content-section">
+					<h3 class="section-title">Work</h3>
+					<div class="section-content-text">
+						<p>I am currently working on giving large language models long-term memory (something like <a href="https://youtu.be/KPgZJzQF1Yg?si=8CuULxNgLKEApmCT&t=55" class="text-link" target="_blank">this</a>). I spend most of my time hanging out at <a class="text-link" href="https://southparkcommons.com" target="_blank">South Park Commons</a>.</p>
+						<p>I previously founded <a target="_blank" href="https://www.crunchbase.com/organization/lightbulbml" class="text-link">LightbulbML</a>, a company building AI agents for patent prosecution, which got acquired by <a target="_blank" href="https://schox.com" class="text-link">Schox Patent Group</a>. I also wrote code that runs every time you watch a trailer on <a target="_blank" href="https://www.imdb.com/trailers/" class="text-link">IMDb</a>, optimized survey software for <a target="_blank" href="https://www.office.com/" class="text-link">Microsoft Office</a>, and brought a <a target="_blank" href="https://dl.acm.org/doi/abs/10.1145/3491102.3517619" class="text-link">lab study</a> to production at Stanford.</p>
+					</div>
+				</div>
 
-						<!-- Fun Projects Section -->
-						<div id="fun-section" class="section-content">
-							<div class="space-y-6 pt-6">
-								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes build things for fun.</h2>
-								<div class="flex flex-col gap-4 font-sm text-gray-600 font-extralight">
-									<p class="leading-loose"><a href="https://github.com/mehularora8/PocketBench" target="_blank" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">PocketBench</a>: A benchmark for LLMs to play Pocket Tanks.</p>
-									<p class="leading-loose"><a target="_blank" href="https://yesand-peach.vercel.app/" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">YesAnd</a>: An app to practice improv with Voice Models.</p>
-									<p class="leading-loose"><a target="_blank" href="https://gyroscope-lake.vercel.app/" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">GyroScope</a>: Find gyros closest to you.</p>
-									<p class="leading-loose"><a target="_blank" href="https://github.com/mehularora8/pixel8" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Pixel8</a>: Create pixel art from any image.</p>
-								</div>
-							</div>
-						</div>
+				<!-- Projects Section -->
+				<div id="projects-section" class="content-section">
+					<h3 class="section-title">Projects</h3>
+					<div class="section-content-text">
+						<p><a href="https://github.com/mehularora8/PocketBench" target="_blank" class="text-link">PocketBench</a>: A benchmark for LLMs to play Pocket Tanks.</p>
+						<p><a target="_blank" href="https://yesand-peach.vercel.app/" class="text-link">YesAnd</a>: An app to practice improv with Voice Models.</p>
+						<p><a target="_blank" href="https://gyroscope-lake.vercel.app/" class="text-link">GyroScope</a>: Find gyros closest to you.</p>
+						<p><a target="_blank" href="https://github.com/mehularora8/pixel8" class="text-link">Pixel8</a>: Create pixel art from any image.</p>
+					</div>
+				</div>
 
-						<!-- Side Quests Section -->
-						<div id="sidequests-section" class="section-content">
-							<div class="space-y-6 pt-6">
-								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes do things for the plot.</h2>
-								<div class="flex flex-col gap-4 text-md font-extralight text-gray-600">
-									<p class="leading-loose"><a target="_blank" href="#" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">SF GeoGuessr Cup</a>: A geoguessr tournament with only SF locations.</p>
-									<p class="leading-loose"><a target="_blank" href="https://caffeinechronicles.vercel.app/" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Caffeine Chronicles</a>: On a mission to visit all local coffee shops in SF.</p>
-									<p class="leading-loose"><a target="_blank" href="https://instagram.com/cameraseesfirst" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">What Mehul's camera sees</a>: Trying to get featured in a shot by iPhone ad.</p>
-									<p class="leading-loose"><a target="_blank" href="https://www.youtube.com/playlist?list=PLye2_gVX_Huf1euQ1G_aI3XtN4Rw_Ii9p" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Bhangra</a>: Dancing like no one's watching.</p>
-									<p class="leading-loose"><a target="_blank" href="https://drive.google.com/file/d/1vLx7woPNpuGUvS_pQ0BU37LK4Pdp_Tc4/view?usp=sharing" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">Improv</a>: Performed a show for 50 people.</p>
-								</div>
-							</div>
-						</div>
+				<!-- Side Quests Section -->
+				<div id="sidequests-section" class="content-section">
+					<h3 class="section-title">Side Quests</h3>
+					<div class="section-content-text">
+						<p><a target="_blank" href="#" class="text-link">SF GeoGuessr Cup</a>: A geoguessr tournament with only SF locations.</p>
+						<p><a target="_blank" href="https://caffeinechronicles.vercel.app/" class="text-link">Caffeine Chronicles</a>: On a mission to visit all local coffee shops in SF.</p>
+						<p><a target="_blank" href="https://instagram.com/cameraseesfirst" class="text-link">What Mehul's camera sees</a>: Trying to get featured in a shot by iPhone ad.</p>
+					</div>
+				</div>
 
-						<!-- Writing Section -->
-						<div id="writing-section" class="section-content">
-							<div class="space-y-6 pt-6">
-								<h2 class="font-space-mono text-2xl md:text-3xl font-bold text-custom-dark mb-8">I sometimes put my thoughts to paper.</h2>
-								<div class="flex flex-col gap-4 font-sm text-gray-600 font-extralight">
-									<p class="leading-loose"><a href="memory-stack.html" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">The Emerging Agent Memory Stack</a></p>
-									<p class="leading-loose"><a href="need-to-be-different.html" class="font-normal text-custom-accent hover:underline underline-offset-2 decoration-gray-300">The incessant need to be different</a></p>
-								</div>
-							</div>
-						</div>
+				<!-- Writing Section -->
+				<div id="writing-section" class="content-section">
+					<div class="section-content-text">
+						<h3 class="section-title">Curiosities</h3>
+						<p><a href="memory-stack.html" class="text-link">The emerging agent memory stack</a></p>
+						<p><a href="science-staying-awake.html" class="text-link">The science of staying awake</a></p>
+						<p><a href="barcodes-encoding.html" class="text-link">Barcodes: ubiquitous, straightforward message encoding</a></p>
+						<p><a href="edge-detection-tattoo.html" class="text-link">Using edge detection to design my next tattoo</a></p>
+
+						<h3 class="section-title">Musings</h3>
+						<p><a href="six-learnings-founder.html" class="text-link">Six learnings from being an early stage founder</a></p>
+						<p><a href="find-pressure.html" class="text-link">Find pressure</a></p>
+						<p><a href="need-to-be-different.html" class="text-link">The incessant need to be different</a></p>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- Footer -->
+		<footer class="page-footer">
+		</footer>
 		
 		<script>
 			// Section Navigation
 			function showSection(sectionName) {
-				// Get current active section
-				const currentSection = document.querySelector('.section-content.active');
-				const targetSection = document.getElementById(sectionName + '-section');
-
-				// Don't do anything if clicking the same section
-				if (currentSection === targetSection) {
-					return;
-				}
-
-				// Add fading-out class to current section
-				if (currentSection) {
-					currentSection.classList.add('fading-out');
-				}
-
-				// Wait for fade-out animation to complete
-				setTimeout(() => {
-					// Remove active from all sections
-					const sections = document.querySelectorAll('.section-content');
-					sections.forEach(section => {
-						section.classList.remove('active', 'fading-out');
-					});
-
-					// Show selected section
-					if (targetSection) {
-						targetSection.classList.add('active');
-					}
-
-					// Update active nav item (both desktop and mobile)
-					const navItems = document.querySelectorAll('.nav-item');
-					navItems.forEach(item => {
-						if (item.getAttribute('data-section') === sectionName) {
-							item.classList.add('active-nav');
-						} else {
-							item.classList.remove('active-nav');
-						}
-					});
-
-					// Scroll to top on mobile
-					if (window.innerWidth <= 1024) {
-						window.scrollTo({ top: 0, behavior: 'smooth' });
-					}
-				}, 300);
-			}
-
-			// Initial page load animations
-			document.addEventListener('DOMContentLoaded', function() {
-				const title = document.getElementById('main-title');
-				const mainContainer = document.querySelector('.main-content');
-				const subtitle = document.getElementById('subtitle');
-				const contactLinks = document.querySelector('.contact-links');
-
-				// Start the animation sequence
-				setTimeout(() => {
-					// Step 1: Fade in the title and show main container
-					title.classList.add('visible');
-					mainContainer.classList.add('visible');
-				}, 50);
-
-				setTimeout(() => {
-					// Step 2: Fade in the subtitle after 200ms
-					subtitle.classList.add('visible');
-				}, 200);
-
-				setTimeout(() => {
-					// Step 3: Fade in contact links
-					if (contactLinks) {
-						contactLinks.style.opacity = '1';
-					}
-				}, 400);
-
-				setTimeout(() => {
-					// Step 4: Fade in the first section
-					const firstSection = document.querySelector('.section-content.active');
-					if (firstSection) {
-						firstSection.style.opacity = '1';
-						firstSection.style.transform = 'translateY(0)';
-					}
-				}, 600);
-
-				// Set first nav item as active (both desktop and mobile)
-				const firstNavItems = document.querySelectorAll('.nav-item[data-section="work"]');
-				firstNavItems.forEach(item => {
-					item.classList.add('active-nav');
+				// Hide all sections
+				const sections = document.querySelectorAll('.content-section');
+				sections.forEach(section => {
+					section.classList.remove('active');
 				});
-			});
+
+				// Show selected section
+				const targetSection = document.getElementById(sectionName + '-section');
+				if (targetSection) {
+					targetSection.classList.add('active');
+				}
+
+				// Update active nav item
+				const navLinks = document.querySelectorAll('.nav-link');
+				navLinks.forEach(link => {
+					if (link.getAttribute('data-section') === sectionName) {
+						link.classList.add('active');
+					} else {
+						link.classList.remove('active');
+					}
+				});
+			}
 		</script>
 	</body>
 </html>

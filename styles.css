@@ -90,7 +90,7 @@ body {
 .image-top-left {
 	position: absolute;
 	top: 2rem;
-	left: 3rem;
+	left: 6rem;
 	width: min(400px, 25vw);
 	height: min(250px, 16vw);
 }
@@ -100,15 +100,15 @@ body {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: min(350px, 22vw);
+	width: min(450px, 28vw);
 }
 
 .image-bottom-left {
 	position: absolute;
 	bottom: 2rem;
 	left: 0;
-	width: min(300px, 20vw);
-	height: min(200px, 13vw);
+	width: min(400px, 26vw);
+	height: min(300px, 20vw);
 }
 
 .img-fluid {
@@ -120,10 +120,10 @@ body {
 /* Text Content */
 .content-text {
 	position: absolute;
-	bottom: 2rem;
-	left: max(330px, 22vw);
+	top: 2rem;
+	left: max(420px, 28vw);
 	right: max(360px, 24vw);
-	max-width: 650px;
+	max-width: max(400px, 20vw);
 }
 
 .content-title {
@@ -136,7 +136,7 @@ body {
 .content-description {
 	font-size: 1.15rem;
 	line-height: 1.8;
-	color: #5a6270;
+	color: #2d3748;
 	font-weight: 300;
 }
 
@@ -204,24 +204,25 @@ body {
 	}
 
 	.image-top-left {
-		left: 2rem;
+		left: 4rem;
 		width: min(300px, 28vw);
 		height: min(200px, 18vw);
 	}
 
 	.image-top-right {
-		width: min(280px, 25vw);
+		width: min(360px, 31vw);
 	}
 
 	.image-bottom-left {
-		width: min(250px, 23vw);
-		height: min(160px, 15vw);
+		width: min(320px, 29vw);
+		height: min(240px, 22vw);
 	}
 
 	.content-text {
-		left: max(270px, 25vw);
+		top: 2rem;
+		left: max(340px, 31vw);
 		right: max(290px, 27vw);
-		max-width: 550px;
+		max-width: 400px;
 	}
 }
 

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>The incessant need to be different - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-2xl w-full article-content">
+			<a href="index.html" class="back-link">Back to home</a>
+
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6 text-title-dark leading-tight">The incessant need to be different</h1>
+			</div>
+
+			<div class="space-y-6 text-gray-600 font-extralight leading-loose">
+				<p>I have never been to a large concert. Nor have I ever watched a Star Wars movie. I spend a large chunk of my waking time thinking about tech and code, and it even took me a while to come around to using Cursor.</p>
+
+				<p>For years, I have felt inertia engaging with things that have lots of popularity behind them. My first instinct is often "everyone is doing / going to / using this", which in my mind was reason enough not to. This isn't intentional pretentiousness. It felt like discernment.</p>
+
+				<p>Younger me made a few contrarian choices–quitting the IIT grind to apply to universities outside India, spending time in computer labs instead of my classes, all that good stuff. And to be fair, things worked out by a few strokes of luck. But this reinforced a pattern: being contrarian became part of my identity, and maintaining that felt like maintaining authenticity.</p>
+
+				<p>In doing so, I started to filter experiences based on whether they fit that image I had in my head, instead of engaging with them to see what actually resonated. The vocabulary I now use to describe this approach is <span class="font-semibold text-custom-dark">Identity Curation</span>.</p>
+
+				<p>Identity curation operates on a simple rule: "Does this align with how I see myself?" If the answer is no, reject it before trying it. And that is just not how developing genuine taste works. Genuine taste emerges as a result of engaging with things and then evaluating what resonates based on lived experience. The former feels safer and more efficient, but is shallower. The latter actually builds authentic preferences, but challenges your identity.</p>
+
+				<p>A friend once said to me "it feels like you're gatekeeping yourself from any sort of community". I didn't get it at the time. But in wanting to be different from the communities that I was in, I was never able to deeply engage with them in the first place.</p>
+
+				<p>I'm not advocating for engaging with everything. I'm advocating for engaging with things that spark genuine curiosity, even when they may challenge how you see yourself. It's an explore vs exploit situation–exploring what you may not know about your preferences and taste vs exploiting what you already know about yourself.</p>
+
+				<p>To be honest, this piece makes me feel quite stupid to write. And I don't know if it resonates with anyone reading this. But I want to put it out in the world as a reminder to myself to always engage with the world as deeply as I can.</p>
+
+				<p>I don't expect myself to get this right immediately (or ever). But I do want to restore balance to this process for myself. While I may still realize that big concerts are not for me, I am looking forward to going to my first one.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

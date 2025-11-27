@@ -178,16 +178,9 @@
 			</div>
 
 			<div class="space-y-4 text-gray-600 font-extralight">
-				<p>By this point, you've probably used a memory-augmented LLM agent. The idea of memory augmentation is simple: overcome the limits of fixed context windows and stateless calls, and give the model some way to accumulate, manage, and reuse information over time.</p>
+				<p>By this point, you've probably used a memory-augmented LLM agent. The idea of memory is simple: overcome the limits of fixed context windows and stateless LLM calls by giving the model some way to accumulate, manage, and reuse information over time.</p>
 
-				<p>There are a lot of approaches to memory out in the wild. This post will try and explore what I believe to be the forming "memory stack". I will cover:</p>
-
-				<ol class="list-decimal">
-					<li>4 case studies of memory in production today.</li>
-					<li>The memory stack — capabilities and technologies that companies are implementing today.</li>
-					<li>A generalized view of the big axes every product will be forced to choose on.</li>
-					<li>What's missing in memory today (and tease where I think memory has to go next, which I'll go deep on in Part 2).</li>
-				</ol>
+				<p>I have spent the last few months exploring this space and talking to people building across the stack. Memory approaches today are converging to similar primitives, however there's a lot that remains unsolved. In this post, I'll break down four approaches to memory, things they do well and make some bets on how we'll progress towards a "memory stack".</p>
 
 				<hr>
 
@@ -199,14 +192,14 @@
 				<details>
 					<summary>User Interaction Metadata</summary>
 					<div>
-						<p>User interaction metadata is information about the environment a user (type of device the request was made from, request time, etc.)</p>
+						<p>User interaction metadata is information about the user environment (type of device the request was made from, request time, etc.)</p>
 					</div>
 				</details>
 
 				<details>
 					<summary>User Profile</summary>
 					<div>
-						<p>The user profile is constructed based off <em>long-term</em> things about you. There are two methods this is updated: you can explicitly tell it things, e.g. "remember this," or it may infer something is worth remembering on its own based on how often you mention it, it's continuity, recurring topics etc.</p>
+						<p>The user profile is constructed based off <em>long-term</em> things attributes in user conversations. There are two methods through which this is updated: you can explicitly tell it things, e.g. "remember this," or it may infer something is worth remembering on its own based on how often you mention it, its continuity, recurring topics etc.</p>
 					</div>
 				</details>
 
@@ -227,12 +220,10 @@
 				</details>
 
 				<p class="font-semibold mt-6">How ChatGPT manages memories</p>
-				<p>What I find most interesting about the ChatGPT memory approach is that all of this context is injected one-time at the beginning of a session. There are limited interactions with memory other than telling it to remember or forget something.</p>
-				<p>OpenAI's documentation briefly mentions <a href="https://help.openai.com/en/articles/8590148-memory-faq#h_c0c04edb6b" class="text-custom-accent hover:underline" target="_blank">automatic memory management</a>.</p>
-				<p><a href="https://www.shloked.com/writing/chatgpt-memory-bitter-lesson" class="text-custom-accent hover:underline" target="_blank">This</a> post does a great job of going deeply into ChatGPTs memory implementation.</p>
+				<p>ChatGPT's memory approach optimizes for simplicity. Each user gets one central memory bank which is statically injected into the context window at the beginning of each session. The memory bank is updated through a separate mechanism periodically. At runtime, the interactions between the agent and memory are limited to basic CRUD operations. This approach doesn't support active retrieval, i.e. the model cannot fetch content on the fly if it needs more information. If the update mechanism doesn't pick up on something worth remembering, it won't be remembered.</p>
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">Claude</h3>
-				<p>The most distinctive feature of Claude's memory architecture are tools that allow it to actively fetch content instead of relying on passively fed context for personalization.</p>
+				<p>The most distinctive feature of Claude's memory architecture are tools that allow it to actively fetch content instead of relying solely on a compressed representation of previous context for personalization.</p>
 
 				<details>
 					<summary>Dynamic retrieval</summary>
@@ -249,12 +240,11 @@
 				</details>
 
 				<p class="font-semibold mt-6">How Claude manages memories</p>
-				<p>Memory application logic lives in Claude's system prompt as a bespoke decision tree that tells Claude things like when to personalize (e.g. always for 'based on what you know about me'), when to hold back (never for generic technical questions), and how to integrate memories naturally without the robotic 'I see from your profile that'. I won't dive too deep into this, but if you're interested, the memory utilization piece of Claude's system prompt is in the next section.</p>
-				<p>The system prompt also mentions "Claude's memories update periodically in the background", implying a compression step as astutely pointed out by Claude themself.</p>
+				<p>Memory application logic lives in Claude's system prompt as a bespoke decision tree that specifies situations like when to personalize, when to hold back, and how to integrate memories naturally without the robotic 'I see from your profile that'. If this piques your interest, the memory utilization piece of Claude's system prompt is in the next section.</p>
+				<p>Similar to ChatGPT, Claude memories are updated daily by a separate mechanism. While this approach presumably still relies on summarization, it uses a predefined schema for <em>what</em> to remember about its user as opposed to ChatGPT's approach of inferring what's important. The tradeoff here is one of breadth vs depth: the mechanism may perform better by focusing on certain categories of things to remember but may miss other aspects of the user's conversations that do not fit neatly into these buckets.</p>
 				<img src="photos/Screenshot_2025-11-21_at_3.27.54_PM.png" alt="Claude Memory Update" style="max-width: 528px; margin: 1.5rem auto; display: block;">
 
-				<p class="font-semibold mt-6">Enterprise flavor</p>
-				<p>Claude implements project-level memory isolation. Conversations inside a project generate separate memories and the search tools are scoped to that project boundary. The tech remains the same, but personal memories are separated out from team-level memories, separated out from org-level memories and so on.</p>
+				<p>Claude has another layer to its memory implementation with project-level memory isolation. Conversations inside a project generate separate memories and the search tools are scoped to that project boundary. This implementation hints at what memories might look like in Enterprise contexts: personal memories separate from team-level memories, and team-level memories separate from org-level memories.</p>
 
 				<p class="font-semibold mt-6">Aside: Memory Instructions for Claude</p>
 				<p>I spent a good chunk of time bullying Claude into giving me its system prompts. Enjoy.</p>
@@ -465,15 +455,15 @@ Result: "Replaced memory #1: User is CEO at Anthropic"
 				</details>
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">Mem0</h3>
-				<p>Mem0 is a memory layer that allows developers to orchestrate memory extraction in their applications. Mem0's memory approach opposes other approaches in that it has an explicit memory type system.</p>
+				<p>Mem0's memory approach tries to learn from human memory and implements an explicit memory type system. They also implement a tiered storage system for different kinds of retrieval tasks.</p>
 
 				<details>
-					<summary>Memory Type System</summary>
+					<summary>Mem0's Memory Type System</summary>
 					<div>
-						<p>Extracted memories are automatically classified into types:</p>
+						<p>Mem0 classifies extracted memories into types:</p>
 						<ul class="list-disc">
-							<li><strong>Semantic memory</strong> (decontextualized facts like "user is vegetarian")</li>
-							<li><strong>Episodic memory</strong> (specific events with temporal markers like "user complained about billing on Nov 15th")</li>
+							<li><strong>Semantic memory</strong> (facts like "user is vegetarian")</li>
+							<li><strong>Episodic memory</strong> (events with temporal markers like "user complained about billing on Nov 15th")</li>
 							<li><strong>Procedural memory</strong> (learned behaviors, workflows, and operational patterns)</li>
 							<li>Distinctions between <strong>short-term</strong> (within-session state) and <strong>long-term</strong> (cross-session persistence).</li>
 						</ul>
@@ -483,16 +473,17 @@ Result: "Replaced memory #1: User is CEO at Anthropic"
 				<details>
 					<summary>External Storage</summary>
 					<div>
-						<p>Mem0 uses a three-tier storage system for different retrieval patterns. They combine Vector stores, Graph Stores, and Key-Value Stores. Vector Stores hold embeddings for semantic search. Graph stores model knowledge graphs for each application, and Key-value stores provide fast lookups for structured facts and metadata using user IDs, session IDs, or custom tags as keys.</p>
+						<p>Mem0 uses a three-tier storage system for different retrieval patterns. They combine Vector stores, Graph Stores, and Key-Value Stores.</p>
+						<p>Vector Stores hold embeddings for semantic search. Graph stores model knowledge graphs for each application, and Key-value stores store structured facts and metadata using user IDs, session IDs, or custom tags as keys.</p>
 					</div>
 				</details>
 
 				<p class="font-semibold mt-6">How Mem0 manages memories</p>
-				<p>Mem0 requires explicit developer orchestration to manage memories. The developer calls a function in their application code to trigger memory storage and retrieval.</p>
-				<p>The mem0 management pipeline uses an extraction LLM call which decides what's worth storing and runs conflict resolution and writes to the datastore. They also track TTL (specified by the developer), access patterns, and size for each memory, enabling audit trails and analytics.</p>
+				<p>Mem0's approach optimizes for control over storage and retrieval. The management pipeline uses an extraction LLM call to decide what's worth storing, runs conflict resolution and writes to the datastore. It also tracks TTL (specified by the developer), access patterns, and size for each memory for audit trails and analytics.</p>
+				<p>Mem0 is making two big bets: 1) agent memories should mirror human memories with separate "types"; and 2) there should be different ways to store them. This approach bets against the bitter lesson, and whether the complexity pays off remains to be seen. I'm skeptical, since this is a lot of infrastructure built on the assumption that the human memory taxonomy maps cleanly onto what agents need, and that simpler summarization-based approaches won't get you 90% of the way there. This approach is also intentionally unopinionated about orchestration. They provide the storage infra, but leave the <em>when</em> to store to the developer.</p>
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">Letta (<a href="https://research.memgpt.ai/" class="text-custom-accent hover:underline" target="_blank">MemGPT</a>)</h3>
-				<p>MemGPT is a system orchestrated around LLM calls that injects memory into them. Letta's approach is somewhat of a hybrid between human memory and machine memory. Their core idea is to give LLM agents an internal memory manager, which works by augmenting the Context Window that the agent is working with. Their system has two big parts: The Context Window, and External Storage.</p>
+				<p>Their core idea is to give LLM agents an internal memory manager, which works by augmenting the agent's context window. Their system has two big parts: the Context Window, and External Storage.</p>
 
 				<details>
 					<summary>Agent Context Window</summary>
@@ -500,6 +491,7 @@ Result: "Replaced memory #1: User is CEO at Anthropic"
 						<p>MemGPT splits the Agent's context window into three: the System Instructions, the Working Context, and the FIFO queue.</p>
 						<p>The Working Context is a fixed-size read/write block of unstructured text that can only be modified via function calls.</p>
 						<p>The FIFO Queue stores a rolling history of messages. When the queue gets too full, older messages get pushed out to "Recall Storage". The first index in the queue stores a recursive summary of messages that have been evicted.</p>
+						<img src="photos/Screenshot_2025-11-21_at_6.07.35_PM.png" alt="MemGPT Architecture">
 					</div>
 				</details>
 
@@ -511,25 +503,25 @@ Result: "Replaced memory #1: User is CEO at Anthropic"
 							<li><strong>Recall Storage</strong>: A message database that stores the full conversation history.</li>
 							<li><strong>Archival Storage</strong>: A read/write database for storing arbitrary length text objects, like documents or any other information the agent wants to preserve long-term.</li>
 						</ul>
-						<img src="photos/Screenshot_2025-11-21_at_6.07.35_PM.png" alt="MemGPT Architecture">
 					</div>
 				</details>
 
-				<p class="font-semibold mt-6">How MemGPT manager memories</p>
-				<p>MemGPT builds a controller that 1) summarizes or compresses lower-priority info; 2) pages older but still-relevant info out to slower storage; and 3) later pages it back in when it becomes relevant again. Agents augmented with the MemGPT architecture manage their own memory by putting text content into external storage, and using function calls to retrieve them when needed.</p>
+				<p class="font-semibold mt-6">How MemGPT manages memories</p>
+				<p>MemGPT's core idea is to make the agent manage its own memory. Instead of relying on external systems or developer orchestration, the agent itself decides what to compress, what to page out to external storage, and what to retrieve when needed. The system is architected around LLM calls, and summarizes lower-priority info, moves older-but-relevant content to slower storage, and pages it back in when it becomes relevant again. Of course, this adds cost and latency to any LLM call.</p>
+				<p>Like Mem0, MemGPT imposes some human memory structure with buckets corresponding to episodic and semantic storage. The difference is that MemGPT is fully reliant on the agent to orchestrate. The bet is that LLMs can effectively manage their own context window if you give them the right primitives.</p>
 
 				<hr>
 
 				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">The Emerging Memory Stack</h2>
-				<p>All four approaches have capabilities that show up in different forms, but they rhyme.</p>
+				<p>All four approaches have similar capabilities that show up in different forms and combinations.</p>
 
 				<ol class="list-decimal">
-					<li>Persist: Carry context forward across sessions.</li>
-					<li>Retrieve: Try to surface the right slice of memory at the right time</li>
-					<li>Inject: Use that memory in generation.</li>
-					<li>Scope: Remember things about the user <em>within boundaries</em>.</li>
-					<li>Control: Give humans control levers.</li>
-					<li>Manage: Decide what memories get remembered, forgotten or further cemented.</li>
+					<li>Carry context forward across sessions.</li>
+					<li>Surface the right slice of memory at the right time</li>
+					<li>Use that memory in generation.</li>
+					<li>Remember things about the user <em>within boundaries</em>.</li>
+					<li>Give humans control levers.</li>
+					<li>Decide what memories get remembered, forgotten or further cemented.</li>
 				</ol>
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">Design decisions for Implementation</h3>
@@ -537,29 +529,32 @@ Result: "Replaced memory #1: User is CEO at Anthropic"
 
 				<p class="font-semibold mt-6">How many cycles do you spend making cleaner memories vs smarter recall?</p>
 				<p><em>Axis: Write time (construct graphs, memory type system)</em> ↔ <em>Read time (better retrieval)</em>.</p>
-				<p>Some product surfaces (e.g. enterprise products) may benefit from spending cycles on cleaner memories (e.g. capturing JSON schemas), whereas products like personal assistants may not require fancy memory writing harnesses. A related question is: how structured is the memory you store? And this can range from free text to JSON facts to knowledge graphs. ChatGPT and Claude simply stored summarized text, Dot by New Computer used JSON schemas to capture events in it's user's life.</p>
+				<p>Today's memory approaches are all across the spectrum from free text to JSON facts to full knowledge graphs. ChatGPT and Claude store summarized text; Dot by New Computer captures events as structured JSON schemas; and Mem0 creates full knowledge graphs.</p>
+				<p>I believe we'll see bifurcation on this axis: enterprise applications will see more bespoke structure whereas consumer and personal applications will continue down the path of summarization. But before committing to creating structures for your usecase, start simple by adding an extra step summarizing your users' recent conversations and see if that gets you 80% of the way there.</p>
 
 				<p class="font-semibold mt-6">How are memories captured?</p>
 				<p><em>Axis: Explicit (e.g. "remember this") ↔ Implicit (e.g. summarize)</em></p>
-				<p>Your product's memory capturing mechanism will govern consent, accuracy, and coverage.</p>
-				<p>Explicit memories will be the most accurate but feel clunky and may miss relevant content. Implicit memories feel magical, potentially at the cost of feeling creepy to your user. Scarier yet, they will need to be extremely precise in enterprise contexts so as to not allow cross contamination between environments. A hybrid mechanism might look like agents proposing remembering certain items with humans approving or rejecting.</p>
-				<p>My bet is on the latter, because I don't think humans want to be in charge of managing what their agents remember about them.</p>
+				<p>Memory capturing mechanisms affect consent, accuracy, and coverage.</p>
+				<p>Explicit capture is accurate and defensible, you can always point to when a user asked you to store something. But it puts the burden on the user, and they'll inevitably forget to say 'remember this' for things that matter. Even when they do, the UX is just clunky.</p>
+				<p>Implicit memories feel magical UX wise, but risks feeling suboptimal when the agent gets something wrong about the user or remembers something they didn't expect it to remember. There's also a consent question: did the user know something would be stored?</p>
+				<p>Today's approaches try to leverage both for maximal coverage, and my guess is that most memory systems will land somewhere in the middle. But long term, my bet is the default reliability of memory systems will come from implicit memory capture, because I don't think humans want to be in charge of managing what their agents remember about them.</p>
 
 				<p class="font-semibold mt-6">What are the boundaries of memories?</p>
-				<p><em>Axis: Personal ↔ Project/Workspace ↔ Org/Global.</em></p>
-				<p>Enterprise focused products may need to implement team and org level shared memories, whereas personal assistants may not need to focus on that at all. This axis will define trust, especially for more enterprise focused use cases. An agent dragging something personal into a shared workspace, or leaking Client A's documents into Client B's project is … pretty bad.</p>
+				<p><em>Axis: Siloed ↔ Global</em></p>
+				<p>ChatGPT gives you one global memory bank across all conversations. Claude scopes memories by project, keeping work and personal contexts separate. Global memories get noisy fast, and siloed memories fragment your users' continuity.</p>
+				<p>If you have an implicit memory extraction system, things get scary without explicit boundaries: your storage and retrieval will need to be extremely precise so as to not allow cross contamination between environments. An agent dragging something personal into a shared workspace, or leaking Client A's documents into Client B's project is … pretty bad.</p>
+				<p>This axis will define trust, especially for more enterprise focused use cases. In the future, I believe we'll see enterprise products implementing shared memories (team and org-level) to increase stickiness.</p>
 
 				<p class="font-semibold mt-6">How does memory re-enter the model at inference time?</p>
 				<p><em>Axis Text snippets ↔ Tool calling</em></p>
-				<p>ChatGPT and Claude inject content back into conversations by splicing remembered facts / summaries into the model's prompt. MemGPT and Mem0 make the model actively in charge of managing its own working context.</p>
-				<p>Text snippets provide the least latency, whereas tool calling might require additional time but will fetch the most up-to-date information.</p>
-				<p><a href="https://arxiv.org/abs/2505.15962" class="text-custom-accent hover:underline" target="_blank">Research</a> suggests that memory injection could also happen in the embedding space.</p>
+				<p>ChatGPT relies on a one-time memory injection into the context, Mem0 and MemGPT make the model in charge of dynamically managing its own memory, and Claude sits somewhere in the middle. From a UX perspective, text snippets provide the least latency, whereas tool calling might require additional time but will fetch the most up-to-date information.</p>
+				<p>Over time, I believe we'll see memory injection tend towards more dynamic, with models dynamically <a href="https://arxiv.org/abs/2510.04618" class="text-custom-accent hover:underline" target="_blank">evolving their contexts</a> to answer queries and execute tasks.</p>
 
 				<hr>
 
-				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">What's Still Needs Work</h2>
+				<h2 class="text-2xl md:text-3xl font-bold text-custom-dark mt-8 mb-4">What Still Needs Work</h2>
 				<p>Right now, "memory" mostly means collecting stuff, keeping it somewhere, and putting it back in when relevant. And this already feels magical! But over time, I have noticed memory implementations become more annoying than useful. For instance, having memory is counterproductive when an ChatGPT remembers projects I was thinking about 6 months ago and uses it to respond to the question at hand.</p>
-				<p>I do not see humans being the arbiters of what gets saved in agents in the future. Memory systems of the future will need to be managers of the entire lifecycle of user memories.</p>
+				<p>I do not see humans being the arbiters of what their agents remember about them. If you believe that, memory systems of the future will need to be managers of the entire lifecycle of user memories.</p>
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">Memory hygiene / compaction / decay</h3>
 				<p>If you just keep appending or promoting information from context into a memory manager, you eventually get:</p>

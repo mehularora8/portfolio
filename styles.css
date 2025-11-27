@@ -124,7 +124,7 @@ body {
 /* Text Content */
 .content-text {
 	grid-column: 2;
-	grid-row: 1;
+	grid-row: 1 / -1;
 	align-self: start;
 	padding-left: 5rem;
 	overflow-wrap: break-word;

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>SF GeoGuessr - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="photos/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+
+		img, video {
+			max-width: 100%;
+			height: auto;
+			border-radius: 6px;
+			margin: 1.5rem 0;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		.photo-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 1.5rem;
+			margin: 2rem 0;
+		}
+
+		.photo-item {
+			display: flex;
+			flex-direction: column;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-3xl w-full article-content">
+			<a href="sidequests.html" class="back-link">Back</a>
+
+			<div class="mb-8">
+				<div class="text-4xl mb-4">🌍</div>
+				<h1 class="text-4xl md:text-5xl font-bold mb-4 text-title-dark">SF GeoGuessr</h1>
+				<p class="text-gray-500 text-sm">September 2025</p>
+			</div>
+
+			<div class="space-y-4 text-gray-600 font-extralight">
+				<p>Inspired by the GeoGuessr World Cup, a few friends and I hosted our very own version featuring only SF locations. The winning prize was a piece of the Golden Gate Bridge.</p>
+
+				<div class="photo-grid">
+					<div class="photo-item">
+						<img src="photos/geoguessr/20251009_174653.jpg" alt="GeoGuessr tournament">
+					</div>
+					<div class="photo-item">
+						<img src="photos/geoguessr/20251012_162440.jpg" alt="GeoGuessr gameplay 1">
+					</div>
+					<div class="photo-item">
+						<img src="photos/geoguessr/20251012_164355.jpg" alt="GeoGuessr gameplay 2">
+					</div>
+					<div class="photo-item">
+						<img src="photos/geoguessr/20251012_170836.jpg" alt="GeoGuessr gameplay 3">
+					</div>
+				</div>
+
+				<div>
+					<video controls>
+						<source src="photos/geoguessr/20251012_154626.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

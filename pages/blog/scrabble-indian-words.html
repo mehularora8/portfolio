@@ -146,6 +146,15 @@
 			padding-left: 1rem;
 			margin: 1.5rem 0;
 		}
+
+		.note a {
+			color: #d94612;
+			text-decoration: underline;
+		}
+
+		.note a:hover {
+			color: #b9380f;
+		}
 	</style>
 </head>
 <body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
@@ -171,6 +180,7 @@
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">The setup</h3>
 				<p>I started off by separating the ~2,600 Indian-origin words from the ~278,000-word CSW24 dataset. I embedded them with <code>gemini-embedding-001</code>, clustered with <code>HDBSCAN</code>, and asked Gemini to come up with labels for the clusters.</p>
+				<p class="note">Credit to Joshua Castellano and the Scrabble community for this <a href="https://github.com/jvc56/CrowdsourcedDefs">annotated dataset</a> which includes the origins of CSW words.</p>
 
 				<img src="../../assets/images/baseline-viz.png" alt="Baseline clustering of Indian-origin words using gemini-embedding-001">
 
@@ -225,9 +235,13 @@
 					<li><strong>Textiles (~10%)</strong> — shawls, turbans, silks.</li>
 				</ul>
 
+				<p>The remaining ~26% breaks into much narrower groupings — single-concept clusters like "Bombay duck" or "pearl millet", and a long tail of outliers that HDBSCAN couldn't confidently group at all.</p>
+
 				<p>The familiar words are the minority. The Indian-origin words that made it into everyday English mostly come from the food, clothing, and religion buckets. The bulk of what's preserved in Scrabble is obscure flora, fauna, and colonial bureaucracy — words like ZAMINDAR, NILGAI, TALUK, BILIMBI. The Scrabble dictionary, it turns out, is a lexical fossil record.</p>
 
-				<p>The next piece of this work is figuring out whether the gain comes from genuine semantic learning or from register fluency alone. For now: ZAMINDAR for 38.</p>
+				<p>The next piece of this work is figuring out whether the gain comes from real semantic understanding, or whether the model just learned what dictionary definitions look like. </p> 
+				
+				<p>For now: ZAMINDAR for 78.</p>
 			</div>
 		</div>
 	</div>

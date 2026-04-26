@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Finding structure in Indian-origin English words - Mehul Arora</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../../assets/css/globals.css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						'space-mono': ['"Space Mono"', 'monospace'],
+						'cousine': ['Cousine', 'monospace'],
+					},
+					colors: {
+						'custom-dark': '#18272F',
+						'custom-light': '#f4f0e8',
+						'custom-teal': '#2e898e8a',
+						'title-dark': '#0C131A',
+						'custom-background': '#e9e7e0',
+						'custom-accent': '#d94612'
+					}
+				}
+			}
+		}
+	</script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="icon" href="../../assets/images/6.png" type="image/png">
+
+	<style>
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.03;
+			z-index: -1;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+		}
+
+		code {
+			background: rgba(135, 131, 120, 0.15);
+			border-radius: 3px;
+			padding: 0.2em 0.4em;
+			font-size: 85%;
+			font-family: 'Courier New', monospace;
+		}
+
+		pre {
+			background: rgba(135, 131, 120, 0.08);
+			border-radius: 6px;
+			padding: 1.5rem;
+			overflow-x: auto;
+			margin: 1.5rem 0;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		pre code {
+			background: none;
+			padding: 0;
+			font-size: 0.9rem;
+			line-height: 1.5;
+		}
+
+		.article-content {
+			opacity: 0;
+			animation: fadeIn 0.8s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			color: #6b7280;
+			transition: color 0.2s;
+			margin-bottom: 2rem;
+		}
+
+		.back-link:hover {
+			color: #d94612;
+		}
+
+		.back-link::before {
+			content: '←';
+			margin-right: 0.5rem;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+			border-radius: 6px;
+			margin: 1.5rem 0;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		ol, ul {
+			margin: 1rem 0;
+			padding-left: 1.5rem;
+		}
+
+		li {
+			margin: 0.5rem 0;
+		}
+
+		hr {
+			margin: 3rem 0;
+			border: none;
+			border-top: 1px solid #d1d5db;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 1.5rem 0;
+			font-size: 0.95rem;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 0.6rem 0.9rem;
+			border-bottom: 1px solid #d1d5db;
+		}
+
+		th {
+			font-weight: 600;
+			color: #374151;
+			background: rgba(135, 131, 120, 0.08);
+		}
+
+		.note {
+			font-style: italic;
+			color: #6b7280;
+			border-left: 2px solid #d1d5db;
+			padding-left: 1rem;
+			margin: 1.5rem 0;
+		}
+	</style>
+</head>
+<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
+	<div class="min-h-screen flex justify-center p-8 md:p-16">
+		<div class="max-w-3xl w-full article-content">
+			<a href="../writing.html" class="back-link">Back</a>
+
+			<div class="mb-8">
+				<div class="text-4xl mb-4">📖</div>
+				<h1 class="text-4xl md:text-5xl font-bold mb-4 text-title-dark">Finding structure in Indian-origin English words</h1>
+			</div>
+
+			<div class="space-y-4 text-gray-600 font-extralight">
+				<p>Indian-origin words like <em>pyjama, jungle</em> or <em>chutney</em> are part of everyday English.</p>
+
+				<p>The other property that these words share is that they are part of the official Scrabble Dictionary (the ~280K words that are "officially" playable in Scrabble).</p>
+
+				<p>The Scrabble dictionary is a mishmash of words — some natively belonging to the English language, and some like the ones listed above adapted from other languages. I was curious what kinds of words actually get adapted into the English language — are they random? Are they words that carried over from colonial times? Are they words that are in pop culture now?</p>
+
+				<p>To find out, I clustered the embeddings of all Indian-origin words in the Scrabble dictionary with an off-the-shelf embedding model, and also finetuned a small embedding model of my own.</p>
+
+				<p class="note">Note: The Scrabble Wordlist overlaps with the English dictionary but it is not 1:1. I used this dataset as a proxy for what words end up making it into the English language.</p>
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">The setup</h3>
+				<p>I started off by separating the ~2,600 Indian-origin words from the ~278,000-word CSW24 dataset. I embedded them with <code>gemini-embedding-001</code>, clustered with <code>HDBSCAN</code>, and asked Gemini to come up with labels for the clusters.</p>
+
+				<img src="../../assets/images/baseline-viz.png" alt="Baseline clustering of Indian-origin words using gemini-embedding-001">
+
+				<p>Here's the result. There's some grouping, but I felt like these words had more to give. So I fine-tuned <code>sentence-transformers/all-MiniLM-L6-v2</code> — a small, 22M parameter embedding model on the ~278,000 word-definition pairs from CSW24, holding out the Indian-origin words entirely so they wouldn't leak into training.</p>
+
+				<hr>
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">The training process</h3>
+				<p>Since the dataset is pairs of <code>(word, definition)</code> there are no "negative" examples for training. However, within each batch of <code>(word, definition)</code> pairs, for each word, you can consider all the <em>other</em> definitions as negative examples. For instance:</p>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Word</th>
+							<th>Definition</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Chameleon</td>
+							<td>Small reptile</td>
+						</tr>
+						<tr>
+							<td>Cook</td>
+							<td>Someone who makes food</td>
+						</tr>
+						<tr>
+							<td>Crab</td>
+							<td>Sea animal</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<p>For a particular word, say <code>"cook"</code>, you can consider <code>"sea animal"</code> and <code>"small reptile"</code> to be negative examples since they are explicitly not the definition of "cook".</p>
+
+				<p>The optimization function, in this case <strong>Multiple Negative Ranking loss</strong>, then tries to pull together the matched pair and pushes the rest apart. With a 64-item batch, you get 63 free negatives per example. For dictionary data this works very well! Every entry is a clean positive, and the rest of the batch supplies the contrast.</p>
+
+				<p><strong>Matryoshka Representation Learning</strong> trains the embedding so the first N dimensions are themselves a usable embedding. A 384-dim vector contains a usable 256-dim vector inside it. You can truncate at inference time without retraining: full quality at 384, faster at 256. One model, multiple resolutions.</p>
+
+				<p>On the held-out test set, word→definition retrieval went from ~50% to 68% Accuracy@1. The fine-tuned model is up on <a href="https://huggingface.co/mehularora/scrabble-embed-v2" class="text-custom-accent hover:underline" target="_blank">HuggingFace</a>. I then embedded the 2,600 Indian-origin words with the fine-tuned model and clustered with HDBSCAN to get the following:</p>
+
+				<img src="../../assets/images/finetuned-viz.png" alt="Clustering of Indian-origin words using the fine-tuned embedding model">
+
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">Findings</h3>
+				<p>The majority of Indian-origin words in the Scrabble dictionary fall under these categories:</p>
+
+				<ul class="list-disc">
+					<li><strong>Flora and fauna (~19%)</strong> — trees, plants, animals. The British were cataloguing a subcontinent's biodiversity.</li>
+					<li><strong>Colonial administration (~18%)</strong> — land revenue terms, military ranks, legal procedures, titles. Words English needed because British administrators were running things they had no vocabulary for.</li>
+					<li><strong>Food and cuisine (~17%)</strong> — millets, lentils, breads, utensils.</li>
+					<li><strong>Religion (~10%)</strong> — yoga, mantras, deities.</li>
+					<li><strong>Textiles (~10%)</strong> — shawls, turbans, silks.</li>
+				</ul>
+
+				<p>The familiar words are the minority. The Indian-origin words that made it into everyday English mostly come from the food, clothing, and religion buckets. The bulk of what's preserved in Scrabble is obscure flora, fauna, and colonial bureaucracy — words like ZAMINDAR, NILGAI, TALUK, BILIMBI. The Scrabble dictionary, it turns out, is a lexical fossil record.</p>
+
+				<p>The next piece of this work is figuring out whether the gain comes from genuine semantic learning or from register fluency alone. For now: ZAMINDAR for 38.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

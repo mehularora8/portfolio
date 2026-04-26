@@ -45,6 +45,52 @@
 			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
 		}
 
+		details {
+			margin: 1rem 0;
+			border-left: 2px solid #d1d5db;
+			padding-left: 1rem;
+			transition: all 0.3s ease;
+		}
+
+		details[open] {
+			border-left-color: #d94612;
+		}
+
+		summary {
+			cursor: pointer;
+			font-weight: 600;
+			color: #374151;
+			padding: 0.5rem 0;
+			transition: color 0.2s;
+			user-select: none;
+			list-style: none;
+		}
+
+		summary::-webkit-details-marker {
+			display: none;
+		}
+
+		summary::before {
+			content: '▶';
+			display: inline-block;
+			margin-right: 0.5rem;
+			transition: transform 0.3s;
+			color: #d94612;
+		}
+
+		details[open] summary::before {
+			transform: rotate(90deg);
+		}
+
+		summary:hover {
+			color: #d94612;
+		}
+
+		details > div {
+			margin-top: 0.75rem;
+			padding-left: 1.5rem;
+		}
+
 		code {
 			background: rgba(135, 131, 120, 0.15);
 			border-radius: 3px;
@@ -172,7 +218,7 @@
 
 				<p>The other property that these words share is that they are part of the official Scrabble Dictionary (the ~280K words that are "officially" playable in Scrabble).</p>
 
-				<p>The Scrabble dictionary is a mishmash of words — some natively belonging to the English language, and some like the ones listed above adapted from other languages. I was curious what kinds of words actually get adapted into the English language — are they random? Are they words that carried over from colonial times? Are they words that are in pop culture now?</p>
+				<p>The Scrabble dictionary is a mishmash of words — some natively belonging to the English language, and some like the ones listed above adapted from other languages. I was curious what kinds of words actually get adapted into the English language, and whether there's any structure to which ones stick.</p>
 
 				<p>To find out, I clustered the embeddings of all Indian-origin words in the Scrabble dictionary with an off-the-shelf embedding model, and also finetuned a small embedding model of my own.</p>
 
@@ -184,63 +230,66 @@
 
 				<img src="../../assets/images/baseline-viz.png" alt="Baseline clustering of Indian-origin words using gemini-embedding-001">
 
-				<p>Here's the result. There's some grouping, but I felt like these words had more to give. So I fine-tuned <code>sentence-transformers/all-MiniLM-L6-v2</code> — a small, 22M parameter embedding model on the ~278,000 word-definition pairs from CSW24, holding out the Indian-origin words entirely so they wouldn't leak into training.</p>
+				<p>Here's the result. There's some grouping, but honestly I wanted to learn how embedding models are trained — and see if finetuning one made a difference. So I finetuned a small embedding model (<code>all-MiniLM-L6-v2</code>) on the full ~278,000 CSW24 word-definition pairs, holding out Indian-origin words so they wouldn't leak into training. The model is on <a href="https://huggingface.co/mehularora/scrabble-embed-v2" class="text-custom-accent hover:underline" target="_blank">HuggingFace</a>; details below if you're curious.</p>
 
-				<hr>
+				<details>
+					<summary>Training details</summary>
+					<div>
+						<p>Since the dataset is pairs of <code>(word, definition)</code> there are no "negative" examples for training. However, within each batch of <code>(word, definition)</code> pairs, for each word, you can consider all the <em>other</em> definitions as negative examples. For instance:</p>
 
-				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-6 mb-3">The training process</h3>
-				<p>Since the dataset is pairs of <code>(word, definition)</code> there are no "negative" examples for training. However, within each batch of <code>(word, definition)</code> pairs, for each word, you can consider all the <em>other</em> definitions as negative examples. For instance:</p>
+						<table>
+							<thead>
+								<tr>
+									<th>Word</th>
+									<th>Definition</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Chameleon</td>
+									<td>Small reptile</td>
+								</tr>
+								<tr>
+									<td>Cook</td>
+									<td>Someone who makes food</td>
+								</tr>
+								<tr>
+									<td>Crab</td>
+									<td>Sea animal</td>
+								</tr>
+							</tbody>
+						</table>
 
-				<table>
-					<thead>
-						<tr>
-							<th>Word</th>
-							<th>Definition</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Chameleon</td>
-							<td>Small reptile</td>
-						</tr>
-						<tr>
-							<td>Cook</td>
-							<td>Someone who makes food</td>
-						</tr>
-						<tr>
-							<td>Crab</td>
-							<td>Sea animal</td>
-						</tr>
-					</tbody>
-				</table>
+						<p>For a particular word, say <code>"cook"</code>, you can consider <code>"sea animal"</code> and <code>"small reptile"</code> to be negative examples since they are explicitly not the definition of "cook".</p>
 
-				<p>For a particular word, say <code>"cook"</code>, you can consider <code>"sea animal"</code> and <code>"small reptile"</code> to be negative examples since they are explicitly not the definition of "cook".</p>
+						<p>The optimization function, in this case <strong>Multiple Negatives Ranking loss</strong>, then tries to pull together the matched pair and pushes the rest apart. With a 64-item batch, you get 63 free negatives per example. For dictionary data this works very well — every entry is a clean positive, and the rest of the batch supplies the contrast.</p>
 
-				<p>The optimization function, in this case <strong>Multiple Negative Ranking loss</strong>, then tries to pull together the matched pair and pushes the rest apart. With a 64-item batch, you get 63 free negatives per example. For dictionary data this works very well! Every entry is a clean positive, and the rest of the batch supplies the contrast.</p>
+						<p>I also threw in <strong>Matryoshka Representation Learning</strong> for fun — it trains the embedding so the first N dimensions are themselves a usable embedding. A 384-dim vector contains a usable 256-dim vector inside it, so you can truncate at inference time without retraining. Didn't end up mattering for this analysis but it was a neat thing to learn.</p>
 
-				<p><strong>Matryoshka Representation Learning</strong> trains the embedding so the first N dimensions are themselves a usable embedding. A 384-dim vector contains a usable 256-dim vector inside it. You can truncate at inference time without retraining: full quality at 384, faster at 256. One model, multiple resolutions.</p>
+						<p>On the held-out test set, word→definition retrieval went from ~50% to 68% Accuracy@1.</p>
+					</div>
+				</details>
 
-				<p>On the held-out test set, word→definition retrieval went from ~50% to 68% Accuracy@1. The fine-tuned model is up on <a href="https://huggingface.co/mehularora/scrabble-embed-v2" class="text-custom-accent hover:underline" target="_blank">HuggingFace</a>. I then embedded the 2,600 Indian-origin words with the fine-tuned model and clustered with HDBSCAN to get the following:</p>
+				<p>I then embedded the 2,600 Indian-origin words with the finetuned model and clustered with HDBSCAN to get the following:</p>
 
-				<img src="../../assets/images/finetuned-viz.png" alt="Clustering of Indian-origin words using the fine-tuned embedding model">
+				<img src="../../assets/images/finetuned-viz.png" alt="Clustering of Indian-origin words using the finetuned embedding model">
 
 				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">Findings</h3>
-				<p>The majority of Indian-origin words in the Scrabble dictionary fall under these categories:</p>
+				<p>The words are not random, and pop culture contributed almost nothing. The Indian-origin words English kept are overwhelmingly the ones British administrators, naturalists, and merchants needed vocabulary for in the 18th and 19th centuries. The majority fall under these categories:</p>
 
 				<ul class="list-disc">
-					<li><strong>Flora and fauna (~19%)</strong> — trees, plants, animals. The British were cataloguing a subcontinent's biodiversity.</li>
-					<li><strong>Colonial administration (~18%)</strong> — land revenue terms, military ranks, legal procedures, titles. Words English needed because British administrators were running things they had no vocabulary for.</li>
-					<li><strong>Food and cuisine (~17%)</strong> — millets, lentils, breads, utensils.</li>
-					<li><strong>Religion (~10%)</strong> — yoga, mantras, deities.</li>
-					<li><strong>Textiles (~10%)</strong> — shawls, turbans, silks.</li>
+					<li><strong>Flora and fauna (~19%)</strong> — trees, plants, animals. Includes <strong>JUNGLE</strong> but also <strong>NILGAI</strong> (a large Indian antelope).</li>
+					<li><strong>Colonial administration (~18%)</strong> — land revenue terms, military ranks, legal procedures, titles. Includes <strong>THUG</strong> but also <strong>TALUK</strong> (an administrative subdivision) and <strong>ZAMINDAR</strong> (a landholder who collected revenue for the British). Words English needed because British administrators were running things they had no words for.</li>
+					<li><strong>Food and cuisine (~17%)</strong> — millets, lentils, breads, utensils. Includes <strong>CHUTNEY</strong> but also <strong>BILIMBI</strong> (a sour tropical fruit).</li>
+					<li><strong>Religion (~10%)</strong> — yoga, mantras, deities. Includes <strong>KARMA</strong> but also <strong>SANNYASI</strong> (a Hindu religious mendicant).</li>
+					<li><strong>Textiles (~10%)</strong> — shawls, turbans, silks. Includes <strong>PYJAMA</strong> but also <strong>JAMDANI</strong> (a fine muslin woven in Bengal).</li>
 				</ul>
 
-				<p>The remaining ~26% breaks into much narrower groupings — single-concept clusters like "Bombay duck" or "pearl millet", and a long tail of outliers that HDBSCAN couldn't confidently group at all.</p>
+				<p>The remaining ~26% breaks into single-concept clusters like "Bombay duck" or "pearl millet", and a long tail of outliers. The words that made it into everyday English are the minority — the Scrabble dictionary, it turns out, is a lexical fossil record.</p>
 
-				<p>The familiar words are the minority. The Indian-origin words that made it into everyday English mostly come from the food, clothing, and religion buckets. The bulk of what's preserved in Scrabble is obscure flora, fauna, and colonial bureaucracy — words like ZAMINDAR, NILGAI, TALUK, BILIMBI. The Scrabble dictionary, it turns out, is a lexical fossil record.</p>
+				<h3 class="text-xl md:text-2xl font-semibold text-custom-dark mt-8 mb-3">Conclusion</h3>
+				<p>The next piece of this work is figuring out whether the gain comes from real semantic understanding, or whether the model just learned what dictionary definitions look like.</p>
 
-				<p>The next piece of this work is figuring out whether the gain comes from real semantic understanding, or whether the model just learned what dictionary definitions look like. </p> 
-				
 				<p>For now: ZAMINDAR for 78.</p>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 	<title>Geospatial Indexing - Mehul Arora</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="globals.css" />
+	<link rel="stylesheet" href="../../assets/css/globals.css" />
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script>
 		tailwind.config = {
@@ -29,7 +29,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-	<link rel="icon" href="photos/6.png" type="image/png">
+	<link rel="icon" href="../../assets/images/6.png" type="image/png">
 
 	<style>
 		body::before {
@@ -178,7 +178,7 @@
 <body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
 	<div class="min-h-screen flex justify-center p-8 md:p-16">
 		<div class="max-w-3xl w-full article-content">
-			<a href="writing.html" class="back-link">Back</a>
+			<a href="../writing.html" class="back-link">Back</a>
 
 			<div class="mb-8">
 				<div class="text-4xl mb-4">🗺️</div>
@@ -286,7 +286,7 @@
 
 				<p>A node's full identifier is created by concatenating its ancestors' quadrant numbers from root to leaf</p>
 
-				<img src="photos/tree.png" alt="Quadtree Structure">
+				<img src="../../assets/images/tree.png" alt="Quadtree Structure">
 
 				<p>For instance, the node represented by the bottom right circle in this image can be coded as 11 01.</p>
 
@@ -296,7 +296,7 @@
 
 				<p>If we fix the depth of a quadtree, you can calculate a point's node number directly. For instance, consider an 8x8 grid. We need a quadtree of depth 3 to map such a grid (4^3 = 64). Take the point (x=5, y=3) and consider the following approach:</p>
 
-				<img src="photos/grid.png" alt="Quadtree Grid">
+				<img src="../../assets/images/grid.png" alt="Quadtree Grid">
 
 				<p>Convert them to binary: x = 101, y = 011</p>
 
@@ -342,7 +342,7 @@ mix: 01 00 11 01 10 ...</code></pre>
 
 				<p>Let's work through an illustrative example: When you're looking at San Francisco on Google Maps, you're really looking at a bounding box – let's say roughly: Northwest: 37.81° N, 122.52° W; Southeast: 37.70° N, 122.35° W</p>
 
-				<img src="photos/sf.png" alt="San Francisco Bounding Box">
+				<img src="../../assets/images/sf.png" alt="San Francisco Bounding Box">
 
 				<p>But if you want to cover all of San Francisco using geohashes, you need to:</p>
 

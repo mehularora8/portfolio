@@ -4,7 +4,7 @@
 	<title>The Emerging Agent Memory Stack - Mehul Arora</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="globals.css" />
+	<link rel="stylesheet" href="../../assets/css/globals.css" />
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script>
 		tailwind.config = {
@@ -29,7 +29,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-	<link rel="icon" href="photos/6.png" type="image/png">
+	<link rel="icon" href="../../assets/images/6.png" type="image/png">
 
 	<style>
 		body::before {
@@ -170,7 +170,7 @@
 <body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
 	<div class="min-h-screen flex justify-center p-8 md:p-16">
 		<div class="max-w-3xl w-full article-content">
-			<a href="writing.html" class="back-link">Back</a>
+			<a href="../writing.html" class="back-link">Back</a>
 
 			<div class="mb-8">
 				<div class="text-4xl mb-4">🗃️</div>
@@ -207,7 +207,7 @@
 					<summary>Recent Conversation Content</summary>
 					<div>
 						<p>Like the name suggests, Recent Conversation Content tries to capture content from recent user conversations. Many of the chats I received were truncated.</p>
-						<img src="photos/0ec57e82-e640-4fb8-b0b4-4ecf97037c2a.png" alt="ChatGPT Recent Conversation Content">
+						<img src="../../assets/images/0ec57e82-e640-4fb8-b0b4-4ecf97037c2a.png" alt="ChatGPT Recent Conversation Content">
 					</div>
 				</details>
 
@@ -215,7 +215,7 @@
 					<summary>User knowledge memories</summary>
 					<div>
 						<p>User knowledge memories are several paragraphs of dense information that is inferred from previous conversations with the user. Interestingly, you can only view these and do not have access to edit them or view them directly in ChatGPT. More thoughts on this in the last section on what's missing from this.</p>
-						<img src="photos/Screenshot_2025-11-03_at_6.37.38_PM.png" alt="User Knowledge Memories">
+						<img src="../../assets/images/Screenshot_2025-11-03_at_6.37.38_PM.png" alt="User Knowledge Memories">
 					</div>
 				</details>
 
@@ -242,7 +242,7 @@
 				<p class="font-semibold mt-6">How Claude manages memories</p>
 				<p>Memory application logic lives in Claude's system prompt as a bespoke decision tree that specifies situations like when to personalize, when to hold back, and how to integrate memories naturally without the robotic 'I see from your profile that'. If this piques your interest, the memory utilization piece of Claude's system prompt is in the next section.</p>
 				<p>Similar to ChatGPT, Claude memories are updated daily by a separate mechanism. While this approach presumably still relies on summarization, it uses a predefined schema for <em>what</em> to remember about its user as opposed to ChatGPT's approach of inferring what's important. The tradeoff here is one of breadth vs depth: the mechanism may perform better by focusing on certain categories of things to remember but may miss other aspects of the user's conversations that do not fit neatly into these buckets.</p>
-				<img src="photos/Screenshot_2025-11-21_at_3.27.54_PM.png" alt="Claude Memory Update" style="max-width: 528px; margin: 1.5rem auto; display: block;">
+				<img src="../../assets/images/Screenshot_2025-11-21_at_3.27.54_PM.png" alt="Claude Memory Update" style="max-width: 528px; margin: 1.5rem auto; display: block;">
 
 				<p>Claude has another layer to its memory implementation with project-level memory isolation. Conversations inside a project generate separate memories and the search tools are scoped to that project boundary. This implementation hints at what memories might look like in Enterprise contexts: personal memories separate from team-level memories, and team-level memories separate from org-level memories.</p>
 
@@ -491,7 +491,7 @@ Result: "Replaced memory #1: User is CEO at Anthropic"
 						<p>MemGPT splits the Agent's context window into three: the System Instructions, the Working Context, and the FIFO queue.</p>
 						<p>The Working Context is a fixed-size read/write block of unstructured text that can only be modified via function calls.</p>
 						<p>The FIFO Queue stores a rolling history of messages. When the queue gets too full, older messages get pushed out to "Recall Storage". The first index in the queue stores a recursive summary of messages that have been evicted.</p>
-						<img src="photos/Screenshot_2025-11-21_at_6.07.35_PM.png" alt="MemGPT Architecture">
+						<img src="../../assets/images/Screenshot_2025-11-21_at_6.07.35_PM.png" alt="MemGPT Architecture">
 					</div>
 				</details>
 

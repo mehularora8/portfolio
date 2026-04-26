@@ -4,8 +4,8 @@
 		<title>Projects - Mehul Arora</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="globals.css" />
-		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="../assets/css/globals.css" />
+		<link rel="stylesheet" href="../assets/css/styles.css" />
 		<script src="https://cdn.tailwindcss.com"></script>
 		<script>
 			tailwind.config = {
@@ -33,7 +33,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-		<link rel="icon" href="photos/6.png" type="image/png">
+		<link rel="icon" href="../assets/images/6.png" type="image/png">
 	</head>
 	<body class="font-space-mono font-normal text-base leading-relaxed text-custom-dark bg-custom-background p-0 m-0">
 		<!-- Top Navigation -->
@@ -47,7 +47,7 @@
 				</div>
 			</div>
 			<div class="nav-right" id="navMenu">
-				<a href="index.html" class="nav-link">Home</a>
+				<a href="../index.html" class="nav-link">Home</a>
 				<a href="work.html" class="nav-link">Work</a>
 				<a href="projects.html" class="nav-link">Projects</a>
 				<a href="sidequests.html" class="nav-link">Side Quests</a>
@@ -59,27 +59,43 @@
 		<div class="page-container">
 			<!-- Top Left Image -->
 			<div class="image-top-left">
-				<img src="photos/left_high.png" alt="Image 1" class="img-fluid">
+				<img src="../assets/images/left_high.png" alt="Image 1" class="img-fluid">
 			</div>
 
 			<!-- Top Right Image -->
 			<div class="image-top-right">
-				<img src="photos/right.jpg" alt="Image 2" class="img-fluid">
+				<img src="../assets/images/right.jpg" alt="Image 2" class="img-fluid">
 			</div>
 
 			<!-- Bottom Left Image -->
 			<div class="image-bottom-left">
-				<img src="photos/left_low.png" alt="Image 3" class="img-fluid">
+				<img src="../assets/images/left_low.png" alt="Image 3" class="img-fluid">
 			</div>
 
 			<!-- Text Content (next to bottom left image) -->
 			<div class="content-text">
 				<h3 class="section-title">Projects</h3>
 				<div class="section-content-text">
-					<p><a href="https://github.com/mehularora8/PocketBench" target="_blank" class="text-link">PocketBench</a>: A benchmark for LLMs to play Pocket Tanks.</p>
-					<p><a target="_blank" href="https://yesand-peach.vercel.app/" class="text-link">YesAnd</a>: An app to practice improv with Voice Models.</p>
-					<p><a target="_blank" href="https://gyroscope-lake.vercel.app/" class="text-link">GyroScope</a>: Find gyros closest to you.</p>
-					<p><a target="_blank" href="https://github.com/mehularora8/pixel8" class="text-link">Pixel8</a>: Create pixel art from any image.</p>
+					<p>
+						<strong><a href="https://huggingface.co/mehularora/scrabble-embed-v2" target="_blank" class="text-link">Tiles of India</a>:</strong> Embedding model finetuned on the worldwide scrabble dictionary.<br>
+						<span style="font-size: 0.95rem; color: #6b7280;">Motivated by playing Scrabble, used PCA to reveal patterns in Indian-origin words.</span>
+					</p>
+					<p>
+						<strong><a href="https://github.com/mehularora8/PocketBench" target="_blank" class="text-link">PocketBench</a>:</strong> A benchmark for LLMs to play Pocket Tanks.<br>
+						<span style="font-size: 0.95rem; color: #6b7280;">Tests whether models can handle physics-based strategy games with imperfect information.</span>
+					</p>
+					<p>
+						<strong><a target="_blank" href="https://yesand-peach.vercel.app/" class="text-link">YesAnd</a>:</strong> An app to practice improv with Voice Models.<br>
+						<span style="font-size: 0.95rem; color: #6b7280;">Built to explore real-time voice interaction for creative applications.</span>
+					</p>
+					<p>
+						<strong><a target="_blank" href="https://gyroscope-lake.vercel.app/" class="text-link">GyroScope</a>:</strong> Find gyros closest to you.<br>
+						<span style="font-size: 0.95rem; color: #6b7280;">Built in 40 minutes to settle a debate about the best gyro in SF.</span>
+					</p>
+					<p>
+						<strong><a target="_blank" href="https://github.com/mehularora8/pixel8" class="text-link">Pixel8</a>:</strong> Create pixel art from any image.<br>
+						<span style="font-size: 0.95rem; color: #6b7280;">Simple image converter that reduces images to pixel art style.</span>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -88,6 +104,6 @@
 		<footer class="page-footer">
 		</footer>
 
-		<script src="navigation.js"></script>
+		<script src="../assets/js/navigation.js"></script>
 	</body>
 </html>
